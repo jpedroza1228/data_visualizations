@@ -105,8 +105,16 @@ counts_all <- west_coast_beer %>%
 west_coast_beer %>% 
   ggplot() +
   geom_polygon(data = west_coast, aes(x = long, y = lat, group = group), fill = NA, color = 'gray70', alpha = .3) +
-  geom_point(aes(x = long, y = lat, color = type), size = 1.5) +
-  coord_fixed(1.3) +
-  scale_color_manual(values = c('#1A8CFE', '#FE2F1A', '#8E49FF'),
-                     labels = paste(counts_all$type, counts_all$total_state)) +
+  geom_jitter(aes(x = long, y = lat, color = type), size = 2, width = 0.2) +
+  coord_fixed(1.1) +
+  colorblindr::scale_color_OkabeIto(labels = paste(counts_all$type, counts_all$total_state)) +
   theme_classic() 
+
+west_coast_beer %>% 
+  ggplot() +
+  geom_polygon(data = west_coast, aes(x = long, y = lat, group = group), fill = NA, color = 'gray70', alpha = .3) +
+  geom_jitter(aes(x = long, y = lat, color = type)) +
+  coord_fixed(1.1) +
+  colorblindr::scale_color_OkabeIto(labels = paste(counts_all$type, counts_all$total_state)) +
+  theme_classic() +
+  facet_wrap(~type)
