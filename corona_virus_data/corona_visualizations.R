@@ -113,8 +113,41 @@ west_coast_beer %>%
 west_coast_beer %>% 
   ggplot() +
   geom_polygon(data = west_coast, aes(x = long, y = lat, group = group), fill = NA, color = 'gray70', alpha = .3) +
-  geom_jitter(aes(x = long, y = lat, color = type)) +
+  geom_jitter(aes(x = long, y = lat, color = type), width = .1) +
   coord_fixed(1.1) +
   colorblindr::scale_color_OkabeIto(labels = paste(counts_all$type, counts_all$total_state)) +
   theme_classic() +
+  facet_wrap(~type)
+
+
+west_coast_beer$county <- str_to_lower(west_coast_beer$county)
+west_coast_beer$county <- str_replace(west_coast_beer$county, pattern = " ",
+                               replacement = "_")
+
+
+west_coast_beer$county <- sub("_$", "", 
+                              west_coast_beer$county)
+
+west_coast_beer %>% 
+  
+
+west_coast <- west_coast %>% 
+  rename(county = subregion)
+
+west_coast$county <- str_replace_all(west_coast$county, pattern = ' ',
+                                     replacement = '_')
+
+west_joined <- left_join(west_coast_beer, west_coast, by = 'county')
+
+west_joined %>% 
+  ggplot() +
+  geom_polygon(data = west_coast, aes(x = long, y = lat, group = group), color = 'white', alpha = .3) +
+  geom_polygon(aes(x = long.y, y = lat.y, group = group, fill = type)) +
+  coord_fixed(1.1) +
+  theme_classic() +
+  labs(title = 'Confirmed Cases, Deaths, and \"Recoveries"\ of COVID-19\non West Coast',
+       x = 'Longitude',
+       y = 'Latitude') +
+  colorblindr::scale_fill_OkabeIto(name = 'Cases',
+                                   labels = counts_all$total_state) +
   facet_wrap(~type)
