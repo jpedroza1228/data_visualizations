@@ -89,7 +89,22 @@ west_coast_beer <- little_beer %>%
   mutate(county = str_remove_all(county, "County")) %>% 
   filter(state == ' CA' |
            state == ' WA' |
-           state == ' OR')
+           state == ' OR') 
+
+west_coast_beer <- west_coast_beer %>% 
+  mutate(county = case_when(county == "Portland" ~ 'Multnomah',
+                            TRUE ~ county))
+
+west_coast_beer %>% 
+  filter(state == ' OR') %>% 
+  group_by(county) %>% 
+  count(cases)
+
+west_coast %>% 
+  filter(region == 'oregon' &
+           county == 'multnomah') %>% 
+  group_by(county) %>% 
+  count(group)
 
 
 counts_by_state <- west_coast_beer %>% 
@@ -99,7 +114,6 @@ counts_by_state <- west_coast_beer %>%
 counts_all <- west_coast_beer %>% 
   group_by(type) %>% 
   summarize(total_state = sum(cases))
-
 
 
 west_coast_beer %>% 
@@ -128,8 +142,6 @@ west_coast_beer$county <- str_replace(west_coast_beer$county, pattern = " ",
 west_coast_beer$county <- sub("_$", "", 
                               west_coast_beer$county)
 
-west_coast_beer %>% 
-  
 
 west_coast <- west_coast %>% 
   rename(county = subregion)
@@ -139,13 +151,35 @@ west_coast$county <- str_replace_all(west_coast$county, pattern = ' ',
 
 west_joined <- left_join(west_coast_beer, west_coast, by = 'county')
 
+
+# issue is that there are several county longitude and latitude coordinates. Will have to choose one
+ex<- west_joined %>% 
+  group_by(county, group, order, long.x, lat.x, long.y, lat.y, type) %>% 
+  filter(row_number()==1)
+
+
+ex %>% 
+  ggplot() +
+  geom_polygon(data = west_coast, aes(x = long, y = lat, group = group), color = 'white', fill = 'gray70', alpha = .7) +
+  geom_polygon(aes(x = long.y, y = lat.y, group = group, fill = type)) +
+  coord_fixed(1.1) +
+  theme_classic() +
+  labs(title = 'Confirmed Cases, Deaths, and Recoveries of COVID-19\non West Coast',
+       x = 'Longitude',
+       y = 'Latitude') +
+  colorblindr::scale_fill_OkabeIto(name = 'Cases',
+                                   labels = counts_all$total_state) +
+  facet_wrap(~type)
+
+
+
 west_joined %>% 
   ggplot() +
   geom_polygon(data = west_coast, aes(x = long, y = lat, group = group), color = 'white', alpha = .3) +
   geom_polygon(aes(x = long.y, y = lat.y, group = group, fill = type)) +
   coord_fixed(1.1) +
   theme_classic() +
-  labs(title = 'Confirmed Cases, Deaths, and \"Recoveries"\ of COVID-19\non West Coast',
+  labs(title = 'Confirmed Cases, Deaths, and Recoveries of COVID-19\non West Coast',
        x = 'Longitude',
        y = 'Latitude') +
   colorblindr::scale_fill_OkabeIto(name = 'Cases',
