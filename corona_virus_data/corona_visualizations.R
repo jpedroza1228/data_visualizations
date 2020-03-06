@@ -43,7 +43,7 @@ death_animate <- beer %>%
   labs(title = 'Date: {frame_time}') +
   theme_classic()
 
-animate(death_animate, fps = 10)
+# animate(death_animate, fps = 10)
 
 us <- map_data(map = 'usa')
 
@@ -119,9 +119,10 @@ counts_all <- west_coast_beer %>%
 west_coast_beer %>% 
   ggplot() +
   geom_polygon(data = west_coast, aes(x = long, y = lat, group = group), fill = NA, color = 'gray70', alpha = .3) +
-  geom_jitter(aes(x = long, y = lat, color = type), size = 2, width = 0.2) +
+  geom_jitter(aes(x = long, y = lat, color = type), size = 2, width = 0.1, height = 0.1) +
   coord_fixed(1.1) +
-  colorblindr::scale_color_OkabeIto(labels = paste(counts_all$type, counts_all$total_state)) +
+  viridis::scale_color_viridis(discrete = TRUE,
+                               labels = paste(counts_all$type, counts_all$total_state)) +
   theme_classic() 
 
 west_coast_beer %>% 
@@ -129,7 +130,8 @@ west_coast_beer %>%
   geom_polygon(data = west_coast, aes(x = long, y = lat, group = group), fill = NA, color = 'gray70', alpha = .3) +
   geom_jitter(aes(x = long, y = lat, color = type), width = .1) +
   coord_fixed(1.1) +
-  colorblindr::scale_color_OkabeIto(labels = paste(counts_all$type, counts_all$total_state)) +
+  viridis::scale_color_viridis(discrete = TRUE,
+                               labels = paste(counts_all$type, counts_all$total_state)) +
   theme_classic() +
   facet_wrap(~type)
 
@@ -153,35 +155,24 @@ west_joined <- left_join(west_coast_beer, west_coast, by = 'county')
 
 
 # issue is that there are several county longitude and latitude coordinates. Will have to choose one
-ex<- west_joined %>% 
+missing_counties <- west_joined %>% 
   group_by(county, group, order, long.x, lat.x, long.y, lat.y, type) %>% 
   filter(row_number()==1)
 
 
-ex %>% 
+# install.packages('transformr')
+
+missing_counties %>% 
   ggplot() +
-  geom_polygon(data = west_coast, aes(x = long, y = lat, group = group), color = 'white', fill = 'gray70', alpha = .7) +
   geom_polygon(aes(x = long.y, y = lat.y, group = group, fill = type)) +
+  geom_polygon(data = west_coast, aes(x = long, y = lat, group = group), color = 'white', fill = 'gray70', alpha = .3) +
   coord_fixed(1.1) +
   theme_classic() +
   labs(title = 'Confirmed Cases, Deaths, and Recoveries of COVID-19\non West Coast',
+       subtitle = 'Date: {frame_time}',
        x = 'Longitude',
        y = 'Latitude') +
-  colorblindr::scale_fill_OkabeIto(name = 'Cases',
-                                   labels = counts_all$total_state) +
+  viridis::scale_fill_viridis(discrete = TRUE,
+                               labels = paste(counts_all$type, counts_all$total_state)) +
   facet_wrap(~type)
-
-
-
-west_joined %>% 
-  ggplot() +
-  geom_polygon(data = west_coast, aes(x = long, y = lat, group = group), color = 'white', alpha = .3) +
-  geom_polygon(aes(x = long.y, y = lat.y, group = group, fill = type)) +
-  coord_fixed(1.1) +
-  theme_classic() +
-  labs(title = 'Confirmed Cases, Deaths, and Recoveries of COVID-19\non West Coast',
-       x = 'Longitude',
-       y = 'Latitude') +
-  colorblindr::scale_fill_OkabeIto(name = 'Cases',
-                                   labels = counts_all$total_state) +
-  facet_wrap(~type)
+  
