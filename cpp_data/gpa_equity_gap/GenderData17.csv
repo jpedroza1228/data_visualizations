@@ -1,0 +1,69 @@
+"Data Download for Which Courses Have the Largest GPA Equity Gaps?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/achievement-gaps-gpa
+"CSV created on:  ","Sun, Dec 12, 2021 5:32 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","Psychology and Sociology","2017 - Academic Year","Largest GPA Gap AND Highest Enrollment"
+
+"Gender GPA Summary"
+Course,"Course Code","Female Enrollment","Male Enrollment","Female GPA","Male GPA","GPA Gap"
+"General Psychology",PSY201,856,828,2.88,2.73,0.15
+"Principles of Sociology",SOC201,417,256,2.28,2.37,-0.09
+"Mind, Brain, and Behavior",PSY210,277,168,2.24,2.44,-0.19
+"Human Sexual Behav,  Relatnshi",PSY455,570,320,3.02,2.89,0.13
+"Multicultural Psychology",PSY325,172,81,2.74,2.55,0.19
+"Principles of Psychology I",PSY202,177,91,2.66,2.44,0.22
+"Contemporary Social Problems",SOC301,144,98,2.53,2.9,-0.37
+"Gender and Sexuality",SOC328,79,20,2.89,3.09,-0.19
+"Survey Research",SOC444,45,23,2.78,3.2,-0.43
+"Survey Research Activity",SOC444A,45,23,2.78,3.2,-0.43
+"Statistics For Social Sci Act",PSY307A,108,37,3.07,3.05,0.03
+"Research Methods In Psychology",PSY204,110,41,2.85,2.71,0.14
+"Juvenile Delinquency",SOC360,98,46,2.94,2.82,0.12
+"Health Psychology",PSY326,371,195,2.99,2.94,0.04
+"Urban Sociology",SOC401,29,18,2.98,2.52,0.46
+"Social Work Practice",SW301,63,15,3.33,3.31,0.02
+"Senior Seminar",PSY498,161,33,3.64,3.5,0.14
+"Research Methods In Sociolgy I",SOC204,126,60,2.99,2.76,0.22
+"Statistics For The Social Scie",PSY307,108,37,3,2.96,0.04
+"Socialization,  Self and Socie",SOC402,99,44,2.89,2.61,0.27
+"Principles of Sociology",SOC202,89,46,2.6,2.39,0.21
+"Statistics For The Social Sci",SOC307,104,40,3.33,3.37,-0.03
+"Statistics For Social Sci Act",SOC307A,104,40,3.33,3.37,-0.03
+"Abnormal Psychology",PSY415,134,55,2.88,3,-0.12
+"Social Stratificationand Inequ",SOC309,104,40,2.71,2.58,0.13
+"Theories of Counseling",PSY412,40,N<10,2.91,N<10,N/A
+"Industrial and Organizatio Psy",PSY332,72,22,3.59,3.3,0.29
+"Treatment of Law Violators",SW318,37,11,3.01,3.12,-0.11
+"Basic Developmental Psychology",PSY305,75,20,2.63,2.3,0.33
+"Classical Sociological Theory",SOC305,106,37,2.91,2.56,0.35
+"Senior Seminar Service Lrng",SOC498S,32,N<10,3.07,N<10,N/A
+Criminology,SOC302,66,29,2.88,2.41,0.47
+"Psychology of Women",PSY322,84,15,3.43,3.24,0.19
+"Probation and Parole",SW320,77,21,3.32,3.21,0.11
+"Ethnic Relations In America",SOC320,32,16,2.98,2.31,0.67
+"Senior Seminar",SOC498,71,29,3.2,3.22,-0.02
+"Environmental Psychology",PSY420,29,14,3.1,2.74,0.36
+"Politics As A Soc Institution",SOC322,30,18,3.15,3.34,-0.19
+"Family As A Social Institution",SOC321,70,26,3.09,3,0.09
+"Sensation and Perception",PSY460,25,16,2.73,2.92,-0.18
+"Program Evaluation",PSY430,62,N<10,3.17,N<10,N/A
+"Cognitive Processes",PSY334,108,33,2.2,2.31,-0.11
+"Basic Counseling Skills",PSY417,112,30,3.18,2.93,0.24
+"Contemporary Sociological Thry",SOC306,65,30,3.2,3.07,0.13
+"Field Work",SW402,69,12,3.93,3.85,0.08
+"Organizational Change and Inte",PSY452,69,23,3.63,3.67,-0.03
+"Soc Welfare Policies and Issue",SW431,25,N<10,3.47,N<10,N/A
+"Survey of Social Welfare",SW300,38,10,3.49,3.3,0.19
+"Child Psych,  Early Childhood",PSY310,74,20,3.3,3.14,0.16
+"Adolescent Psychology",PSY312,119,23,3.15,3.3,-0.15
+"Sociology of Minority Commun",SOC323,93,49,3.28,3.31,-0.03
+"Theories of Learning",PSY402,35,12,2.75,3.42,-0.66
+"Memory and Amnesia",PSY335,106,35,3.27,3.04,0.23
+"Rsrch Methods In Sociology II",SOC205,128,51,3.36,3.25,0.12
+"Exper Psy and Res Meth and Des",PSY433,132,33,3.32,3.07,0.25
+"Exper Psy and Res Meth and Des",PSY433L,132,33,3.32,3.07,0.25
+"Spec Study Ud Students",PSY400,45,11,3.97,4,-0.03
+"Qualitative Methds In Psychlgy",PSY404,54,20,3.67,3.73,-0.07
+"Family Violence",SW322,75,20,3.55,3.58,-0.03
+"Social Psychology",PSY401,62,34,2.73,2.86,-0.14
+"Spec Topics Ud Students",PSY499,24,N<10,4,N<10,N/A
+

@@ -1,0 +1,43 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:05 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2012 - Fall"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2012 - Fall",PSY201,"General Psychology",389,8%,33
+"2012 - Fall",PSY202,"Principles of Psychology I",180,16%,29
+"2012 - Fall",SOC201,"Principles of Sociology",214,14%,29
+"2012 - Fall",PSY402,"Theories of Learning",47,60%,28
+"2012 - Fall",PSY210,"Mind, Brain, and Behavior",179,8%,15
+"2012 - Fall",PSY204,"Research Methods In Psychology",73,18%,13
+"2012 - Fall",PSY455,"Human Sexual Behav,  Relatnshi",135,4%,6
+"2012 - Fall",PSY403,"Psychology of Personality",48,10%,5
+"2012 - Fall",PSY326,"Health Psychology",129,4%,5
+"2012 - Fall",SOC309,"Social Stratificationand Inequ",47,9%,4
+"2012 - Fall",PSY322,"Psychology of Women",48,8%,4
+"2012 - Fall",PSY433,"Exper Psy and Res Meth and Des",49,8%,4
+"2012 - Fall",SOC202,"Principles of Sociology",77,5%,4
+"2012 - Fall",SW300,"Survey of Social Welfare",37,8%,3
+"2012 - Fall",SOC328,"Gender and Sexuality",47,6%,3
+"2012 - Fall",PSY401,"Social Psychology",47,6%,3
+"2012 - Fall",PSY334,"Cognitive Processes",47,6%,3
+"2012 - Fall",SOC360,"Juvenile Delinquency",48,6%,3
+"2012 - Fall",SOC204,"Research Methods In Sociolgy I",50,6%,3
+"2012 - Fall",SOC301,"Contemporary Social Problems",64,5%,3
+"2012 - Fall",SOC306,"Contemporary Sociological Thry",43,5%,2
+"2012 - Fall",SOC402,"Socialization,  Self and Socie",48,4%,2
+"2012 - Fall",SOC401,"Urban Sociology",48,4%,2
+"2012 - Fall",PSY321,"The Psychology of Identity",48,4%,2
+"2012 - Fall",PSY307,"Statistics For The Social Scie",48,4%,2
+"2012 - Fall",PSY307A,"Statistics For Social Sci Act",48,4%,2
+"2012 - Fall",PSY415,"Abnormal Psychology",89,2%,2
+"2012 - Fall",PSY412,"Theories of Counseling",23,4%,1
+"2012 - Fall",SOC205,"Rsrch Methods In Sociology II",43,2%,1
+"2012 - Fall",SOC350,"Collective Behavior and Soc Mo",47,2%,1
+"2012 - Fall",PSY310,"Child Psych,  Early Childhood",48,2%,1
+"2012 - Fall",PSY425,"Community Psychology",48,2%,1
+"2012 - Fall",PSY311,"Child Psych,  The Middle Years",48,2%,1
+"2012 - Fall",PSY433L,"Exper Psy and Res Meth and Des",49,2%,1
+"2012 - Fall",PSY325,"Multicultural Psychology",65,2%,1
+

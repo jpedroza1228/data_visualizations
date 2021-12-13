@@ -1,0 +1,49 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:04 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2013 - Spring"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2013 - Spring",PSY201,"General Psychology",648,11%,70
+"2013 - Spring",PSY210,"Mind, Brain, and Behavior",181,14%,26
+"2013 - Spring",SOC201,"Principles of Sociology",211,11%,23
+"2013 - Spring",PSY455,"Human Sexual Behav,  Relatnshi",191,9%,17
+"2013 - Spring",PSY322,"Psychology of Women",47,23%,11
+"2013 - Spring",PSY202,"Principles of Psychology I",69,16%,11
+"2013 - Spring",PSY334,"Cognitive Processes",48,21%,10
+"2013 - Spring",PSY401,"Social Psychology",81,12%,10
+"2013 - Spring",PSY206,"Child Psych For Educators",65,14%,9
+"2013 - Spring",PSY326,"Health Psychology",180,4%,7
+"2013 - Spring",SOC301,"Contemporary Social Problems",44,14%,6
+"2013 - Spring",PSY410,"History and Systems",45,13%,6
+"2013 - Spring",PSY403,"Psychology of Personality",47,13%,6
+"2013 - Spring",SOC320,"Ethnic Relations In America",47,13%,6
+"2013 - Spring",PSY412,"Theories of Counseling",51,10%,5
+"2013 - Spring",SOC401,"Urban Sociology",24,17%,4
+"2013 - Spring",SOC444A,"Survey Research Activity",47,9%,4
+"2013 - Spring",SOC323,"Sociology of Minority Commun",48,8%,4
+"2013 - Spring",SW322,"Family Violence",48,8%,4
+"2013 - Spring",PSY415,"Abnormal Psychology",97,4%,4
+"2013 - Spring",PSY303,"Physiological Psychology",25,12%,3
+"2013 - Spring",SOC302,Criminology,40,8%,3
+"2013 - Spring",SOC444,"Survey Research",47,6%,3
+"2013 - Spring",SOC306,"Contemporary Sociological Thry",48,6%,3
+"2013 - Spring",SOC202,"Principles of Sociology",51,6%,3
+"2013 - Spring",SOC322,"Politics As A Soc Institution",21,10%,2
+"2013 - Spring",PSY204,"Research Methods In Psychology",23,9%,2
+"2013 - Spring",PSY307,"Statistics For The Social Scie",23,9%,2
+"2013 - Spring",PSY307A,"Statistics For Social Sci Act",23,9%,2
+"2013 - Spring",SOC440,"Technology and Society",34,6%,2
+"2013 - Spring",SOC360,"Juvenile Delinquency",39,5%,2
+"2013 - Spring",SOC402,"Socialization,  Self and Socie",43,5%,2
+"2013 - Spring",SOC498,"Senior Seminar",45,4%,2
+"2013 - Spring",PSY433,"Exper Psy and Res Meth and Des",71,3%,2
+"2013 - Spring",PSY433L,"Exper Psy and Res Meth and Des",71,3%,2
+"2013 - Spring",SOC204,"Research Methods In Sociolgy I",25,4%,1
+"2013 - Spring",SW402,"Field Work",33,3%,1
+"2013 - Spring",SOC305,"Classical Sociological Theory",45,2%,1
+"2013 - Spring",SW318,"Treatment of Law Violators",46,2%,1
+"2013 - Spring",PSY312,"Adolescent Psychology",47,2%,1
+"2013 - Spring",SW320,"Probation and Parole",48,2%,1
+

@@ -1,0 +1,38 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:03 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2017 - Spring"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2017 - Spring",PSY201,"General Psychology",515,19%,100
+"2017 - Spring",PSY210,"Mind, Brain, and Behavior",138,31%,43
+"2017 - Spring",PSY455,"Human Sexual Behav,  Relatnshi",149,17%,25
+"2017 - Spring",SOC201,"Principles of Sociology",180,13%,23
+"2017 - Spring",PSY202,"Principles of Psychology I",90,18%,16
+"2017 - Spring",PSY326,"Health Psychology",127,10%,13
+"2017 - Spring",SOC360,"Juvenile Delinquency",33,24%,8
+"2017 - Spring",SOC305,"Classical Sociological Theory",44,18%,8
+"2017 - Spring",SW318,"Treatment of Law Violators",46,17%,8
+"2017 - Spring",PSY322,"Psychology of Women",47,17%,8
+"2017 - Spring",SOC301,"Contemporary Social Problems",63,13%,8
+"2017 - Spring",PSY402,"Theories of Learning",41,15%,6
+"2017 - Spring",PSY415,"Abnormal Psychology",45,13%,6
+"2017 - Spring",PSY325,"Multicultural Psychology",63,10%,6
+"2017 - Spring",PSY307A,"Statistics For Social Sci Act",47,11%,5
+"2017 - Spring",PSY307,"Statistics For The Social Scie",47,11%,5
+"2017 - Spring",SOC322,"Politics As A Soc Institution",46,9%,4
+"2017 - Spring",PSY433,"Exper Psy and Res Meth and Des",71,6%,4
+"2017 - Spring",PSY433L,"Exper Psy and Res Meth and Des",71,6%,4
+"2017 - Spring",SOC328,"Gender and Sexuality",43,7%,3
+"2017 - Spring",SOC309,"Social Stratificationand Inequ",47,6%,3
+"2017 - Spring",SW320,"Probation and Parole",44,5%,2
+"2017 - Spring",PSY334,"Cognitive Processes",47,4%,2
+"2017 - Spring",SOC306,"Contemporary Sociological Thry",48,4%,2
+"2017 - Spring",SOC302,Criminology,48,4%,2
+"2017 - Spring",SOC340,"Social Change",27,4%,1
+"2017 - Spring",PSY403,"Psychology of Personality",36,3%,1
+"2017 - Spring",SOC402,"Socialization,  Self and Socie",37,3%,1
+"2017 - Spring",PSY310,"Child Psych,  Early Childhood",44,2%,1
+"2017 - Spring",SOC204,"Research Methods In Sociolgy I",50,2%,1
+

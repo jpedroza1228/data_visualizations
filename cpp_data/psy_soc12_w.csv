@@ -1,0 +1,48 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:05 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2012 - Winter"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2012 - Winter",PSY201,"General Psychology",443,9%,41
+"2012 - Winter",PSY210,"Mind, Brain, and Behavior",91,21%,19
+"2012 - Winter",SOC201,"Principles of Sociology",179,8%,14
+"2012 - Winter",PSY334,"Cognitive Processes",48,21%,10
+"2012 - Winter",PSY402,"Theories of Learning",27,33%,9
+"2012 - Winter",PSY403,"Psychology of Personality",48,19%,9
+"2012 - Winter",PSY307,"Statistics For The Social Scie",67,13%,9
+"2012 - Winter",PSY307A,"Statistics For Social Sci Act",67,13%,9
+"2012 - Winter",PSY433L,"Exper Psy and Res Meth and Des",73,12%,9
+"2012 - Winter",PSY204,"Research Methods In Psychology",90,10%,9
+"2012 - Winter",PSY401,"Social Psychology",96,9%,9
+"2012 - Winter",PSY321,"The Psychology of Identity",47,17%,8
+"2012 - Winter",PSY412,"Theories of Counseling",48,17%,8
+"2012 - Winter",PSY433,"Exper Psy and Res Meth and Des",73,11%,8
+"2012 - Winter",PSY326,"Health Psychology",65,11%,7
+"2012 - Winter",SOC320,"Ethnic Relations In America",46,13%,6
+"2012 - Winter",SOC322,"Politics As A Soc Institution",32,16%,5
+"2012 - Winter",SOC302,Criminology,48,10%,5
+"2012 - Winter",PSY415,"Abnormal Psychology",96,5%,5
+"2012 - Winter",SOC202,"Principles of Sociology",90,4%,4
+"2012 - Winter",SOC401,"Urban Sociology",31,10%,3
+"2012 - Winter",SOC306,"Contemporary Sociological Thry",45,7%,3
+"2012 - Winter",SOC360,"Juvenile Delinquency",48,6%,3
+"2012 - Winter",PSY202,"Principles of Psychology I",90,3%,3
+"2012 - Winter",SW300,"Survey of Social Welfare",37,5%,2
+"2012 - Winter",PSY335,"Memory and Amnesia",42,5%,2
+"2012 - Winter",SOC340,"Social Change",47,4%,2
+"2012 - Winter",SOC309,"Social Stratificationand Inequ",48,4%,2
+"2012 - Winter",PSY425,"Community Psychology",48,4%,2
+"2012 - Winter",SW320,"Probation and Parole",50,4%,2
+"2012 - Winter",PSY498,"Senior Seminar",72,3%,2
+"2012 - Winter",SOC444A,"Survey Research Activity",16,6%,1
+"2012 - Winter",SOC444,"Survey Research",16,6%,1
+"2012 - Winter",PSY450,"Prin of Behavorial Management",38,3%,1
+"2012 - Winter",SW402,"Field Work",41,2%,1
+"2012 - Winter",SW322,"Family Violence",48,2%,1
+"2012 - Winter",PSY430,"Program Evaluation",50,2%,1
+"2012 - Winter",SOC205,"Rsrch Methods In Sociology II",50,2%,1
+"2012 - Winter",SOC301,"Contemporary Social Problems",62,2%,1
+"2012 - Winter",PSY455,"Human Sexual Behav,  Relatnshi",65,2%,1
+

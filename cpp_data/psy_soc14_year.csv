@@ -1,0 +1,63 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:04 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2014 - Academic Year"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2014 - Academic Year",PSY201,"General Psychology","1,824",14%,250
+"2014 - Academic Year",SOC201,"Principles of Sociology",539,15%,81
+"2014 - Academic Year",PSY202,"Principles of Psychology I",265,25%,67
+"2014 - Academic Year",PSY455,"Human Sexual Behav,  Relatnshi",904,6%,57
+"2014 - Academic Year",PSY210,"Mind, Brain, and Behavior",271,14%,37
+"2014 - Academic Year",PSY326,"Health Psychology",574,6%,32
+"2014 - Academic Year",PSY415,"Abnormal Psychology",287,11%,31
+"2014 - Academic Year",PSY334,"Cognitive Processes",141,17%,24
+"2014 - Academic Year",PSY402,"Theories of Learning",78,26%,20
+"2014 - Academic Year",SOC305,"Classical Sociological Theory",139,14%,20
+"2014 - Academic Year",SOC302,Criminology,138,14%,19
+"2014 - Academic Year",PSY325,"Multicultural Psychology",320,5%,15
+"2014 - Academic Year",SOC202,"Principles of Sociology",97,14%,14
+"2014 - Academic Year",PSY204,"Research Methods In Psychology",125,10%,13
+"2014 - Academic Year",PSY305,"Basic Developmental Psychology",143,8%,11
+"2014 - Academic Year",PSY206,"Child Psych For Educators",48,21%,10
+"2014 - Academic Year",PSY403,"Psychology of Personality",96,10%,10
+"2014 - Academic Year",PSY433L,"Exper Psy and Res Meth and Des",143,7%,10
+"2014 - Academic Year",SOC301,"Contemporary Social Problems",108,8%,9
+"2014 - Academic Year",SOC360,"Juvenile Delinquency",140,6%,9
+"2014 - Academic Year",PSY433,"Exper Psy and Res Meth and Des",143,6%,9
+"2014 - Academic Year",PSY307A,"Statistics For Social Sci Act",144,6%,9
+"2014 - Academic Year",PSY307,"Statistics For The Social Scie",144,6%,9
+"2014 - Academic Year",SOC322,"Politics As A Soc Institution",48,15%,7
+"2014 - Academic Year",SOC402,"Socialization,  Self and Socie",123,6%,7
+"2014 - Academic Year",SOC309,"Social Stratificationand Inequ",129,5%,7
+"2014 - Academic Year",PSY311,"Child Psych,  The Middle Years",48,13%,6
+"2014 - Academic Year",SOC320,"Ethnic Relations In America",100,6%,6
+"2014 - Academic Year",PSY401,"Social Psychology",127,5%,6
+"2014 - Academic Year",SOC321,"Family As A Social Institution",40,13%,5
+"2014 - Academic Year",SOC328,"Gender and Sexuality",85,6%,5
+"2014 - Academic Year",SOC444A,"Survey Research Activity",54,7%,4
+"2014 - Academic Year",SOC444,"Survey Research",54,7%,4
+"2014 - Academic Year",SOC498,"Senior Seminar",110,4%,4
+"2014 - Academic Year",SOC204,"Research Methods In Sociolgy I",50,6%,3
+"2014 - Academic Year",PSY312,"Adolescent Psychology",94,3%,3
+"2014 - Academic Year",PSY310,"Child Psych,  Early Childhood",95,3%,3
+"2014 - Academic Year",SW318,"Treatment of Law Violators",29,7%,2
+"2014 - Academic Year",SOC401,"Urban Sociology",31,6%,2
+"2014 - Academic Year",PSY412,"Theories of Counseling",48,4%,2
+"2014 - Academic Year",SW320,"Probation and Parole",94,2%,2
+"2014 - Academic Year",PSY332,"Industrial and Organizatio Psy",95,2%,2
+"2014 - Academic Year",PSY417,"Basic Counseling Skills",97,2%,2
+"2014 - Academic Year",SOC307,"Statistics For The Social Sci",113,2%,2
+"2014 - Academic Year",SOC307A,"Statistics For Social Sci Act",113,2%,2
+"2014 - Academic Year",SOC323,"Sociology of Minority Commun",117,2%,2
+"2014 - Academic Year",SW322,"Family Violence",141,1%,2
+"2014 - Academic Year",SW300,"Survey of Social Welfare",32,3%,1
+"2014 - Academic Year",PSY322,"Psychology of Women",47,2%,1
+"2014 - Academic Year",PSY490,"Leadership and Teams",48,2%,1
+"2014 - Academic Year",SOC499,"Spec Topics Ud Students",69,1%,1
+"2014 - Academic Year",SW301,"Social Work Practice",70,1%,1
+"2014 - Academic Year",SOC205,"Rsrch Methods In Sociology II",75,1%,1
+"2014 - Academic Year",SOC306,"Contemporary Sociological Thry",115,1%,1
+"2014 - Academic Year",PSY498,"Senior Seminar",146,1%,1
+

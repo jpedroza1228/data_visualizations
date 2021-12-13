@@ -1,0 +1,46 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:04 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2013 - Fall"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2013 - Fall",PSY201,"General Psychology",569,9%,49
+"2013 - Fall",SOC201,"Principles of Sociology",181,12%,22
+"2013 - Fall",PSY210,"Mind, Brain, and Behavior",89,22%,20
+"2013 - Fall",PSY402,"Theories of Learning",42,43%,18
+"2013 - Fall",PSY202,"Principles of Psychology I",90,14%,13
+"2013 - Fall",PSY455,"Human Sexual Behav,  Relatnshi",254,5%,12
+"2013 - Fall",PSY326,"Health Psychology",191,6%,11
+"2013 - Fall",PSY334,"Cognitive Processes",46,22%,10
+"2013 - Fall",PSY305,"Basic Developmental Psychology",48,19%,9
+"2013 - Fall",PSY322,"Psychology of Women",47,17%,8
+"2013 - Fall",PSY403,"Psychology of Personality",48,13%,6
+"2013 - Fall",PSY204,"Research Methods In Psychology",60,10%,6
+"2013 - Fall",SOC309,"Social Stratificationand Inequ",38,13%,5
+"2013 - Fall",PSY311,"Child Psych,  The Middle Years",48,10%,5
+"2013 - Fall",SOC204,"Research Methods In Sociolgy I",48,10%,5
+"2013 - Fall",PSY433,"Exper Psy and Res Meth and Des",47,9%,4
+"2013 - Fall",PSY433L,"Exper Psy and Res Meth and Des",47,9%,4
+"2013 - Fall",PSY325,"Multicultural Psychology",66,6%,4
+"2013 - Fall",PSY415,"Abnormal Psychology",93,4%,4
+"2013 - Fall",PSY401,"Social Psychology",27,11%,3
+"2013 - Fall",SOC302,Criminology,32,9%,3
+"2013 - Fall",SW318,"Treatment of Law Violators",40,8%,3
+"2013 - Fall",SOC328,"Gender and Sexuality",46,7%,3
+"2013 - Fall",PSY307,"Statistics For The Social Scie",48,6%,3
+"2013 - Fall",PSY307A,"Statistics For Social Sci Act",48,6%,3
+"2013 - Fall",SOC202,"Principles of Sociology",40,5%,2
+"2013 - Fall",SOC305,"Classical Sociological Theory",41,5%,2
+"2013 - Fall",SOC321,"Family As A Social Institution",45,4%,2
+"2013 - Fall",SOC307,"Statistics For The Social Sci",47,4%,2
+"2013 - Fall",SOC307A,"Statistics For Social Sci Act",47,4%,2
+"2013 - Fall",PSY310,"Child Psych,  Early Childhood",48,4%,2
+"2013 - Fall",PSY450,"Prin of Behavorial Management",17,6%,1
+"2013 - Fall",PSY490,"Leadership and Teams",27,4%,1
+"2013 - Fall",SOC402,"Socialization,  Self and Socie",46,2%,1
+"2013 - Fall",PSY332,"Industrial and Organizatio Psy",47,2%,1
+"2013 - Fall",PSY312,"Adolescent Psychology",48,2%,1
+"2013 - Fall",PSY412,"Theories of Counseling",48,2%,1
+"2013 - Fall",PSY417,"Basic Counseling Skills",48,2%,1
+

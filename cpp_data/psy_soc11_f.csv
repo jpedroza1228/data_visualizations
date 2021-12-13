@@ -1,0 +1,44 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:05 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2011 - Fall"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2011 - Fall",PSY210,"Mind, Brain, and Behavior",90,41%,37
+"2011 - Fall",PSY201,"General Psychology",390,9%,35
+"2011 - Fall",SOC201,"Principles of Sociology",242,10%,25
+"2011 - Fall",PSY202,"Principles of Psychology I",180,9%,17
+"2011 - Fall",PSY402,"Theories of Learning",47,28%,13
+"2011 - Fall",PSY307A,"Statistics For Social Sci Act",73,14%,10
+"2011 - Fall",PSY307,"Statistics For The Social Scie",73,14%,10
+"2011 - Fall",PSY460,"Sensation and Perception",35,26%,9
+"2011 - Fall",PSY460A,"Sensation and Perception Act",35,26%,9
+"2011 - Fall",PSY334,"Cognitive Processes",48,19%,9
+"2011 - Fall",PSY204,"Research Methods In Psychology",74,11%,8
+"2011 - Fall",PSY326,"Health Psychology",123,7%,8
+"2011 - Fall",PSY433,"Exper Psy and Res Meth and Des",45,16%,7
+"2011 - Fall",PSY322,"Psychology of Women",47,15%,7
+"2011 - Fall",PSY321,"The Psychology of Identity",48,13%,6
+"2011 - Fall",SOC204,"Research Methods In Sociolgy I",47,11%,5
+"2011 - Fall",PSY412,"Theories of Counseling",48,10%,5
+"2011 - Fall",PSY433L,"Exper Psy and Res Meth and Des",45,9%,4
+"2011 - Fall",SOC403,"Sociology of Emotion",39,8%,3
+"2011 - Fall",SOC401,"Urban Sociology",43,7%,3
+"2011 - Fall",SOC305,"Classical Sociological Theory",48,6%,3
+"2011 - Fall",PSY403,"Psychology of Personality",48,6%,3
+"2011 - Fall",PSY415,"Abnormal Psychology",48,6%,3
+"2011 - Fall",PSY325,"Multicultural Psychology",130,2%,3
+"2011 - Fall",SOC322,"Politics As A Soc Institution",46,4%,2
+"2011 - Fall",PSY410,"History and Systems",48,4%,2
+"2011 - Fall",SW318,"Treatment of Law Violators",50,4%,2
+"2011 - Fall",SOC306,"Contemporary Sociological Thry",29,3%,1
+"2011 - Fall",SOC498,"Senior Seminar",34,3%,1
+"2011 - Fall",PSY498,"Senior Seminar",45,2%,1
+"2011 - Fall",SW300,"Survey of Social Welfare",47,2%,1
+"2011 - Fall",SOC402,"Socialization,  Self and Socie",48,2%,1
+"2011 - Fall",PSY401,"Social Psychology",48,2%,1
+"2011 - Fall",SOC360,"Juvenile Delinquency",48,2%,1
+"2011 - Fall",SOC302,Criminology,48,2%,1
+"2011 - Fall",SOC301,"Contemporary Social Problems",65,2%,1
+

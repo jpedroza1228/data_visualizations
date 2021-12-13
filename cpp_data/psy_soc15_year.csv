@@ -1,0 +1,64 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:03 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2015 - Academic Year"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2015 - Academic Year",PSY201,"General Psychology","1,759",14%,242
+"2015 - Academic Year",SOC201,"Principles of Sociology",500,24%,122
+"2015 - Academic Year",PSY202,"Principles of Psychology I",236,24%,56
+"2015 - Academic Year",PSY210,"Mind, Brain, and Behavior",311,18%,56
+"2015 - Academic Year",PSY455,"Human Sexual Behav,  Relatnshi",833,7%,56
+"2015 - Academic Year",PSY326,"Health Psychology",500,7%,33
+"2015 - Academic Year",SOC305,"Classical Sociological Theory",122,22%,27
+"2015 - Academic Year",PSY403,"Psychology of Personality",137,17%,23
+"2015 - Academic Year",PSY307,"Statistics For The Social Scie",215,9%,20
+"2015 - Academic Year",PSY307A,"Statistics For Social Sci Act",215,9%,20
+"2015 - Academic Year",PSY334,"Cognitive Processes",135,13%,18
+"2015 - Academic Year",PSY325,"Multicultural Psychology",270,7%,18
+"2015 - Academic Year",PSY415,"Abnormal Psychology",268,6%,15
+"2015 - Academic Year",PSY204,"Research Methods In Psychology",102,13%,13
+"2015 - Academic Year",PSY305,"Basic Developmental Psychology",144,9%,13
+"2015 - Academic Year",PSY206,"Child Psych For Educators",44,27%,12
+"2015 - Academic Year",PSY412,"Theories of Counseling",76,14%,11
+"2015 - Academic Year",PSY311,"Child Psych,  The Middle Years",119,9%,11
+"2015 - Academic Year",PSY402,"Theories of Learning",39,23%,9
+"2015 - Academic Year",SOC498,"Senior Seminar",99,9%,9
+"2015 - Academic Year",PSY312,"Adolescent Psychology",75,11%,8
+"2015 - Academic Year",PSY310,"Child Psych,  Early Childhood",76,8%,6
+"2015 - Academic Year",SOC301,"Contemporary Social Problems",216,3%,6
+"2015 - Academic Year",PSY321,"The Psychology of Identity",40,13%,5
+"2015 - Academic Year",PSY322,"Psychology of Women",48,10%,5
+"2015 - Academic Year",SOC202,"Principles of Sociology",66,8%,5
+"2015 - Academic Year",PSY401,"Social Psychology",86,6%,5
+"2015 - Academic Year",SOC321,"Family As A Social Institution",90,6%,5
+"2015 - Academic Year",SOC402,"Socialization,  Self and Socie",112,4%,5
+"2015 - Academic Year",SOC328,"Gender and Sexuality",60,7%,4
+"2015 - Academic Year",SW320,"Probation and Parole",84,5%,4
+"2015 - Academic Year",SOC204,"Research Methods In Sociolgy I",119,3%,4
+"2015 - Academic Year",PSY335,"Memory and Amnesia",47,6%,3
+"2015 - Academic Year",SOC306,"Contemporary Sociological Thry",109,3%,3
+"2015 - Academic Year",SOC302,Criminology,130,2%,3
+"2015 - Academic Year",PSY498,"Senior Seminar",140,2%,3
+"2015 - Academic Year",PSY433L,"Exper Psy and Res Meth and Des",146,2%,3
+"2015 - Academic Year",PSY433,"Exper Psy and Res Meth and Des",146,2%,3
+"2015 - Academic Year",SOC324,"Religion In American Life",23,9%,2
+"2015 - Academic Year",PSY425,"Community Psychology",42,5%,2
+"2015 - Academic Year",SOC323,"Sociology of Minority Commun",48,4%,2
+"2015 - Academic Year",PSY452,"Organizational Change and Inte",48,4%,2
+"2015 - Academic Year",SOC360,"Juvenile Delinquency",67,3%,2
+"2015 - Academic Year",PSY417,"Basic Counseling Skills",92,2%,2
+"2015 - Academic Year",SOC205,"Rsrch Methods In Sociology II",96,2%,2
+"2015 - Academic Year",PSY303,"Physiological Psychology",23,4%,1
+"2015 - Academic Year",SOC307,"Statistics For The Social Sci",25,4%,1
+"2015 - Academic Year",SOC307A,"Statistics For Social Sci Act",25,4%,1
+"2015 - Academic Year",PSY499,"Spec Topics Ud Students",35,3%,1
+"2015 - Academic Year",SOC444A,"Survey Research Activity",40,3%,1
+"2015 - Academic Year",SOC444,"Survey Research",40,3%,1
+"2015 - Academic Year",SOC320,"Ethnic Relations In America",40,3%,1
+"2015 - Academic Year",SW300,"Survey of Social Welfare",66,2%,1
+"2015 - Academic Year",PSY332,"Industrial and Organizatio Psy",96,1%,1
+"2015 - Academic Year",SOC309,"Social Stratificationand Inequ",110,1%,1
+"2015 - Academic Year",PSY430,"Program Evaluation",147,1%,1
+

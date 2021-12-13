@@ -1,0 +1,40 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:04 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2014 - Winter"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2014 - Winter",PSY201,"General Psychology",690,16%,109
+"2014 - Winter",PSY202,"Principles of Psychology I",89,21%,19
+"2014 - Winter",PSY326,"Health Psychology",247,8%,19
+"2014 - Winter",SOC201,"Principles of Sociology",180,6%,11
+"2014 - Winter",PSY415,"Abnormal Psychology",96,9%,9
+"2014 - Winter",PSY455,"Human Sexual Behav,  Relatnshi",323,3%,9
+"2014 - Winter",PSY410,"History and Systems",42,19%,8
+"2014 - Winter",PSY334,"Cognitive Processes",46,17%,8
+"2014 - Winter",PSY210,"Mind, Brain, and Behavior",94,9%,8
+"2014 - Winter",PSY305,"Basic Developmental Psychology",48,13%,6
+"2014 - Winter",SOC306,"Contemporary Sociological Thry",36,11%,4
+"2014 - Winter",SOC301,"Contemporary Social Problems",63,6%,4
+"2014 - Winter",SOC401,"Urban Sociology",35,9%,3
+"2014 - Winter",PSY403,"Psychology of Personality",47,6%,3
+"2014 - Winter",SW320,"Probation and Parole",48,6%,3
+"2014 - Winter",SOC302,Criminology,48,6%,3
+"2014 - Winter",PSY325,"Multicultural Psychology",122,2%,3
+"2014 - Winter",SW318,"Treatment of Law Violators",18,11%,2
+"2014 - Winter",SOC451,"Social Inequality and Sport",46,4%,2
+"2014 - Winter",PSY312,"Adolescent Psychology",47,4%,2
+"2014 - Winter",PSY307A,"Statistics For Social Sci Act",47,4%,2
+"2014 - Winter",PSY307,"Statistics For The Social Scie",47,4%,2
+"2014 - Winter",SOC309,"Social Stratificationand Inequ",48,4%,2
+"2014 - Winter",PSY433L,"Exper Psy and Res Meth and Des",68,3%,2
+"2014 - Winter",PSY433,"Exper Psy and Res Meth and Des",68,3%,2
+"2014 - Winter",PSY401,"Social Psychology",20,5%,1
+"2014 - Winter",SOC204,"Research Methods In Sociolgy I",22,5%,1
+"2014 - Winter",PSY332,"Industrial and Organizatio Psy",44,2%,1
+"2014 - Winter",PSY204,"Research Methods In Psychology",45,2%,1
+"2014 - Winter",SOC307A,"Statistics For Social Sci Act",48,2%,1
+"2014 - Winter",SOC305,"Classical Sociological Theory",48,2%,1
+"2014 - Winter",SOC307,"Statistics For The Social Sci",48,2%,1
+

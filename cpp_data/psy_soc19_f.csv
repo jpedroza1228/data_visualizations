@@ -1,0 +1,62 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:02 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2019 - Fall"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2019 - Fall",SOC2201,"Introduction To Sociology",343,25%,85
+"2019 - Fall",PSY2201,"Introduction To Psychology",640,12%,76
+"2019 - Fall",CRM2201,"Introduction To Criminology",311,24%,74
+"2019 - Fall",PSY4455,"Human Sexuality,  Relationship",443,5%,21
+"2019 - Fall",PSY4150,"Abnormal Psychology",162,12%,19
+"2019 - Fall",SOC3345,"Crime Criminalization Society",110,16%,18
+"2019 - Fall",SOC3309,"Social Strat and Inequality",163,10%,17
+"2019 - Fall",PSY3333,"Industrial Psychology",89,17%,15
+"2019 - Fall",PSY3307A,"Statistics For Psychology Act",145,10%,14
+"2019 - Fall",PSY3325,"Multicultural Psychology",235,6%,14
+"2019 - Fall",PSY3334,"Cognitive Processes",114,11%,13
+"2019 - Fall",PSY3307,"Statistics For Psychology",145,9%,13
+"2019 - Fall",SW2201,"Intro Soc Work and Soc Welfare",204,6%,13
+"2019 - Fall",SOC3305,"Classic Sociological Theory",263,5%,13
+"2019 - Fall",PSY3326,"Health Psychology",312,4%,13
+"2019 - Fall",CRM3360,"Juvenile Delinquency",99,12%,12
+"2019 - Fall",SOC3307,"Statistics For Sociology",182,6%,11
+"2019 - Fall",PSY4401,"Social Psychology",194,6%,11
+"2019 - Fall",PSY3312,"Adolescent Psychology",214,5%,11
+"2019 - Fall",SOC4451,"Soc Inequality Sport and Body",103,10%,10
+"2019 - Fall",PSY4433,"Experimental Psychology",118,8%,10
+"2019 - Fall",PSY4433A,"Experimental Psychology Act",118,8%,10
+"2019 - Fall",PSY3305,"Basic Developmental Psychology",186,5%,10
+"2019 - Fall",SOC3306,"Contemp Sociology Theory",127,7%,9
+"2019 - Fall",SOC2205,"Research Methods In Sociology",183,5%,9
+"2019 - Fall",PSY2210,"Mind Brain Behvr Intgrtd View",128,6%,8
+"2019 - Fall",PSY3332,"Organizational Psychology",94,7%,7
+"2019 - Fall",SOC3325,"Community and Urban Sociology",91,7%,6
+"2019 - Fall",SOC3307L,"Statistics For Sociology Lab",181,3%,6
+"2019 - Fall",SOC4402,"Socialization,  Self and Socie",62,8%,5
+"2019 - Fall",SOC4611,"Senior Symposium",83,6%,5
+"2019 - Fall",PSY2204,"Research Methods In Psychology",74,5%,4
+"2019 - Fall",SOC3313,"Latina and O Sociology",93,4%,4
+"2019 - Fall",PSY4403,"Psychology of Personality",113,4%,4
+"2019 - Fall",PSY4121,"Theories of Counseling",115,3%,4
+"2019 - Fall",SOC3320,"Race and Ethnic Relations",115,3%,4
+"2019 - Fall",SOC3328,"Gender and Sexuality",129,3%,4
+"2019 - Fall",PSY4170,"Basic Counseling Skills",164,2%,4
+"2019 - Fall",CRM3320,"Probation and Parole",48,6%,3
+"2019 - Fall",PSY4404,"Qualitative Methods In Psych",19,11%,2
+"2019 - Fall",PSY4430A,"Program Evaluation Lab",47,4%,2
+"2019 - Fall",CRM3319,Policing,48,4%,2
+"2019 - Fall",PSY4250,"Community Psychology",48,4%,2
+"2019 - Fall",CRM3318,"Contemp Treat of Law Violators",48,4%,2
+"2019 - Fall",PSY2222,"Careers In Psychology",57,4%,2
+"2019 - Fall",PSY3310,"Child Psych,  Early Childhood",75,3%,2
+"2019 - Fall",SW3322,"Family Violence",101,2%,2
+"2019 - Fall",PSY4611,"Senior Seminar",122,2%,2
+"2019 - Fall",SOC4100,"Quantitative Mthds Sociology",11,9%,1
+"2019 - Fall",SOC4100L,"Quantitative Mthds Soclgy Lab",11,9%,1
+"2019 - Fall",SW3301,"Social Work Practice",15,7%,1
+"2019 - Fall",PSY4430,"Program Evaluation",47,2%,1
+"2019 - Fall",PSY3322,"Psychology of Women",48,2%,1
+"2019 - Fall",PSY3335,"Memory and Amnesia",115,1%,1
+

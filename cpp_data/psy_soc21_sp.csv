@@ -1,0 +1,69 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:01 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2021 - Spring"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2021 - Spring",PSY3325,"Multicultural Psychology",501,10%,52
+"2021 - Spring",SOC3309,"Social Strat and Inequality",194,25%,49
+"2021 - Spring",SOC3345,"Crime Criminalization Society",122,30%,37
+"2021 - Spring",SOC3306,"Contemp Sociology Theory",239,9%,21
+"2021 - Spring",PSY4433,"Experimental Psychology",196,10%,20
+"2021 - Spring",PSY4433A,"Experimental Psychology Act",196,10%,20
+"2021 - Spring",PSY2210,"Mind Brain Behvr Intgrtd View",230,8%,19
+"2021 - Spring",SOC3307,"Statistics For Sociology",141,13%,18
+"2021 - Spring",SOC3307L,"Statistics For Sociology Lab",141,12%,17
+"2021 - Spring",PSY2201,"Introduction To Psychology",343,5%,17
+"2021 - Spring",SW3310,"Soc Welfare Policy Issues",90,18%,16
+"2021 - Spring",PSY2222,"Careers In Psychology",226,7%,16
+"2021 - Spring",PSY4170,"Basic Counseling Skills",229,7%,16
+"2021 - Spring",SOC3320,"Race and Ethnic Relations",162,9%,15
+"2021 - Spring",PSY3307A,"Statistics For Psychology Act",164,9%,15
+"2021 - Spring",PSY3307,"Statistics For Psychology",164,9%,15
+"2021 - Spring",PSY4455,"Human Sexuality,  Relationship",462,3%,15
+"2021 - Spring",PSY2204,"Research Methods In Psychology",102,14%,14
+"2021 - Spring",SOC2201,"Introduction To Sociology",139,10%,14
+"2021 - Spring",CRM3360,"Juvenile Delinquency",58,21%,12
+"2021 - Spring",CRM2201,"Introduction To Criminology",119,9%,11
+"2021 - Spring",SOC2205,"Research Methods In Sociology",199,6%,11
+"2021 - Spring",CRM3319,Policing,70,13%,9
+"2021 - Spring",SOC4402,"Socialization,  Self and Socie",119,8%,9
+"2021 - Spring",SOC4611,"Senior Symposium",152,6%,9
+"2021 - Spring",SOC3328,"Gender and Sexuality",200,5%,9
+"2021 - Spring",PSY4150,"Abnormal Psychology",230,4%,9
+"2021 - Spring",PSY4611,"Senior Seminar",190,4%,8
+"2021 - Spring",PSY4404,"Qualitative Methods In Psych",72,10%,7
+"2021 - Spring",CRM3390,"Media and Crime",118,6%,7
+"2021 - Spring",PSY3305,"Basic Developmental Psychology",230,3%,7
+"2021 - Spring",SW3301,"Social Work Practice",67,9%,6
+"2021 - Spring",SOC3314,"Black Sociology",42,12%,5
+"2021 - Spring",PSY4121,"Theories of Counseling",48,10%,5
+"2021 - Spring",SW3320,"Medical Social Work",48,10%,5
+"2021 - Spring",SW3301L,"Social Work Pract Lab",66,8%,5
+"2021 - Spring",SW2201,"Intro Soc Work and Soc Welfare",70,7%,5
+"2021 - Spring",SOC4110,"Qualitative Methods For Soc",83,6%,5
+"2021 - Spring",PSY4401,"Social Psychology",114,4%,5
+"2021 - Spring",PSY3312,"Adolescent Psychology",115,4%,5
+"2021 - Spring",SOC3305,"Classic Sociological Theory",185,3%,5
+"2021 - Spring",PSY3326,"Health Psychology",230,2%,5
+"2021 - Spring",SOC4110L,"Qual Mthds For Soclgy Lab",83,5%,4
+"2021 - Spring",CRM3320,"Probation and Parole",85,5%,4
+"2021 - Spring",PSY3334,"Cognitive Processes",114,4%,4
+"2021 - Spring",SOC3350,"Immigration and Migration",122,3%,4
+"2021 - Spring",PSY4444,"Survey Research",46,7%,3
+"2021 - Spring",PSY2206,"Child Psychology For Educators",48,6%,3
+"2021 - Spring",SOC3325,"Community and Urban Sociology",49,6%,3
+"2021 - Spring",CRM3318,"Contemp Treat of Law Violators",50,6%,3
+"2021 - Spring",SOC4100L,"Quantitative Mthds Soclgy Lab",83,4%,3
+"2021 - Spring",SOC4100,"Quantitative Mthds Sociology",83,4%,3
+"2021 - Spring",PSY4444A,"Survey Research Act",46,4%,2
+"2021 - Spring",SOC3321,"Sociology of The Family",47,4%,2
+"2021 - Spring",SOC3313,"Latina and O Sociology",65,3%,2
+"2021 - Spring",PSY3332,"Organizational Psychology",96,2%,2
+"2021 - Spring",PSY4430,"Program Evaluation",111,2%,2
+"2021 - Spring",PSY4430A,"Program Evaluation Lab",111,2%,2
+"2021 - Spring",CRM3350,"Crm Theory",53,2%,1
+"2021 - Spring",SW3322,"Family Violence",70,1%,1
+"2021 - Spring",PSY3310,"Child Psych,  Early Childhood",113,1%,1
+

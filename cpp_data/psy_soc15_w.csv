@@ -1,0 +1,41 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:04 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2015 - Winter"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2015 - Winter",PSY201,"General Psychology",719,16%,118
+"2015 - Winter",SOC201,"Principles of Sociology",180,18%,32
+"2015 - Winter",PSY202,"Principles of Psychology I",89,30%,27
+"2015 - Winter",PSY415,"Abnormal Psychology",95,23%,22
+"2015 - Winter",PSY455,"Human Sexual Behav,  Relatnshi",314,4%,14
+"2015 - Winter",SOC202,"Principles of Sociology",68,16%,11
+"2015 - Winter",PSY210,"Mind, Brain, and Behavior",89,12%,11
+"2015 - Winter",PSY403,"Psychology of Personality",48,19%,9
+"2015 - Winter",SOC302,Criminology,44,16%,7
+"2015 - Winter",SOC322,"Politics As A Soc Institution",48,15%,7
+"2015 - Winter",PSY204,"Research Methods In Psychology",50,14%,7
+"2015 - Winter",SOC305,"Classical Sociological Theory",46,11%,5
+"2015 - Winter",PSY326,"Health Psychology",190,3%,5
+"2015 - Winter",PSY334,"Cognitive Processes",48,8%,4
+"2015 - Winter",SOC360,"Juvenile Delinquency",45,7%,3
+"2015 - Winter",PSY310,"Child Psych,  Early Childhood",47,6%,3
+"2015 - Winter",PSY305,"Basic Developmental Psychology",47,6%,3
+"2015 - Winter",PSY325,"Multicultural Psychology",130,2%,3
+"2015 - Winter",SOC320,"Ethnic Relations In America",34,6%,2
+"2015 - Winter",PSY401,"Social Psychology",43,5%,2
+"2015 - Winter",PSY312,"Adolescent Psychology",47,4%,2
+"2015 - Winter",PSY307A,"Statistics For Social Sci Act",48,4%,2
+"2015 - Winter",PSY307,"Statistics For The Social Scie",48,4%,2
+"2015 - Winter",SOC498,"Senior Seminar",53,4%,2
+"2015 - Winter",PSY490,"Leadership and Teams",23,4%,1
+"2015 - Winter",SOC205,"Rsrch Methods In Sociology II",25,4%,1
+"2015 - Winter",SW300,"Survey of Social Welfare",32,3%,1
+"2015 - Winter",SOC402,"Socialization,  Self and Socie",35,3%,1
+"2015 - Winter",SOC309,"Social Stratificationand Inequ",39,3%,1
+"2015 - Winter",SOC306,"Contemporary Sociological Thry",39,3%,1
+"2015 - Winter",SOC307A,"Statistics For Social Sci Act",43,2%,1
+"2015 - Winter",SOC307,"Statistics For The Social Sci",43,2%,1
+"2015 - Winter",PSY498,"Senior Seminar",51,2%,1
+

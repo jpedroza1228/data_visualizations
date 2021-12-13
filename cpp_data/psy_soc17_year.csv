@@ -1,0 +1,59 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:02 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2017 - Academic Year"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2017 - Academic Year",PSY201,"General Psychology","1,684",13%,227
+"2017 - Academic Year",SOC201,"Principles of Sociology",673,23%,156
+"2017 - Academic Year",PSY210,"Mind, Brain, and Behavior",445,16%,72
+"2017 - Academic Year",PSY455,"Human Sexual Behav,  Relatnshi",890,4%,39
+"2017 - Academic Year",PSY326,"Health Psychology",566,7%,38
+"2017 - Academic Year",PSY334,"Cognitive Processes",141,26%,36
+"2017 - Academic Year",PSY202,"Principles of Psychology I",268,12%,31
+"2017 - Academic Year",PSY204,"Research Methods In Psychology",151,13%,19
+"2017 - Academic Year",SOC202,"Principles of Sociology",135,12%,16
+"2017 - Academic Year",SOC301,"Contemporary Social Problems",242,7%,16
+"2017 - Academic Year",PSY325,"Multicultural Psychology",253,6%,16
+"2017 - Academic Year",SOC305,"Classical Sociological Theory",143,9%,13
+"2017 - Academic Year",PSY307,"Statistics For The Social Scie",145,8%,12
+"2017 - Academic Year",PSY307A,"Statistics For Social Sci Act",145,8%,12
+"2017 - Academic Year",PSY305,"Basic Developmental Psychology",95,11%,10
+"2017 - Academic Year",SOC309,"Social Stratificationand Inequ",144,7%,10
+"2017 - Academic Year",SOC302,Criminology,95,9%,9
+"2017 - Academic Year",PSY335,"Memory and Amnesia",141,6%,8
+"2017 - Academic Year",SOC204,"Research Methods In Sociolgy I",186,4%,8
+"2017 - Academic Year",SOC444A,"Survey Research Activity",68,10%,7
+"2017 - Academic Year",SOC444,"Survey Research",68,10%,7
+"2017 - Academic Year",SW301,"Social Work Practice",78,9%,7
+"2017 - Academic Year",PSY415,"Abnormal Psychology",189,4%,7
+"2017 - Academic Year",SOC306,"Contemporary Sociological Thry",95,6%,6
+"2017 - Academic Year",PSY401,"Social Psychology",96,6%,6
+"2017 - Academic Year",SW320,"Probation and Parole",98,6%,6
+"2017 - Academic Year",SOC328,"Gender and Sexuality",99,6%,6
+"2017 - Academic Year",PSY460,"Sensation and Perception",41,12%,5
+"2017 - Academic Year",SOC323,"Sociology of Minority Commun",142,4%,5
+"2017 - Academic Year",PSY433,"Exper Psy and Res Meth and Des",165,3%,5
+"2017 - Academic Year",PSY433L,"Exper Psy and Res Meth and Des",165,3%,5
+"2017 - Academic Year",SOC401,"Urban Sociology",47,9%,4
+"2017 - Academic Year",PSY402,"Theories of Learning",47,9%,4
+"2017 - Academic Year",PSY312,"Adolescent Psychology",142,3%,4
+"2017 - Academic Year",SW318,"Treatment of Law Violators",48,6%,3
+"2017 - Academic Year",PSY430,"Program Evaluation",71,4%,3
+"2017 - Academic Year",SOC498,"Senior Seminar",100,3%,3
+"2017 - Academic Year",SOC402,"Socialization,  Self and Socie",143,2%,3
+"2017 - Academic Year",SOC205,"Rsrch Methods In Sociology II",179,2%,3
+"2017 - Academic Year",PSY498,"Senior Seminar",194,2%,3
+"2017 - Academic Year",PSY332,"Industrial and Organizatio Psy",94,2%,2
+"2017 - Academic Year",PSY322,"Psychology of Women",99,2%,2
+"2017 - Academic Year",SOC360,"Juvenile Delinquency",144,1%,2
+"2017 - Academic Year",PSY303,"Physiological Psychology",24,4%,1
+"2017 - Academic Year",SW431,"Soc Welfare Policies and Issue",32,3%,1
+"2017 - Academic Year",SOC498S,"Senior Seminar Service Lrng",40,3%,1
+"2017 - Academic Year",PSY420,"Environmental Psychology",43,2%,1
+"2017 - Academic Year",PSY310,"Child Psych,  Early Childhood",94,1%,1
+"2017 - Academic Year",SOC321,"Family As A Social Institution",96,1%,1
+"2017 - Academic Year",SOC307A,"Statistics For Social Sci Act",144,1%,1
+"2017 - Academic Year",SOC307,"Statistics For The Social Sci",144,1%,1
+

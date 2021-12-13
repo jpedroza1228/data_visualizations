@@ -1,0 +1,56 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:02 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2019 - Spring"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2019 - Spring",PSY2201,"Introduction To Psychology",283,13%,37
+"2019 - Spring",PSY4402,"Theories of Learning",174,20%,34
+"2019 - Spring",PSY3334,"Cognitive Processes",253,9%,24
+"2019 - Spring",PSY3325,"Multicultural Psychology",313,7%,23
+"2019 - Spring",SOC2201,"Introduction To Sociology",200,11%,22
+"2019 - Spring",PSY3305,"Basic Developmental Psychology",263,8%,22
+"2019 - Spring",SOC4402,"Socialization,  Self and Socie",196,11%,21
+"2019 - Spring",SOC3305,"Classic Sociological Theory",173,9%,15
+"2019 - Spring",PSY4455,"Human Sexuality,  Relationship",195,7%,14
+"2019 - Spring",PSY4401,"Social Psychology",270,5%,14
+"2019 - Spring",PSY4150,"Abnormal Psychology",265,5%,13
+"2019 - Spring",CRM3318,"Contemp Treat of Law Violators",54,20%,11
+"2019 - Spring",SOC4440,"Technology and Society",31,32%,10
+"2019 - Spring",PSY2210,"Mind Brain Behvr Intgrtd View",90,11%,10
+"2019 - Spring",SOC3328,"Gender and Sexuality",142,7%,10
+"2019 - Spring",SOC3345,"Crime Criminalization Society",115,8%,9
+"2019 - Spring",PSY3307,"Statistics For Psychology",120,8%,9
+"2019 - Spring",PSY2206,"Child Psychology For Educators",75,11%,8
+"2019 - Spring",SOC2205,"Research Methods In Sociology",173,5%,8
+"2019 - Spring",PSY3307A,"Statistics For Psychology Act",120,6%,7
+"2019 - Spring",PSY3326,"Health Psychology",188,4%,7
+"2019 - Spring",SOC3309,"Social Strat and Inequality",195,4%,7
+"2019 - Spring",PSY2204,"Research Methods In Psychology",72,8%,6
+"2019 - Spring",CRM3360,"Juvenile Delinquency",91,7%,6
+"2019 - Spring",SOC3307,"Statistics For Sociology",95,6%,6
+"2019 - Spring",SOC3307L,"Statistics For Sociology Lab",95,6%,6
+"2019 - Spring",PSY4433,"Experimental Psychology",114,5%,6
+"2019 - Spring",PSY4433A,"Experimental Psychology Act",114,5%,6
+"2019 - Spring",PSY4430,"Program Evaluation",44,11%,5
+"2019 - Spring",PSY4430A,"Program Evaluation Lab",44,11%,5
+"2019 - Spring",SW3310,"Soc Welfare Policy Issues",94,4%,4
+"2019 - Spring",SOC4110,"Qualitative Methods For Soc",36,8%,3
+"2019 - Spring",SOC4110L,"Qual Mthds For Soclgy Lab",36,8%,3
+"2019 - Spring",CRM3320,"Probation and Parole",47,6%,3
+"2019 - Spring",PSY4403,"Psychology of Personality",49,6%,3
+"2019 - Spring",SOC3320,"Race and Ethnic Relations",63,5%,3
+"2019 - Spring",SOC4611,"Senior Symposium",75,4%,3
+"2019 - Spring",PSY3312,"Adolescent Psychology",113,3%,3
+"2019 - Spring",PSY3332,"Organizational Psychology",143,2%,3
+"2019 - Spring",PSY4170,"Basic Counseling Skills",48,4%,2
+"2019 - Spring",SOC3306,"Contemp Sociology Theory",96,2%,2
+"2019 - Spring",PSY4611,"Senior Seminar",123,2%,2
+"2019 - Spring",SOC4100L,"Quantitative Mthds Soclgy Lab",24,4%,1
+"2019 - Spring",SOC4100,"Quantitative Mthds Sociology",24,4%,1
+"2019 - Spring",SW3301,"Social Work Practice",34,3%,1
+"2019 - Spring",SW3301L,"Social Work Pract Lab",34,3%,1
+"2019 - Spring",PSY3321,"Psychology of Identity",48,2%,1
+"2019 - Spring",SW3322,"Family Violence",113,1%,1
+

@@ -1,0 +1,51 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:03 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2016 - Spring"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2016 - Spring",PSY201,"General Psychology",600,13%,77
+"2016 - Spring",SOC201,"Principles of Sociology",157,42%,66
+"2016 - Spring",PSY210,"Mind, Brain, and Behavior",141,16%,23
+"2016 - Spring",PSY202,"Principles of Psychology I",68,26%,18
+"2016 - Spring",PSY455,"Human Sexual Behav,  Relatnshi",254,7%,17
+"2016 - Spring",PSY334,"Cognitive Processes",43,35%,15
+"2016 - Spring",PSY206,"Child Psych For Educators",44,27%,12
+"2016 - Spring",SOC305,"Classical Sociological Theory",39,23%,9
+"2016 - Spring",PSY403,"Psychology of Personality",42,21%,9
+"2016 - Spring",PSY305,"Basic Developmental Psychology",48,19%,9
+"2016 - Spring",PSY415,"Abnormal Psychology",81,11%,9
+"2016 - Spring",PSY307,"Statistics For The Social Scie",48,17%,8
+"2016 - Spring",PSY307A,"Statistics For Social Sci Act",48,17%,8
+"2016 - Spring",PSY326,"Health Psychology",126,6%,7
+"2016 - Spring",PSY311,"Child Psych,  The Middle Years",34,15%,5
+"2016 - Spring",PSY321,"The Psychology of Identity",40,13%,5
+"2016 - Spring",PSY401,"Social Psychology",48,10%,5
+"2016 - Spring",PSY325,"Multicultural Psychology",82,6%,5
+"2016 - Spring",SOC202,"Principles of Sociology",45,9%,4
+"2016 - Spring",SOC498,"Senior Seminar",31,10%,3
+"2016 - Spring",SOC402,"Socialization,  Self and Socie",33,9%,3
+"2016 - Spring",PSY335,"Memory and Amnesia",47,6%,3
+"2016 - Spring",SW320,"Probation and Parole",37,5%,2
+"2016 - Spring",PSY425,"Community Psychology",42,5%,2
+"2016 - Spring",SOC360,"Juvenile Delinquency",45,4%,2
+"2016 - Spring",SOC321,"Family As A Social Institution",46,4%,2
+"2016 - Spring",SOC323,"Sociology of Minority Commun",48,4%,2
+"2016 - Spring",PSY498,"Senior Seminar",50,4%,2
+"2016 - Spring",SOC444,"Survey Research",16,6%,1
+"2016 - Spring",SOC444A,"Survey Research Activity",16,6%,1
+"2016 - Spring",PSY499,"Spec Topics Ud Students",18,6%,1
+"2016 - Spring",PSY204,"Research Methods In Psychology",18,6%,1
+"2016 - Spring",SOC204,"Research Methods In Sociolgy I",22,5%,1
+"2016 - Spring",PSY303,"Physiological Psychology",23,4%,1
+"2016 - Spring",SOC307,"Statistics For The Social Sci",25,4%,1
+"2016 - Spring",SOC307A,"Statistics For Social Sci Act",25,4%,1
+"2016 - Spring",SOC306,"Contemporary Sociological Thry",36,3%,1
+"2016 - Spring",SOC205,"Rsrch Methods In Sociology II",44,2%,1
+"2016 - Spring",PSY417,"Basic Counseling Skills",45,2%,1
+"2016 - Spring",SOC302,Criminology,47,2%,1
+"2016 - Spring",PSY433L,"Exper Psy and Res Meth and Des",52,2%,1
+"2016 - Spring",PSY433,"Exper Psy and Res Meth and Des",52,2%,1
+"2016 - Spring",SOC301,"Contemporary Social Problems",87,1%,1
+

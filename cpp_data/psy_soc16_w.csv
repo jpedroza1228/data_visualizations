@@ -1,0 +1,42 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:03 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2016 - Winter"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2016 - Winter",PSY201,"General Psychology",625,13%,81
+"2016 - Winter",SOC201,"Principles of Sociology",165,22%,36
+"2016 - Winter",PSY202,"Principles of Psychology I",87,21%,18
+"2016 - Winter",PSY455,"Human Sexual Behav,  Relatnshi",267,7%,18
+"2016 - Winter",PSY210,"Mind, Brain, and Behavior",84,20%,17
+"2016 - Winter",PSY325,"Multicultural Psychology",123,8%,10
+"2016 - Winter",PSY326,"Health Psychology",183,5%,10
+"2016 - Winter",SOC305,"Classical Sociological Theory",43,16%,7
+"2016 - Winter",PSY412,"Theories of Counseling",45,16%,7
+"2016 - Winter",PSY403,"Psychology of Personality",48,15%,7
+"2016 - Winter",PSY307A,"Statistics For Social Sci Act",86,8%,7
+"2016 - Winter",PSY307,"Statistics For The Social Scie",86,8%,7
+"2016 - Winter",PSY312,"Adolescent Psychology",33,18%,6
+"2016 - Winter",PSY322,"Psychology of Women",48,10%,5
+"2016 - Winter",SOC301,"Contemporary Social Problems",66,8%,5
+"2016 - Winter",SOC328,"Gender and Sexuality",30,13%,4
+"2016 - Winter",PSY204,"Research Methods In Psychology",35,11%,4
+"2016 - Winter",PSY310,"Child Psych,  Early Childhood",30,10%,3
+"2016 - Winter",PSY311,"Child Psych,  The Middle Years",38,8%,3
+"2016 - Winter",SOC498,"Senior Seminar",43,7%,3
+"2016 - Winter",SOC324,"Religion In American Life",23,9%,2
+"2016 - Winter",SW320,"Probation and Parole",47,4%,2
+"2016 - Winter",PSY452,"Organizational Change and Inte",48,4%,2
+"2016 - Winter",PSY415,"Abnormal Psychology",95,2%,2
+"2016 - Winter",SOC306,"Contemporary Sociological Thry",33,3%,1
+"2016 - Winter",SOC402,"Socialization,  Self and Socie",33,3%,1
+"2016 - Winter",SOC320,"Ethnic Relations In America",40,3%,1
+"2016 - Winter",SOC302,Criminology,46,2%,1
+"2016 - Winter",PSY433,"Exper Psy and Res Meth and Des",46,2%,1
+"2016 - Winter",PSY433L,"Exper Psy and Res Meth and Des",46,2%,1
+"2016 - Winter",PSY498,"Senior Seminar",48,2%,1
+"2016 - Winter",SOC309,"Social Stratificationand Inequ",48,2%,1
+"2016 - Winter",SOC204,"Research Methods In Sociolgy I",50,2%,1
+"2016 - Winter",PSY430,"Program Evaluation",50,2%,1
+

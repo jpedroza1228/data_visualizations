@@ -1,0 +1,40 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:03 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2018 - Winter"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2018 - Winter",PSY201,"General Psychology",602,13%,76
+"2018 - Winter",SOC201,"Principles of Sociology",169,32%,54
+"2018 - Winter",PSY210,"Mind, Brain, and Behavior",173,18%,31
+"2018 - Winter",PSY334,"Cognitive Processes",45,29%,13
+"2018 - Winter",PSY326,"Health Psychology",193,7%,13
+"2018 - Winter",PSY455,"Human Sexual Behav,  Relatnshi",254,4%,11
+"2018 - Winter",SOC202,"Principles of Sociology",80,13%,10
+"2018 - Winter",PSY202,"Principles of Psychology I",90,11%,10
+"2018 - Winter",PSY335,"Memory and Amnesia",47,13%,6
+"2018 - Winter",PSY401,"Social Psychology",47,11%,5
+"2018 - Winter",PSY307A,"Statistics For Social Sci Act",49,10%,5
+"2018 - Winter",PSY307,"Statistics For The Social Scie",49,10%,5
+"2018 - Winter",PSY204,"Research Methods In Psychology",51,8%,4
+"2018 - Winter",SOC301,"Contemporary Social Problems",63,6%,4
+"2018 - Winter",SOC204,"Research Methods In Sociolgy I",120,3%,4
+"2018 - Winter",SOC309,"Social Stratificationand Inequ",48,6%,3
+"2018 - Winter",PSY325,"Multicultural Psychology",63,5%,3
+"2018 - Winter",PSY430,"Program Evaluation",23,9%,2
+"2018 - Winter",SW301,"Social Work Practice",24,8%,2
+"2018 - Winter",SOC323,"Sociology of Minority Commun",48,4%,2
+"2018 - Winter",PSY433L,"Exper Psy and Res Meth and Des",48,4%,2
+"2018 - Winter",SOC305,"Classical Sociological Theory",48,4%,2
+"2018 - Winter",PSY433,"Exper Psy and Res Meth and Des",48,4%,2
+"2018 - Winter",SOC444,"Survey Research",24,4%,1
+"2018 - Winter",SOC444A,"Survey Research Activity",24,4%,1
+"2018 - Winter",PSY420,"Environmental Psychology",43,2%,1
+"2018 - Winter",PSY415,"Abnormal Psychology",47,2%,1
+"2018 - Winter",SOC360,"Juvenile Delinquency",48,2%,1
+"2018 - Winter",PSY310,"Child Psych,  Early Childhood",48,2%,1
+"2018 - Winter",SOC321,"Family As A Social Institution",48,2%,1
+"2018 - Winter",SW320,"Probation and Parole",50,2%,1
+"2018 - Winter",PSY498,"Senior Seminar",75,1%,1
+

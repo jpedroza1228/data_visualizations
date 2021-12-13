@@ -1,0 +1,81 @@
+"Data Download for Which Courses Have the Largest GPA Equity Gaps?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/achievement-gaps-gpa
+"CSV created on:  ","Sun, Dec 12, 2021 5:50 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","Psychology and Sociology","2019 - Academic Year","Largest GPA Gap AND Highest Enrollment"
+
+"Pell Status Summary"
+Course,"Course Code","Pell Enrollment","Non-Pell Enrollment","Pell GPA","Non-Pell GPA","GPA Gap"
+"Introduction To Psychology",PSY2201,522,460,2.86,3.02,0.15
+"Introduction To Sociology",SOC2201,314,228,2.61,2.81,0.19
+"Multicultural Psychology",PSY3325,277,219,3.08,3.19,0.11
+"Abnormal Psychology",PSY4150,213,176,2.87,3.01,0.14
+"Research Methods In Sociology",SOC2205,259,141,3.17,3.11,-0.06
+"Gender and Sexuality",SOC3328,191,98,3.58,3.64,0.06
+"Cognitive Processes",PSY3334,180,131,3.27,3.2,-0.07
+"Senior Seminar",PSY4611,151,110,3.51,3.58,0.08
+"Basic Counseling Skills",PSY4170,151,109,3.33,3.26,-0.08
+"Soc Inequality Sport and Body",SOC4451,57,46,2.75,3.09,0.34
+"Basic Developmental Psychology",PSY3305,218,165,3.46,3.45,-0.02
+"Senior Symposium",SOC4611,136,65,3.16,3.48,0.33
+"Theories of Counseling",PSY4121,103,60,3.25,3.34,0.09
+"Statistics For Sociology",SOC3307,233,108,3.17,3.16,-0.01
+"Careers In Psychology",PSY2222,165,118,3.8,3.74,-0.06
+"Statistics For Psychology",PSY3307,182,107,3.03,3.01,-0.02
+"Juvenile Delinquency",CRM3360,62,37,2.6,2.24,-0.36
+"Human Sexuality,  Relationship",PSY4455,425,328,3.01,3.12,0.11
+"Social Psychology",PSY4401,219,157,3.17,3.15,-0.02
+"Probation and Parole",CRM3320,82,49,3.03,3.11,0.07
+"Psychology of Personality",PSY4403,144,84,3.11,3.21,0.09
+"Social Strat and Inequality",SOC3309,266,133,3.05,3.17,0.12
+"Latina and O Sociology",SOC3313,109,32,3.49,3.44,-0.05
+"Race and Ethnic Relations",SOC3320,124,63,3.13,3.06,-0.07
+"Contemp Sociology Theory",SOC3306,243,106,3.22,3.16,-0.06
+"Program Evaluation Lab",PSY4430A,73,51,3.72,3.78,0.06
+"Statistics For Psychology Act",PSY3307A,182,107,3,2.98,-0.02
+"Crime Criminalization Society",SOC3345,132,92,3.02,3.34,0.32
+"Statistics For Sociology Lab",SOC3307L,232,108,3.39,3.31,-0.08
+"Qualitative Methods In Psych",PSY4404,20,21,2.63,2.72,0.09
+"Black Sociology",SOC3314,31,13,3.09,3.22,0.14
+"Classic Sociological Theory",SOC3305,286,161,3.14,3.23,0.1
+"Program Evaluation",PSY4430,73,51,3.72,3.86,0.14
+"Introduction To Criminology",CRM2201,277,177,2.58,2.56,-0.02
+"Crime Analysis Activity",CRM3306A,23,22,3.3,3.22,-0.08
+"Quantitative Mthds Soclgy Lab",SOC4100L,53,21,3.65,3.68,0.03
+"Adolescent Psychology",PSY3312,112,102,2.96,2.87,-0.1
+"Qualitative Methods For Soc",SOC4110,78,27,3.73,3.78,0.04
+"Research Methods In Psychology",PSY2204,96,75,2.84,3.17,0.32
+"Social Work Practice",SW3301,40,21,3.65,3.36,-0.28
+"Quantitative Mthds Sociology",SOC4100,53,21,3.55,3.6,0.04
+"Health Psychology",PSY3326,176,136,3.14,3.2,0.06
+"Qualitative Mthds In Psych Act",PSY4404A,20,21,3.48,3.26,-0.22
+"Community and Urban Sociology",SOC3325,116,55,3.42,3.46,0.05
+"Survey Research Act",PSY4444A,62,34,3.62,3.53,-0.09
+"Mind Brain Behvr Intgrtd View",PSY2210,117,101,2.95,3,0.05
+"Crime Analysis",CRM3306,23,22,3.26,3.18,-0.09
+"Soc Welfare Policy Issues",SW3310,82,37,3.42,3.37,-0.05
+"Contemp Treat of Law Violators",CRM3318,59,37,2.99,3.26,0.27
+"Impact Colonization On Hawaii",SOC4465,26,13,3.71,3.64,-0.07
+"Sociology of Education Svc Lrn",SOC3360S,31,11,2.94,3.03,0.1
+"Intro Soc Work and Soc Welfare",SW2201,225,87,3.24,3.22,-0.01
+Policing,CRM3319,60,36,3.37,3.26,-0.11
+"Experimental Psychology",PSY4433,168,114,3.05,2.98,-0.07
+"Experimental Psychology Act",PSY4433A,168,114,3.05,2.98,-0.07
+"Organizational Psychology",PSY3332,147,91,3.27,3.52,0.25
+"Child Psychology For Educators",PSY2206,24,22,2.72,2.57,-0.14
+Internship,SW4411,93,34,4,3.93,-0.07
+"Psychology of Women",PSY3322,31,17,3.25,3.37,0.13
+"Industrial Psychology",PSY3333,42,47,2.18,2.25,0.07
+"Survey Research",PSY4444,62,34,3.69,3.62,-0.07
+"Family Violence",SW3322,128,78,3.38,3.32,-0.06
+"Spec Study For Ud Students",SOC4000,18,N<10,3.93,N<10,N/A
+"Socialization,  Self and Socie",SOC4402,177,82,3.03,3.09,0.06
+"Child Psych,  Early Childhood",PSY3310,115,75,3.57,3.67,0.11
+"Social Work Pract Lab",SW3301L,40,21,3.69,3.67,-0.03
+"Memory and Amnesia",PSY3335,137,91,3.2,3.27,0.06
+"Community Psychology",PSY4250,30,18,2.81,3.02,0.21
+"Spec Study For Ud Students",PSY4000,24,31,4,3.96,-0.04
+"Child Psych,  Mid Childhood",PSY3311,31,17,3.69,3.48,-0.21
+"Theories of Learning",PSY4402,41,40,3.25,3.08,-0.17
+"Qual Mthds For Soclgy Lab",SOC4110L,78,27,3.76,3.75,-0.01
+"Death and Dying",SW4470,36,23,3.58,3.54,-0.04
+

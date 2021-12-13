@@ -1,0 +1,64 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:04 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2012 - Academic Year"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2012 - Academic Year",PSY201,"General Psychology","1,552",9%,132
+"2012 - Academic Year",SOC201,"Principles of Sociology",644,14%,90
+"2012 - Academic Year",PSY210,"Mind, Brain, and Behavior",539,14%,76
+"2012 - Academic Year",PSY202,"Principles of Psychology I",338,17%,58
+"2012 - Academic Year",PSY402,"Theories of Learning",71,55%,39
+"2012 - Academic Year",PSY455,"Human Sexual Behav,  Relatnshi",455,6%,26
+"2012 - Academic Year",PSY322,"Psychology of Women",132,16%,21
+"2012 - Academic Year",PSY334,"Cognitive Processes",143,15%,21
+"2012 - Academic Year",PSY204,"Research Methods In Psychology",153,14%,21
+"2012 - Academic Year",PSY326,"Health Psychology",430,5%,20
+"2012 - Academic Year",SOC202,"Principles of Sociology",184,10%,19
+"2012 - Academic Year",PSY401,"Social Psychology",224,8%,17
+"2012 - Academic Year",PSY403,"Psychology of Personality",141,11%,15
+"2012 - Academic Year",PSY410,"History and Systems",94,14%,13
+"2012 - Academic Year",PSY325,"Multicultural Psychology",227,5%,11
+"2012 - Academic Year",PSY415,"Abnormal Psychology",234,5%,11
+"2012 - Academic Year",SOC301,"Contemporary Social Problems",150,7%,10
+"2012 - Academic Year",PSY206,"Child Psych For Educators",65,14%,9
+"2012 - Academic Year",PSY307,"Statistics For The Social Scie",139,6%,9
+"2012 - Academic Year",SOC320,"Ethnic Relations In America",93,9%,8
+"2012 - Academic Year",SOC204,"Research Methods In Sociolgy I",126,6%,8
+"2012 - Academic Year",SOC360,"Juvenile Delinquency",135,6%,8
+"2012 - Academic Year",PSY307A,"Statistics For Social Sci Act",139,6%,8
+"2012 - Academic Year",SOC402,"Socialization,  Self and Socie",138,5%,7
+"2012 - Academic Year",PSY412,"Theories of Counseling",74,8%,6
+"2012 - Academic Year",SOC401,"Urban Sociology",101,6%,6
+"2012 - Academic Year",SOC309,"Social Stratificationand Inequ",139,4%,6
+"2012 - Academic Year",PSY433,"Exper Psy and Res Meth and Des",192,3%,6
+"2012 - Academic Year",SOC322,"Politics As A Soc Institution",61,8%,5
+"2012 - Academic Year",SW318,"Treatment of Law Violators",89,6%,5
+"2012 - Academic Year",PSY311,"Child Psych,  The Middle Years",96,5%,5
+"2012 - Academic Year",SOC306,"Contemporary Sociological Thry",129,4%,5
+"2012 - Academic Year",SOC444A,"Survey Research Activity",83,5%,4
+"2012 - Academic Year",SOC323,"Sociology of Minority Commun",94,4%,4
+"2012 - Academic Year",SW322,"Family Violence",96,4%,4
+"2012 - Academic Year",PSY305,"Basic Developmental Psychology",96,4%,4
+"2012 - Academic Year",SOC498,"Senior Seminar",106,4%,4
+"2012 - Academic Year",SOC302,Criminology,134,3%,4
+"2012 - Academic Year",PSY303,"Physiological Psychology",25,12%,3
+"2012 - Academic Year",SOC340,"Social Change",43,7%,3
+"2012 - Academic Year",SW300,"Survey of Social Welfare",71,4%,3
+"2012 - Academic Year",SOC444,"Survey Research",83,4%,3
+"2012 - Academic Year",SOC328,"Gender and Sexuality",96,3%,3
+"2012 - Academic Year",PSY498,"Senior Seminar",169,2%,3
+"2012 - Academic Year",PSY433L,"Exper Psy and Res Meth and Des",192,2%,3
+"2012 - Academic Year",SOC440,"Technology and Society",34,6%,2
+"2012 - Academic Year",PSY321,"The Psychology of Identity",48,4%,2
+"2012 - Academic Year",PSY312,"Adolescent Psychology",95,2%,2
+"2012 - Academic Year",SW431,"Soc Welfare Policies and Issue",45,2%,1
+"2012 - Academic Year",SOC350,"Collective Behavior and Soc Mo",47,2%,1
+"2012 - Academic Year",SW320,"Probation and Parole",48,2%,1
+"2012 - Academic Year",PSY425,"Community Psychology",48,2%,1
+"2012 - Academic Year",SW402,"Field Work",83,1%,1
+"2012 - Academic Year",PSY310,"Child Psych,  Early Childhood",96,1%,1
+"2012 - Academic Year",SOC205,"Rsrch Methods In Sociology II",115,1%,1
+"2012 - Academic Year",SOC305,"Classical Sociological Theory",144,1%,1
+

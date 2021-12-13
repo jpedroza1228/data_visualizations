@@ -1,0 +1,45 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:04 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2014 - Fall"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2014 - Fall",PSY201,"General Psychology",571,15%,87
+"2014 - Fall",SOC201,"Principles of Sociology",179,17%,31
+"2014 - Fall",PSY455,"Human Sexual Behav,  Relatnshi",296,6%,19
+"2014 - Fall",PSY326,"Health Psychology",195,8%,16
+"2014 - Fall",PSY334,"Cognitive Processes",45,33%,15
+"2014 - Fall",PSY202,"Principles of Psychology I",86,16%,14
+"2014 - Fall",SOC305,"Classical Sociological Theory",45,24%,11
+"2014 - Fall",PSY210,"Mind, Brain, and Behavior",91,12%,11
+"2014 - Fall",SOC302,Criminology,46,22%,10
+"2014 - Fall",PSY433L,"Exper Psy and Res Meth and Des",45,16%,7
+"2014 - Fall",PSY402,"Theories of Learning",33,18%,6
+"2014 - Fall",PSY433,"Exper Psy and Res Meth and Des",45,13%,6
+"2014 - Fall",PSY311,"Child Psych,  The Middle Years",48,13%,6
+"2014 - Fall",SOC321,"Family As A Social Institution",40,13%,5
+"2014 - Fall",SOC328,"Gender and Sexuality",44,11%,5
+"2014 - Fall",SOC309,"Social Stratificationand Inequ",46,11%,5
+"2014 - Fall",PSY305,"Basic Developmental Psychology",48,8%,4
+"2014 - Fall",PSY204,"Research Methods In Psychology",50,8%,4
+"2014 - Fall",PSY415,"Abnormal Psychology",96,4%,4
+"2014 - Fall",SOC204,"Research Methods In Sociolgy I",25,12%,3
+"2014 - Fall",SOC360,"Juvenile Delinquency",47,6%,3
+"2014 - Fall",SW318,"Treatment of Law Violators",29,7%,2
+"2014 - Fall",SOC401,"Urban Sociology",31,6%,2
+"2014 - Fall",SOC402,"Socialization,  Self and Socie",45,4%,2
+"2014 - Fall",PSY332,"Industrial and Organizatio Psy",47,4%,2
+"2014 - Fall",PSY412,"Theories of Counseling",48,4%,2
+"2014 - Fall",PSY325,"Multicultural Psychology",65,3%,2
+"2014 - Fall",SW301,"Social Work Practice",20,5%,1
+"2014 - Fall",SOC498,"Senior Seminar",21,5%,1
+"2014 - Fall",SOC499,"Spec Topics Ud Students",37,3%,1
+"2014 - Fall",SOC301,"Contemporary Social Problems",44,2%,1
+"2014 - Fall",SW320,"Probation and Parole",46,2%,1
+"2014 - Fall",PSY322,"Psychology of Women",47,2%,1
+"2014 - Fall",SOC307,"Statistics For The Social Sci",47,2%,1
+"2014 - Fall",SOC307A,"Statistics For Social Sci Act",47,2%,1
+"2014 - Fall",PSY312,"Adolescent Psychology",47,2%,1
+"2014 - Fall",PSY403,"Psychology of Personality",48,2%,1
+

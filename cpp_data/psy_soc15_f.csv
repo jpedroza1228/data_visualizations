@@ -1,0 +1,41 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:03 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2015 - Fall"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2015 - Fall",PSY201,"General Psychology",534,16%,84
+"2015 - Fall",PSY455,"Human Sexual Behav,  Relatnshi",312,7%,21
+"2015 - Fall",PSY202,"Principles of Psychology I",81,25%,20
+"2015 - Fall",SOC201,"Principles of Sociology",178,11%,20
+"2015 - Fall",PSY210,"Mind, Brain, and Behavior",86,19%,16
+"2015 - Fall",PSY326,"Health Psychology",191,8%,16
+"2015 - Fall",SOC305,"Classical Sociological Theory",40,28%,11
+"2015 - Fall",PSY402,"Theories of Learning",39,23%,9
+"2015 - Fall",PSY204,"Research Methods In Psychology",49,16%,8
+"2015 - Fall",PSY403,"Psychology of Personality",47,15%,7
+"2015 - Fall",PSY307A,"Statistics For Social Sci Act",81,6%,5
+"2015 - Fall",PSY307,"Statistics For The Social Scie",81,6%,5
+"2015 - Fall",PSY412,"Theories of Counseling",31,13%,4
+"2015 - Fall",PSY305,"Basic Developmental Psychology",48,8%,4
+"2015 - Fall",PSY415,"Abnormal Psychology",92,4%,4
+"2015 - Fall",SOC498,"Senior Seminar",25,12%,3
+"2015 - Fall",SOC321,"Family As A Social Institution",44,7%,3
+"2015 - Fall",PSY334,"Cognitive Processes",45,7%,3
+"2015 - Fall",PSY310,"Child Psych,  Early Childhood",46,7%,3
+"2015 - Fall",PSY311,"Child Psych,  The Middle Years",47,6%,3
+"2015 - Fall",PSY325,"Multicultural Psychology",65,5%,3
+"2015 - Fall",PSY312,"Adolescent Psychology",42,5%,2
+"2015 - Fall",SOC204,"Research Methods In Sociolgy I",47,4%,2
+"2015 - Fall",SOC202,"Principles of Sociology",21,5%,1
+"2015 - Fall",SOC205,"Rsrch Methods In Sociology II",25,4%,1
+"2015 - Fall",SOC302,Criminology,37,3%,1
+"2015 - Fall",SOC306,"Contemporary Sociological Thry",40,3%,1
+"2015 - Fall",SW300,"Survey of Social Welfare",43,2%,1
+"2015 - Fall",SOC402,"Socialization,  Self and Socie",46,2%,1
+"2015 - Fall",PSY417,"Basic Counseling Skills",47,2%,1
+"2015 - Fall",PSY433L,"Exper Psy and Res Meth and Des",48,2%,1
+"2015 - Fall",PSY332,"Industrial and Organizatio Psy",48,2%,1
+"2015 - Fall",PSY433,"Exper Psy and Res Meth and Des",48,2%,1
+

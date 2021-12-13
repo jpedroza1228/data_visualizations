@@ -1,0 +1,57 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:04 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2013 - Academic Year"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2013 - Academic Year",PSY201,"General Psychology","1,884",12%,229
+"2013 - Academic Year",SOC201,"Principles of Sociology",609,11%,65
+"2013 - Academic Year",PSY202,"Principles of Psychology I",251,22%,54
+"2013 - Academic Year",PSY455,"Human Sexual Behav,  Relatnshi",822,5%,42
+"2013 - Academic Year",PSY210,"Mind, Brain, and Behavior",269,15%,41
+"2013 - Academic Year",PSY402,"Theories of Learning",86,43%,37
+"2013 - Academic Year",PSY326,"Health Psychology",616,6%,36
+"2013 - Academic Year",PSY415,"Abnormal Psychology",281,7%,21
+"2013 - Academic Year",PSY334,"Cognitive Processes",92,20%,18
+"2013 - Academic Year",PSY305,"Basic Developmental Psychology",144,11%,16
+"2013 - Academic Year",PSY403,"Psychology of Personality",143,10%,15
+"2013 - Academic Year",PSY325,"Multicultural Psychology",278,5%,15
+"2013 - Academic Year",PSY433,"Exper Psy and Res Meth and Des",163,8%,13
+"2013 - Academic Year",PSY433L,"Exper Psy and Res Meth and Des",163,8%,13
+"2013 - Academic Year",SOC302,Criminology,128,9%,12
+"2013 - Academic Year",SOC204,"Research Methods In Sociolgy I",95,12%,11
+"2013 - Academic Year",SOC305,"Classical Sociological Theory",126,9%,11
+"2013 - Academic Year",PSY307A,"Statistics For Social Sci Act",142,8%,11
+"2013 - Academic Year",PSY307,"Statistics For The Social Scie",142,8%,11
+"2013 - Academic Year",PSY335,"Memory and Amnesia",48,19%,9
+"2013 - Academic Year",SOC309,"Social Stratificationand Inequ",133,7%,9
+"2013 - Academic Year",PSY410,"History and Systems",42,19%,8
+"2013 - Academic Year",PSY322,"Psychology of Women",47,17%,8
+"2013 - Academic Year",SOC328,"Gender and Sexuality",142,6%,8
+"2013 - Academic Year",PSY204,"Research Methods In Psychology",130,5%,7
+"2013 - Academic Year",SW320,"Probation and Parole",96,6%,6
+"2013 - Academic Year",SOC306,"Contemporary Sociological Thry",118,5%,6
+"2013 - Academic Year",SOC301,"Contemporary Social Problems",121,5%,6
+"2013 - Academic Year",PSY311,"Child Psych,  The Middle Years",48,10%,5
+"2013 - Academic Year",SW318,"Treatment of Law Violators",58,9%,5
+"2013 - Academic Year",SOC402,"Socialization,  Self and Socie",125,4%,5
+"2013 - Academic Year",PSY401,"Social Psychology",47,9%,4
+"2013 - Academic Year",PSY412,"Theories of Counseling",96,4%,4
+"2013 - Academic Year",SOC401,"Urban Sociology",46,7%,3
+"2013 - Academic Year",PSY321,"The Psychology of Identity",48,6%,3
+"2013 - Academic Year",SOC307A,"Statistics For Social Sci Act",115,3%,3
+"2013 - Academic Year",SOC307,"Statistics For The Social Sci",115,3%,3
+"2013 - Academic Year",PSY312,"Adolescent Psychology",143,2%,3
+"2013 - Academic Year",SOC321,"Family As A Social Institution",45,4%,2
+"2013 - Academic Year",SOC451,"Social Inequality and Sport",46,4%,2
+"2013 - Academic Year",SOC440,"Technology and Society",47,4%,2
+"2013 - Academic Year",SOC324,"Religion In American Life",47,4%,2
+"2013 - Academic Year",SOC202,"Principles of Sociology",83,2%,2
+"2013 - Academic Year",PSY332,"Industrial and Organizatio Psy",91,2%,2
+"2013 - Academic Year",PSY417,"Basic Counseling Skills",96,2%,2
+"2013 - Academic Year",PSY310,"Child Psych,  Early Childhood",96,2%,2
+"2013 - Academic Year",PSY450,"Prin of Behavorial Management",17,6%,1
+"2013 - Academic Year",PSY490,"Leadership and Teams",27,4%,1
+"2013 - Academic Year",SOC320,"Ethnic Relations In America",48,2%,1
+

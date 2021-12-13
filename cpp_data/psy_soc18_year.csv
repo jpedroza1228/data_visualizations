@@ -1,0 +1,64 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:02 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2018 - Academic Year"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2018 - Academic Year",PSY2201,"Introduction To Psychology",859,15%,132
+"2018 - Academic Year",SOC2201,"Introduction To Sociology",461,27%,125
+"2018 - Academic Year",PSY4402,"Theories of Learning",233,26%,60
+"2018 - Academic Year",PSY4455,"Human Sexuality,  Relationship",659,7%,49
+"2018 - Academic Year",PSY3334,"Cognitive Processes",346,13%,45
+"2018 - Academic Year",PSY4150,"Abnormal Psychology",467,8%,36
+"2018 - Academic Year",PSY3325,"Multicultural Psychology",501,7%,34
+"2018 - Academic Year",SOC3305,"Classic Sociological Theory",335,10%,33
+"2018 - Academic Year",PSY3305,"Basic Developmental Psychology",457,7%,31
+"2018 - Academic Year",SOC4402,"Socialization,  Self and Socie",311,9%,29
+"2018 - Academic Year",PSY2204,"Research Methods In Psychology",182,14%,25
+"2018 - Academic Year",PSY3307,"Statistics For Psychology",267,9%,24
+"2018 - Academic Year",PSY4401,"Social Psychology",475,5%,22
+"2018 - Academic Year",PSY3307A,"Statistics For Psychology Act",267,8%,21
+"2018 - Academic Year",PSY2210,"Mind Brain Behvr Intgrtd View",151,13%,19
+"2018 - Academic Year",SOC3328,"Gender and Sexuality",262,6%,17
+"2018 - Academic Year",SOC3320,"Race and Ethnic Relations",176,9%,16
+"2018 - Academic Year",PSY3326,"Health Psychology",368,4%,16
+"2018 - Academic Year",CRM3360,"Juvenile Delinquency",204,6%,13
+"2018 - Academic Year",SOC3345,"Crime Criminalization Society",229,6%,13
+"2018 - Academic Year",PSY4430A,"Program Evaluation Lab",100,12%,12
+"2018 - Academic Year",PSY4430,"Program Evaluation",100,12%,12
+"2018 - Academic Year",PSY3312,"Adolescent Psychology",182,7%,12
+"2018 - Academic Year",CRM3318,"Contemp Treat of Law Violators",54,20%,11
+"2018 - Academic Year",SOC3309,"Social Strat and Inequality",312,4%,11
+"2018 - Academic Year",SOC4440,"Technology and Society",31,32%,10
+"2018 - Academic Year",CRM3320,"Probation and Parole",156,6%,10
+"2018 - Academic Year",SOC2205,"Research Methods In Sociology",282,4%,10
+"2018 - Academic Year",SOC3307L,"Statistics For Sociology Lab",189,5%,9
+"2018 - Academic Year",SOC3307,"Statistics For Sociology",189,5%,9
+"2018 - Academic Year",PSY2206,"Child Psychology For Educators",75,11%,8
+"2018 - Academic Year",PSY4433A,"Experimental Psychology Act",161,4%,7
+"2018 - Academic Year",PSY4433,"Experimental Psychology",161,4%,7
+"2018 - Academic Year",PSY3310,"Child Psych,  Early Childhood",113,5%,6
+"2018 - Academic Year",SOC4451,"Soc Inequality Sport and Body",114,5%,6
+"2018 - Academic Year",SOC4611,"Senior Symposium",149,3%,5
+"2018 - Academic Year",SOC3306,"Contemp Sociology Theory",177,3%,5
+"2018 - Academic Year",SOC4110,"Qualitative Methods For Soc",51,8%,4
+"2018 - Academic Year",SOC4110L,"Qual Mthds For Soclgy Lab",51,8%,4
+"2018 - Academic Year",SW3310,"Soc Welfare Policy Issues",94,4%,4
+"2018 - Academic Year",PSY2000,"Spec Study For Ld Students",31,10%,3
+"2018 - Academic Year",SOC4100L,"Quantitative Mthds Soclgy Lab",33,9%,3
+"2018 - Academic Year",SOC4100,"Quantitative Mthds Sociology",33,9%,3
+"2018 - Academic Year",PSY4990,"Spec Topic For Ud Students",47,6%,3
+"2018 - Academic Year",SW2201,"Intro Soc Work and Soc Welfare",47,6%,3
+"2018 - Academic Year",SOC3313,"Latina and O Sociology",47,6%,3
+"2018 - Academic Year",PSY4403,"Psychology of Personality",49,6%,3
+"2018 - Academic Year",PSY4611,"Senior Seminar",174,2%,3
+"2018 - Academic Year",PSY3332,"Organizational Psychology",190,2%,3
+"2018 - Academic Year",PSY4170,"Basic Counseling Skills",48,4%,2
+"2018 - Academic Year",SW3301,"Social Work Practice",58,3%,2
+"2018 - Academic Year",SW3301L,"Social Work Pract Lab",58,3%,2
+"2018 - Academic Year",SOC3325,"Community and Urban Sociology",112,2%,2
+"2018 - Academic Year",PSY3321,"Psychology of Identity",48,2%,1
+"2018 - Academic Year",PSY4121,"Theories of Counseling",49,2%,1
+"2018 - Academic Year",SW3322,"Family Violence",113,1%,1
+

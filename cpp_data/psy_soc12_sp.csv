@@ -1,0 +1,45 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:05 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2012 - Spring"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2012 - Spring",PSY201,"General Psychology",374,10%,37
+"2012 - Spring",SOC202,"Principles of Sociology",90,37%,33
+"2012 - Spring",SOC201,"Principles of Sociology",90,21%,19
+"2012 - Spring",PSY334,"Cognitive Processes",48,33%,16
+"2012 - Spring",SOC302,Criminology,48,27%,13
+"2012 - Spring",PSY202,"Principles of Psychology I",87,11%,10
+"2012 - Spring",PSY455,"Human Sexual Behav,  Relatnshi",130,8%,10
+"2012 - Spring",PSY307A,"Statistics For Social Sci Act",47,19%,9
+"2012 - Spring",PSY415,"Abnormal Psychology",48,17%,8
+"2012 - Spring",PSY210,"Mind, Brain, and Behavior",90,9%,8
+"2012 - Spring",PSY433,"Exper Psy and Res Meth and Des",72,10%,7
+"2012 - Spring",PSY433L,"Exper Psy and Res Meth and Des",72,10%,7
+"2012 - Spring",PSY403,"Psychology of Personality",46,13%,6
+"2012 - Spring",PSY412,"Theories of Counseling",49,12%,6
+"2012 - Spring",SOC451,"Social Inequality and Sport",44,11%,5
+"2012 - Spring",PSY321,"The Psychology of Identity",48,8%,4
+"2012 - Spring",PSY326,"Health Psychology",65,6%,4
+"2012 - Spring",PSY322,"Psychology of Women",46,7%,3
+"2012 - Spring",SOC401,"Urban Sociology",47,6%,3
+"2012 - Spring",SOC360,"Juvenile Delinquency",48,6%,3
+"2012 - Spring",SOC322,"Politics As A Soc Institution",48,6%,3
+"2012 - Spring",PSY410,"History and Systems",48,6%,3
+"2012 - Spring",PSY416,"Psychological Testing",48,6%,3
+"2012 - Spring",SOC307,"Statistics For The Social Sci",47,4%,2
+"2012 - Spring",SOC307A,"Statistics For Social Sci Act",47,4%,2
+"2012 - Spring",PSY401,"Social Psychology",48,4%,2
+"2012 - Spring",SW318,"Treatment of Law Violators",50,4%,2
+"2012 - Spring",PSY204,"Research Methods In Psychology",67,3%,2
+"2012 - Spring",PSY498,"Senior Seminar",72,3%,2
+"2012 - Spring",SOC444A,"Survey Research Activity",23,4%,1
+"2012 - Spring",SOC444,"Survey Research",23,4%,1
+"2012 - Spring",PSY303,"Physiological Psychology",25,4%,1
+"2012 - Spring",SOC498,"Senior Seminar",44,2%,1
+"2012 - Spring",PSY490,"Leadership and Teams",46,2%,1
+"2012 - Spring",PSY307,"Statistics For The Social Scie",47,2%,1
+"2012 - Spring",SOC402,"Socialization,  Self and Socie",47,2%,1
+"2012 - Spring",SOC305,"Classical Sociological Theory",47,2%,1
+

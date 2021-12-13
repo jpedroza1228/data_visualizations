@@ -1,0 +1,39 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:04 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2014 - Spring"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2014 - Spring",PSY201,"General Psychology",625,11%,71
+"2014 - Spring",SOC201,"Principles of Sociology",248,13%,32
+"2014 - Spring",PSY202,"Principles of Psychology I",72,31%,22
+"2014 - Spring",PSY455,"Human Sexual Behav,  Relatnshi",245,9%,21
+"2014 - Spring",PSY402,"Theories of Learning",44,43%,19
+"2014 - Spring",PSY210,"Mind, Brain, and Behavior",86,15%,13
+"2014 - Spring",PSY335,"Memory and Amnesia",48,19%,9
+"2014 - Spring",SOC305,"Classical Sociological Theory",37,22%,8
+"2014 - Spring",PSY325,"Multicultural Psychology",90,9%,8
+"2014 - Spring",PSY415,"Abnormal Psychology",92,9%,8
+"2014 - Spring",PSY433,"Exper Psy and Res Meth and Des",48,15%,7
+"2014 - Spring",PSY433L,"Exper Psy and Res Meth and Des",48,15%,7
+"2014 - Spring",PSY307A,"Statistics For Social Sci Act",47,13%,6
+"2014 - Spring",PSY307,"Statistics For The Social Scie",47,13%,6
+"2014 - Spring",SOC302,Criminology,48,13%,6
+"2014 - Spring",PSY403,"Psychology of Personality",48,13%,6
+"2014 - Spring",PSY326,"Health Psychology",178,3%,6
+"2014 - Spring",SOC204,"Research Methods In Sociolgy I",25,20%,5
+"2014 - Spring",SOC328,"Gender and Sexuality",48,10%,5
+"2014 - Spring",SOC402,"Socialization,  Self and Socie",32,13%,4
+"2014 - Spring",PSY321,"The Psychology of Identity",48,6%,3
+"2014 - Spring",SW320,"Probation and Parole",48,6%,3
+"2014 - Spring",PSY412,"Theories of Counseling",48,6%,3
+"2014 - Spring",SOC324,"Religion In American Life",47,4%,2
+"2014 - Spring",SOC440,"Technology and Society",47,4%,2
+"2014 - Spring",SOC309,"Social Stratificationand Inequ",47,4%,2
+"2014 - Spring",SOC306,"Contemporary Sociological Thry",48,4%,2
+"2014 - Spring",SOC301,"Contemporary Social Problems",58,3%,2
+"2014 - Spring",PSY305,"Basic Developmental Psychology",48,2%,1
+"2014 - Spring",SOC320,"Ethnic Relations In America",48,2%,1
+"2014 - Spring",PSY417,"Basic Counseling Skills",48,2%,1
+

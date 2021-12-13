@@ -1,0 +1,46 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:03 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2018 - Spring"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2018 - Spring",SOC201,"Principles of Sociology",263,31%,82
+"2018 - Spring",PSY201,"General Psychology",601,11%,65
+"2018 - Spring",PSY455,"Human Sexual Behav,  Relatnshi",319,6%,18
+"2018 - Spring",PSY210,"Mind, Brain, and Behavior",90,18%,16
+"2018 - Spring",PSY334,"Cognitive Processes",48,31%,15
+"2018 - Spring",PSY204,"Research Methods In Psychology",51,27%,14
+"2018 - Spring",PSY202,"Principles of Psychology I",89,16%,14
+"2018 - Spring",PSY326,"Health Psychology",183,7%,13
+"2018 - Spring",PSY325,"Multicultural Psychology",125,10%,12
+"2018 - Spring",PSY305,"Basic Developmental Psychology",47,17%,8
+"2018 - Spring",SOC305,"Classical Sociological Theory",48,17%,8
+"2018 - Spring",SOC306,"Contemporary Sociological Thry",47,13%,6
+"2018 - Spring",SOC301,"Contemporary Social Problems",89,7%,6
+"2018 - Spring",SW320,"Probation and Parole",48,10%,5
+"2018 - Spring",PSY402,"Theories of Learning",47,9%,4
+"2018 - Spring",PSY307,"Statistics For The Social Scie",48,8%,4
+"2018 - Spring",PSY307A,"Statistics For Social Sci Act",48,8%,4
+"2018 - Spring",SW301,"Social Work Practice",29,10%,3
+"2018 - Spring",SOC204,"Research Methods In Sociolgy I",41,7%,3
+"2018 - Spring",SOC309,"Social Stratificationand Inequ",48,6%,3
+"2018 - Spring",SOC302,Criminology,48,6%,3
+"2018 - Spring",PSY312,"Adolescent Psychology",48,6%,3
+"2018 - Spring",PSY433,"Exper Psy and Res Meth and Des",69,4%,3
+"2018 - Spring",PSY433L,"Exper Psy and Res Meth and Des",69,4%,3
+"2018 - Spring",SOC205,"Rsrch Methods In Sociology II",96,3%,3
+"2018 - Spring",PSY415,"Abnormal Psychology",96,3%,3
+"2018 - Spring",SOC323,"Sociology of Minority Commun",47,4%,2
+"2018 - Spring",PSY498,"Senior Seminar",69,3%,2
+"2018 - Spring",PSY430,"Program Evaluation",23,4%,1
+"2018 - Spring",SOC444,"Survey Research",24,4%,1
+"2018 - Spring",SOC444A,"Survey Research Activity",24,4%,1
+"2018 - Spring",PSY303,"Physiological Psychology",24,4%,1
+"2018 - Spring",SW431,"Soc Welfare Policies and Issue",32,3%,1
+"2018 - Spring",PSY335,"Memory and Amnesia",46,2%,1
+"2018 - Spring",SOC498,"Senior Seminar",47,2%,1
+"2018 - Spring",SOC402,"Socialization,  Self and Socie",48,2%,1
+"2018 - Spring",SOC360,"Juvenile Delinquency",48,2%,1
+"2018 - Spring",PSY401,"Social Psychology",49,2%,1
+

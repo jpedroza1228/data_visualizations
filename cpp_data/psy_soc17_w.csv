@@ -1,0 +1,41 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:03 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2017 - Winter"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2017 - Winter",PSY201,"General Psychology",509,15%,76
+"2017 - Winter",SOC201,"Principles of Sociology",140,50%,70
+"2017 - Winter",PSY455,"Human Sexual Behav,  Relatnshi",321,12%,38
+"2017 - Winter",PSY326,"Health Psychology",189,15%,29
+"2017 - Winter",PSY210,"Mind, Brain, and Behavior",137,17%,23
+"2017 - Winter",PSY334,"Cognitive Processes",46,22%,10
+"2017 - Winter",SOC202,"Principles of Sociology",68,15%,10
+"2017 - Winter",PSY305,"Basic Developmental Psychology",48,17%,8
+"2017 - Winter",PSY325,"Multicultural Psychology",125,6%,7
+"2017 - Winter",SW320,"Probation and Parole",44,14%,6
+"2017 - Winter",PSY202,"Principles of Psychology I",90,6%,5
+"2017 - Winter",PSY204,"Research Methods In Psychology",33,12%,4
+"2017 - Winter",SOC204,"Research Methods In Sociolgy I",50,8%,4
+"2017 - Winter",SOC328,"Gender and Sexuality",29,10%,3
+"2017 - Winter",SOC305,"Classical Sociological Theory",47,6%,3
+"2017 - Winter",PSY415,"Abnormal Psychology",48,6%,3
+"2017 - Winter",PSY403,"Psychology of Personality",48,6%,3
+"2017 - Winter",PSY452,"Organizational Change and Inte",48,6%,3
+"2017 - Winter",SOC402,"Socialization,  Self and Socie",30,7%,2
+"2017 - Winter",SOC324,"Religion In American Life",34,6%,2
+"2017 - Winter",PSY433L,"Exper Psy and Res Meth and Des",47,4%,2
+"2017 - Winter",PSY433,"Exper Psy and Res Meth and Des",47,4%,2
+"2017 - Winter",PSY335,"Memory and Amnesia",47,4%,2
+"2017 - Winter",SOC205,"Rsrch Methods In Sociology II",47,4%,2
+"2017 - Winter",SOC302,Criminology,48,4%,2
+"2017 - Winter",PSY420,"Environmental Psychology",17,6%,1
+"2017 - Winter",SOC309,"Social Stratificationand Inequ",19,5%,1
+"2017 - Winter",SOC440,"Technology and Society",20,5%,1
+"2017 - Winter",PSY490,"Leadership and Teams",25,4%,1
+"2017 - Winter",SOC360,"Juvenile Delinquency",37,3%,1
+"2017 - Winter",PSY311,"Child Psych,  The Middle Years",45,2%,1
+"2017 - Winter",SOC320,"Ethnic Relations In America",48,2%,1
+"2017 - Winter",SOC498,"Senior Seminar",61,2%,1
+

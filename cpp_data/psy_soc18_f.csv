@@ -1,0 +1,53 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:02 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2018 - Fall"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2018 - Fall",SOC2201,"Introduction To Sociology",261,39%,103
+"2018 - Fall",PSY2201,"Introduction To Psychology",576,16%,95
+"2018 - Fall",PSY4455,"Human Sexuality,  Relationship",464,8%,35
+"2018 - Fall",PSY4402,"Theories of Learning",59,44%,26
+"2018 - Fall",PSY4150,"Abnormal Psychology",202,11%,23
+"2018 - Fall",PSY3334,"Cognitive Processes",93,23%,21
+"2018 - Fall",PSY2204,"Research Methods In Psychology",110,17%,19
+"2018 - Fall",SOC3305,"Classic Sociological Theory",162,11%,18
+"2018 - Fall",PSY3307,"Statistics For Psychology",147,10%,15
+"2018 - Fall",PSY3307A,"Statistics For Psychology Act",147,10%,14
+"2018 - Fall",SOC3320,"Race and Ethnic Relations",113,12%,13
+"2018 - Fall",PSY3325,"Multicultural Psychology",188,6%,11
+"2018 - Fall",PSY2210,"Mind Brain Behvr Intgrtd View",61,15%,9
+"2018 - Fall",PSY3312,"Adolescent Psychology",69,13%,9
+"2018 - Fall",PSY3326,"Health Psychology",180,5%,9
+"2018 - Fall",PSY3305,"Basic Developmental Psychology",194,5%,9
+"2018 - Fall",SOC4402,"Socialization,  Self and Socie",115,7%,8
+"2018 - Fall",PSY4401,"Social Psychology",205,4%,8
+"2018 - Fall",PSY4430,"Program Evaluation",56,13%,7
+"2018 - Fall",PSY4430A,"Program Evaluation Lab",56,13%,7
+"2018 - Fall",CRM3320,"Probation and Parole",109,6%,7
+"2018 - Fall",CRM3360,"Juvenile Delinquency",113,6%,7
+"2018 - Fall",SOC3328,"Gender and Sexuality",120,6%,7
+"2018 - Fall",PSY3310,"Child Psych,  Early Childhood",113,5%,6
+"2018 - Fall",SOC4451,"Soc Inequality Sport and Body",114,5%,6
+"2018 - Fall",SOC3345,"Crime Criminalization Society",114,4%,4
+"2018 - Fall",SOC3309,"Social Strat and Inequality",117,3%,4
+"2018 - Fall",PSY2000,"Spec Study For Ld Students",16,19%,3
+"2018 - Fall",PSY4990,"Spec Topic For Ud Students",47,6%,3
+"2018 - Fall",SW2201,"Intro Soc Work and Soc Welfare",47,6%,3
+"2018 - Fall",SOC3313,"Latina and O Sociology",47,6%,3
+"2018 - Fall",SOC3306,"Contemp Sociology Theory",81,4%,3
+"2018 - Fall",SOC3307,"Statistics For Sociology",94,3%,3
+"2018 - Fall",SOC3307L,"Statistics For Sociology Lab",94,3%,3
+"2018 - Fall",SOC4611,"Senior Symposium",74,3%,2
+"2018 - Fall",SOC2205,"Research Methods In Sociology",109,2%,2
+"2018 - Fall",SOC3325,"Community and Urban Sociology",112,2%,2
+"2018 - Fall",SOC4110,"Qualitative Methods For Soc",15,7%,1
+"2018 - Fall",SOC4110L,"Qual Mthds For Soclgy Lab",15,7%,1
+"2018 - Fall",SW3301L,"Social Work Pract Lab",24,4%,1
+"2018 - Fall",SW3301,"Social Work Practice",24,4%,1
+"2018 - Fall",PSY4433,"Experimental Psychology",47,2%,1
+"2018 - Fall",PSY4433A,"Experimental Psychology Act",47,2%,1
+"2018 - Fall",PSY4121,"Theories of Counseling",49,2%,1
+"2018 - Fall",PSY4611,"Senior Seminar",51,2%,1
+

@@ -1,0 +1,60 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:02 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2020 - Spring"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2020 - Spring",SOC3309,"Social Strat and Inequality",236,11%,26
+"2020 - Spring",PSY2201,"Introduction To Psychology",342,8%,26
+"2020 - Spring",SOC2201,"Introduction To Sociology",199,10%,20
+"2020 - Spring",SOC2205,"Research Methods In Sociology",217,7%,16
+"2020 - Spring",CRM2201,"Introduction To Criminology",143,10%,15
+"2020 - Spring",SOC3345,"Crime Criminalization Society",114,11%,13
+"2020 - Spring",PSY3335,"Memory and Amnesia",113,10%,11
+"2020 - Spring",SOC3305,"Classic Sociological Theory",184,6%,11
+"2020 - Spring",PSY4150,"Abnormal Psychology",227,5%,11
+"2020 - Spring",PSY3307,"Statistics For Psychology",144,6%,9
+"2020 - Spring",PSY3305,"Basic Developmental Psychology",197,5%,9
+"2020 - Spring",PSY3325,"Multicultural Psychology",261,3%,9
+"2020 - Spring",PSY2206,"Child Psychology For Educators",46,17%,8
+"2020 - Spring",SW2201,"Intro Soc Work and Soc Welfare",108,7%,8
+"2020 - Spring",PSY3307A,"Statistics For Psychology Act",144,6%,8
+"2020 - Spring",SOC3307L,"Statistics For Sociology Lab",159,5%,8
+"2020 - Spring",SOC3307,"Statistics For Sociology",159,5%,8
+"2020 - Spring",SOC3306,"Contemp Sociology Theory",222,4%,8
+"2020 - Spring",PSY4433A,"Experimental Psychology Act",164,4%,7
+"2020 - Spring",PSY4433,"Experimental Psychology",164,4%,7
+"2020 - Spring",PSY4455,"Human Sexuality,  Relationship",310,2%,7
+"2020 - Spring",PSY4402,"Theories of Learning",81,7%,6
+"2020 - Spring",PSY4401,"Social Psychology",182,3%,6
+"2020 - Spring",SW3310,"Soc Welfare Policy Issues",76,7%,5
+"2020 - Spring",PSY2204,"Research Methods In Psychology",97,5%,5
+"2020 - Spring",SOC4402,"Socialization,  Self and Socie",197,3%,5
+"2020 - Spring",PSY4403,"Psychology of Personality",115,3%,4
+"2020 - Spring",PSY4404A,"Qualitative Mthds In Psych Act",22,14%,3
+"2020 - Spring",PSY2210,"Mind Brain Behvr Intgrtd View",90,3%,3
+"2020 - Spring",SOC4611,"Senior Symposium",118,3%,3
+"2020 - Spring",PSY4404,"Qualitative Methods In Psych",22,9%,2
+"2020 - Spring",SOC3314,"Black Sociology",44,5%,2
+"2020 - Spring",CRM3318,"Contemp Treat of Law Violators",48,4%,2
+"2020 - Spring",PSY4121,"Theories of Counseling",48,4%,2
+"2020 - Spring",SW4470,"Death and Dying",59,3%,2
+"2020 - Spring",SOC4100L,"Quantitative Mthds Soclgy Lab",63,3%,2
+"2020 - Spring",PSY3310,"Child Psych,  Early Childhood",115,2%,2
+"2020 - Spring",PSY4611,"Senior Seminar",139,1%,2
+"2020 - Spring",SOC4990,"Spec Topic For Ud Students",15,7%,1
+"2020 - Spring",PSY3303,"Physiological Psychology",24,4%,1
+"2020 - Spring",SW3301L,"Social Work Pract Lab",46,2%,1
+"2020 - Spring",SW3301,"Social Work Practice",46,2%,1
+"2020 - Spring",PSY3311,"Child Psych,  Mid Childhood",48,2%,1
+"2020 - Spring",CRM3319,Policing,48,2%,1
+"2020 - Spring",SOC4100,"Quantitative Mthds Sociology",63,2%,1
+"2020 - Spring",PSY4430A,"Program Evaluation Lab",77,1%,1
+"2020 - Spring",PSY4430,"Program Evaluation",77,1%,1
+"2020 - Spring",CRM3320,"Probation and Parole",83,1%,1
+"2020 - Spring",PSY4170,"Basic Counseling Skills",96,1%,1
+"2020 - Spring",SOC3328,"Gender and Sexuality",160,1%,1
+"2020 - Spring",PSY3334,"Cognitive Processes",197,1%,1
+"2020 - Spring",PSY2222,"Careers In Psychology",226,0%,1
+

@@ -1,0 +1,72 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:02 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2019 - Academic Year"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2019 - Academic Year",SOC2201,"Introduction To Sociology",542,19%,105
+"2019 - Academic Year",PSY2201,"Introduction To Psychology",982,10%,102
+"2019 - Academic Year",CRM2201,"Introduction To Criminology",454,20%,89
+"2019 - Academic Year",SOC3309,"Social Strat and Inequality",399,11%,43
+"2019 - Academic Year",SOC3345,"Crime Criminalization Society",224,14%,31
+"2019 - Academic Year",PSY4150,"Abnormal Psychology",389,8%,30
+"2019 - Academic Year",PSY4455,"Human Sexuality,  Relationship",753,4%,28
+"2019 - Academic Year",SOC2205,"Research Methods In Sociology",400,6%,25
+"2019 - Academic Year",SOC3305,"Classic Sociological Theory",447,5%,24
+"2019 - Academic Year",PSY3325,"Multicultural Psychology",496,5%,23
+"2019 - Academic Year",PSY3307,"Statistics For Psychology",289,8%,22
+"2019 - Academic Year",PSY3307A,"Statistics For Psychology Act",289,8%,22
+"2019 - Academic Year",SW2201,"Intro Soc Work and Soc Welfare",312,7%,21
+"2019 - Academic Year",SOC3307,"Statistics For Sociology",341,6%,19
+"2019 - Academic Year",PSY3305,"Basic Developmental Psychology",383,5%,19
+"2019 - Academic Year",PSY4433A,"Experimental Psychology Act",282,6%,17
+"2019 - Academic Year",PSY4433,"Experimental Psychology",282,6%,17
+"2019 - Academic Year",SOC3306,"Contemp Sociology Theory",349,5%,17
+"2019 - Academic Year",PSY4401,"Social Psychology",376,5%,17
+"2019 - Academic Year",PSY3333,"Industrial Psychology",89,17%,15
+"2019 - Academic Year",PSY3334,"Cognitive Processes",311,5%,14
+"2019 - Academic Year",SOC3307L,"Statistics For Sociology Lab",340,4%,14
+"2019 - Academic Year",PSY3326,"Health Psychology",312,4%,13
+"2019 - Academic Year",CRM3360,"Juvenile Delinquency",99,12%,12
+"2019 - Academic Year",PSY3335,"Memory and Amnesia",228,5%,12
+"2019 - Academic Year",PSY3312,"Adolescent Psychology",214,5%,11
+"2019 - Academic Year",PSY2210,"Mind Brain Behvr Intgrtd View",218,5%,11
+"2019 - Academic Year",SOC4451,"Soc Inequality Sport and Body",103,10%,10
+"2019 - Academic Year",SOC4402,"Socialization,  Self and Socie",259,4%,10
+"2019 - Academic Year",PSY2204,"Research Methods In Psychology",171,5%,9
+"2019 - Academic Year",PSY2206,"Child Psychology For Educators",46,17%,8
+"2019 - Academic Year",SOC4611,"Senior Symposium",201,4%,8
+"2019 - Academic Year",PSY4403,"Psychology of Personality",228,4%,8
+"2019 - Academic Year",PSY3332,"Organizational Psychology",238,3%,7
+"2019 - Academic Year",PSY4402,"Theories of Learning",81,7%,6
+"2019 - Academic Year",PSY4121,"Theories of Counseling",163,4%,6
+"2019 - Academic Year",SOC3325,"Community and Urban Sociology",171,4%,6
+"2019 - Academic Year",SW3310,"Soc Welfare Policy Issues",119,4%,5
+"2019 - Academic Year",PSY4170,"Basic Counseling Skills",260,2%,5
+"2019 - Academic Year",SOC3328,"Gender and Sexuality",289,2%,5
+"2019 - Academic Year",PSY4404,"Qualitative Methods In Psych",41,10%,4
+"2019 - Academic Year",CRM3318,"Contemp Treat of Law Violators",96,4%,4
+"2019 - Academic Year",CRM3320,"Probation and Parole",131,3%,4
+"2019 - Academic Year",SOC3313,"Latina and O Sociology",141,3%,4
+"2019 - Academic Year",SOC3320,"Race and Ethnic Relations",187,2%,4
+"2019 - Academic Year",PSY3310,"Child Psych,  Early Childhood",190,2%,4
+"2019 - Academic Year",PSY4611,"Senior Seminar",261,2%,4
+"2019 - Academic Year",PSY4404A,"Qualitative Mthds In Psych Act",41,7%,3
+"2019 - Academic Year",SOC4100L,"Quantitative Mthds Soclgy Lab",74,4%,3
+"2019 - Academic Year",CRM3319,Policing,96,3%,3
+"2019 - Academic Year",PSY4430A,"Program Evaluation Lab",124,2%,3
+"2019 - Academic Year",PSY2222,"Careers In Psychology",283,1%,3
+"2019 - Academic Year",SOC3314,"Black Sociology",44,5%,2
+"2019 - Academic Year",PSY4250,"Community Psychology",48,4%,2
+"2019 - Academic Year",SW4470,"Death and Dying",59,3%,2
+"2019 - Academic Year",SW3301,"Social Work Practice",61,3%,2
+"2019 - Academic Year",SOC4100,"Quantitative Mthds Sociology",74,3%,2
+"2019 - Academic Year",PSY4430,"Program Evaluation",124,2%,2
+"2019 - Academic Year",SW3322,"Family Violence",206,1%,2
+"2019 - Academic Year",SOC4990,"Spec Topic For Ud Students",15,7%,1
+"2019 - Academic Year",PSY3303,"Physiological Psychology",24,4%,1
+"2019 - Academic Year",PSY3322,"Psychology of Women",48,2%,1
+"2019 - Academic Year",PSY3311,"Child Psych,  Mid Childhood",48,2%,1
+"2019 - Academic Year",SW3301L,"Social Work Pract Lab",61,2%,1
+

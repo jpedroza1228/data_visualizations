@@ -1,0 +1,45 @@
+"Data Download for In Which Courses Do They Struggle?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
+"CSV created on:  ","Sun, Dec 12, 2021 5:03 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2016 - Fall"
+
+"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
+"Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
+"2016 - Fall",PSY201,"General Psychology",605,25%,149
+"2016 - Fall",PSY455,"Human Sexual Behav,  Relatnshi",311,12%,36
+"2016 - Fall",PSY326,"Health Psychology",254,12%,30
+"2016 - Fall",PSY210,"Mind, Brain, and Behavior",146,16%,24
+"2016 - Fall",SOC201,"Principles of Sociology",215,10%,22
+"2016 - Fall",PSY202,"Principles of Psychology I",91,15%,14
+"2016 - Fall",SOC305,"Classical Sociological Theory",43,16%,7
+"2016 - Fall",PSY325,"Multicultural Psychology",171,4%,6
+"2016 - Fall",SW318,"Treatment of Law Violators",44,11%,5
+"2016 - Fall",PSY334,"Cognitive Processes",45,11%,5
+"2016 - Fall",PSY415,"Abnormal Psychology",92,5%,5
+"2016 - Fall",SOC309,"Social Stratificationand Inequ",43,9%,4
+"2016 - Fall",SOC451,"Social Inequality and Sport",44,9%,4
+"2016 - Fall",PSY307A,"Statistics For Social Sci Act",47,9%,4
+"2016 - Fall",PSY307,"Statistics For The Social Scie",47,9%,4
+"2016 - Fall",SOC360,"Juvenile Delinquency",48,8%,4
+"2016 - Fall",PSY310,"Child Psych,  Early Childhood",43,7%,3
+"2016 - Fall",SW322,"Family Violence",43,7%,3
+"2016 - Fall",SOC402,"Socialization,  Self and Socie",45,7%,3
+"2016 - Fall",SOC302,Criminology,48,6%,3
+"2016 - Fall",PSY204,"Research Methods In Psychology",49,6%,3
+"2016 - Fall",PSY444,"Survey Research",16,13%,2
+"2016 - Fall",PSY412,"Theories of Counseling",26,8%,2
+"2016 - Fall",SOC328,"Gender and Sexuality",34,6%,2
+"2016 - Fall",SOC321,"Family As A Social Institution",41,5%,2
+"2016 - Fall",SOC204,"Research Methods In Sociolgy I",47,4%,2
+"2016 - Fall",SOC301,"Contemporary Social Problems",89,2%,2
+"2016 - Fall",PSY444A,"Survey Research Activity",16,6%,1
+"2016 - Fall",SOC307A,"Statistics For Social Sci Act",39,3%,1
+"2016 - Fall",SOC307,"Statistics For The Social Sci",39,3%,1
+"2016 - Fall",PSY433L,"Exper Psy and Res Meth and Des",45,2%,1
+"2016 - Fall",SOC401,"Urban Sociology",45,2%,1
+"2016 - Fall",PSY433,"Exper Psy and Res Meth and Des",45,2%,1
+"2016 - Fall",PSY403,"Psychology of Personality",47,2%,1
+"2016 - Fall",PSY401,"Social Psychology",47,2%,1
+"2016 - Fall",PSY305,"Basic Developmental Psychology",48,2%,1
+"2016 - Fall",PSY417,"Basic Counseling Skills",48,2%,1
+
