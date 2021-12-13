@@ -1,9 +1,3 @@
-"Data Download for In Which Courses Do They Struggle?"
-"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
-"CSV created on:  ","Sun, Dec 12, 2021 5:00 PM America/Los_Angeles"
-Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2020 - Academic Year"
-
-"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
 "Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
 "2020 - Academic Year",PSY2201,"Introduction To Psychology",887,9%,81
 "2020 - Academic Year",SOC3309,"Social Strat and Inequality",354,21%,74

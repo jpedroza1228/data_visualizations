@@ -1,9 +1,3 @@
-"Data Download for In Which Courses Do They Struggle?"
-"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/where-do-they-struggle
-"CSV created on:  ","Sun, Dec 12, 2021 5:05 PM America/Los_Angeles"
-Pomona,"College of Letters, Arts, & Social Sciences","By Department","Psychology and Sociology","2013 - Winter"
-
-"Course Grade Bottlenecks for All Freshman, Transfer, and Graduate Students"
 "Year Term","Course Code","Course Title",Enrollment,"Non-passing Rate",Impact
 "2013 - Winter",SOC201,"Principles of Sociology",219,17%,38
 "2013 - Winter",PSY210,"Mind, Brain, and Behavior",179,20%,35
