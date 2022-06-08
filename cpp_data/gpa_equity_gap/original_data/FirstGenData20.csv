@@ -1,0 +1,81 @@
+Course,"Course Code","FirstGen Enrollment","NotFirstGen Enrollment","FirstGen GPA","NotFirstGen GPA","GPA Gap"
+"Introduction To Psychology",PSY2201,284,603,3.27,3.36,0.09
+"Research Methods In Psychology",PSY2204,72,155,2.94,3.22,0.27
+"Statistics For Sociology",SOC3307,139,189,3.42,3.23,-0.19
+"Mind Brain Behvr Intgrtd View",PSY2210,249,432,3.33,3.41,0.09
+"Contemp Sociology Theory",SOC3306,162,205,3.5,3.36,-0.14
+"Statistics For Psychology",PSY3307,117,210,3.48,3.33,-0.16
+"Soc Inequality Sport and Body",SOC4451,52,59,3.11,3.54,0.43
+"Statistics For Sociology Lab",SOC3307L,138,189,3.54,3.4,-0.14
+"Soc Welfare Policy Issues",SW3310,102,99,3.5,3.29,-0.21
+"Multicultural Psychology",PSY3325,264,530,3.15,3.2,0.05
+"Organizational Psychology",PSY3332,97,143,3.64,3.5,-0.14
+"Socialization,  Self and Socie",SOC4402,91,112,3.62,3.46,-0.16
+"Crime Criminalization Society",SOC3345,110,126,3.45,3.31,-0.13
+"Statistics For Psychology Act",PSY3307A,117,210,3.47,3.38,-0.09
+"Survey Research",PSY4444,46,71,3.33,3.58,0.25
+"Social Work Practice",SW3301,46,48,3.46,3.15,-0.31
+"Social Strat and Inequality",SOC3309,146,208,3.68,3.6,-0.08
+"Social Work Pract Lab",SW3301L,46,47,3.49,3.19,-0.3
+"Research Methods In Sociology",SOC2205,204,257,3.47,3.41,-0.06
+"Basic Developmental Psychology",PSY3305,164,295,3.7,3.64,-0.06
+"Hr In Organizations",PSY3314,16,34,3.38,3.89,0.51
+"Cognitive Processes",PSY3334,89,140,3.3,3.41,0.11
+"Community and Urban Sociology",SOC3325,58,86,3.34,3.51,0.17
+"Crm Theory",CRM3350,44,50,2.86,3.09,0.23
+"Introduction To Criminology",CRM2201,138,191,3.5,3.57,0.07
+"Impact Colonization On Hawaii",SOC4465,17,19,3.02,3.55,0.53
+"Memory and Amnesia",PSY3335,48,66,3.27,3.11,-0.17
+"Careers In Psychology",PSY2222,147,259,3.8,3.85,0.05
+"Intro Soc Work and Soc Welfare",SW2201,93,105,3.45,3.36,-0.09
+"Senior Seminar",PSY4611,137,253,3.62,3.66,0.05
+"Classic Sociological Theory",SOC3305,230,250,3.7,3.73,0.04
+"Senior Symposium",SOC4611,115,131,3.49,3.56,0.07
+"Abnormal Psychology",PSY4150,193,343,3.22,3.19,-0.03
+"Latina and O Sociology",SOC3313,90,93,3.42,3.34,-0.08
+"Basic Counseling Skills",PSY4170,143,279,3.51,3.47,-0.03
+"Leadership and Teams",PSY4490,17,31,3.88,3.6,-0.28
+"Political Violence",CRM3380,21,26,3.06,3.35,0.28
+"Sociology of The Family",SOC3321,48,51,3.19,3.31,0.11
+"Qualitative Mthds In Psych Act",PSY4404A,53,90,3.6,3.53,-0.08
+"Quantitative Mthds Soclgy Lab",SOC4100L,51,77,3.5,3.59,0.09
+"Psychology of Women",PSY3322,45,70,3.48,3.57,0.09
+"Immigration and Migration",SOC3350,120,118,3.94,3.89,-0.04
+"Family Violence",SW3322,97,102,3.53,3.58,0.05
+"Child Psych,  Early Childhood",PSY3310,101,186,3.56,3.59,0.03
+"Quantitative Mthds Sociology",SOC4100,51,77,3.57,3.64,0.07
+"Survey Research Act",PSY4444A,46,71,3.52,3.6,0.07
+"Gender and Sexuality",SOC3328,164,192,3.62,3.64,0.02
+"Community Psychology",PSY4250,21,27,3.1,2.92,-0.17
+"Theories of Counseling",PSY4121,14,34,3.05,3.21,0.16
+"Experimental Psychology",PSY4433,132,253,3.2,3.18,-0.02
+"Probation and Parole",CRM3320,72,81,3.19,3.24,0.05
+"Juvenile Delinquency",CRM3360,51,57,3.22,3.15,-0.07
+"Human Sexuality,  Relationship",PSY4455,268,429,3.38,3.39,0.01
+"Rsrch Methods In Criminology",CRM2205,18,24,3.02,2.84,-0.18
+"Qualitative Methods In Psych",PSY4404,53,90,3.37,3.32,-0.05
+"Human Rights",SW4440,43,39,3.19,3.11,-0.09
+"Program Evaluation",PSY4430,58,124,3.68,3.64,-0.04
+"Contemp Treat of Law Violators",CRM3318,46,53,3.37,3.44,0.07
+"Crime Analysis Activity",CRM3306A,19,29,3.37,3.51,0.13
+Policing,CRM3319,65,72,3.22,3.18,-0.05
+"Crime Analysis",CRM3306,19,29,3.75,3.62,-0.12
+"Experimental Psychology Act",PSY4433A,132,253,3.19,3.18,-0.02
+"Black Sociology",SOC3314,42,60,3.19,3.24,0.06
+"Program Evaluation Lab",PSY4430A,58,124,3.67,3.64,-0.03
+"Adolescent Psychology",PSY3312,98,180,3.67,3.66,-0.02
+"Child Psychology For Educators",PSY2206,18,30,3.65,3.55,-0.1
+"Qualitative Methods For Soc",SOC4110,67,82,3.71,3.74,0.03
+"Sociology of Education",SOC3360,18,30,3.41,3.32,-0.09
+Internship,SW4411,59,46,3.93,3.97,0.04
+"Introduction To Sociology",SOC2201,149,340,3.51,3.52,0.01
+"Senior Symposium",CRM4611,16,22,3.56,3.64,0.08
+"Health Psychology",PSY3326,166,292,3.63,3.63,-0.01
+"Qual Mthds For Soclgy Lab",SOC4110L,67,82,3.74,3.75,0.02
+"Race and Ethnic Relations",SOC3320,123,152,3.17,3.16,-0.01
+"Media and Crime",CRM3390,108,125,3.3,3.29,-0.01
+"Technology and Society",SOC4440,47,62,3.79,3.78,-0.01
+"Social Psychology",PSY4401,86,143,3.66,3.67,0
+"Spec Study For Ud Students",PSY4000,10,35,4,3.98,-0.02
+"Medical Social Work",SW3320,22,26,3.57,3.57,0
+

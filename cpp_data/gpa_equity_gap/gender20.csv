@@ -1,0 +1,80 @@
+"","Course","Course Code","Female Enrollment","Male Enrollment","Female GPA","Male GPA","GPA Gap","year"
+"1","Introduction To Psychology","PSY2201",526,"361",3.4,"3.24","0.16",2020
+"2","Research Methods In Psychology","PSY2204",173,"54",3.1,"3.25","-0.15",2020
+"3","Statistics For Sociology","SOC3307",253,"75",3.34,"3.19","0.15",2020
+"4","Mind Brain Behvr Intgrtd View","PSY2210",537,"144",3.39,"3.37","0.02",2020
+"5","Contemp Sociology Theory","SOC3306",283,"84",3.41,"3.47","-0.06",2020
+"6","Statistics For Psychology","PSY3307",239,"88",3.43,"3.25","0.19",2020
+"7","Soc Inequality Sport and Body","SOC4451",85,"26",3.44,"3.01","0.42",2020
+"8","Statistics For Sociology Lab","SOC3307L",252,"75",3.48,"3.39","0.09",2020
+"9","Soc Welfare Policy Issues","SW3310",169,"32",3.39,"3.42","-0.04",2020
+"10","Multicultural Psychology","PSY3325",611,"183",3.22,"3.08","0.14",2020
+"11","Organizational Psychology","PSY3332",172,"68",3.56,"3.54","0.02",2020
+"12","Socialization,  Self and Socie","SOC4402",164,"39",3.56,"3.41","0.15",2020
+"13","Crime Criminalization Society","SOC3345",163,"73",3.46,"3.2","0.26",2020
+"14","Statistics For Psychology Act","PSY3307A",239,"88",3.45,"3.29","0.16",2020
+"15","Survey Research","PSY4444",84,"33",3.53,"3.35","0.18",2020
+"16","Social Work Practice","SW3301",83,"11",3.34,"3","0.34",2020
+"17","Social Strat and Inequality","SOC3309",263,"91",3.63,"3.67","-0.04",2020
+"18","Social Work Pract Lab","SW3301L",82,"11",3.37,"3.1","0.27",2020
+"19","Research Methods In Sociology","SOC2205",342,"119",3.42,"3.46","-0.03",2020
+"20","Basic Developmental Psychology","PSY3305",337,"122",3.71,"3.53","0.18",2020
+"21","Hr In Organizations","PSY3314",41,"N<10",3.73,"N<10","N/A",2020
+"22","Cognitive Processes","PSY3334",173,"56",3.39,"3.31","0.07",2020
+"23","Community and Urban Sociology","SOC3325",99,"45",3.44,"3.47","-0.03",2020
+"24","Crm Theory","CRM3350",60,"34",2.87,"3.19","-0.32",2020
+"25","Introduction To Criminology","CRM2201",198,"131",3.5,"3.6","-0.09",2020
+"26","Impact Colonization On Hawaii","SOC4465",28,"N<10",3.24,"N<10","N/A",2020
+"27","Memory and Amnesia","PSY3335",82,"32",3.21,"3.1","0.11",2020
+"28","Careers In Psychology","PSY2222",310,"96",3.86,"3.72","0.14",2020
+"29","Intro Soc Work and Soc Welfare","SW2201",173,"25",3.43,"3.2","0.24",2020
+"30","Senior Seminar","PSY4611",297,"93",3.65,"3.64","0",2020
+"31","Classic Sociological Theory","SOC3305",364,"116",3.72,"3.69","0.03",2020
+"32","Senior Symposium","SOC4611",186,"60",3.53,"3.53","-0.01",2020
+"33","Abnormal Psychology","PSY4150",392,"144",3.19,"3.25","-0.06",2020
+"34","Latina and O Sociology","SOC3313",138,"45",3.41,"3.29","0.11",2020
+"35","Basic Counseling Skills","PSY4170",319,"103",3.49,"3.45","0.04",2020
+"36","Leadership and Teams","PSY4490",34,"14",3.87,"3.29","0.59",2020
+"37","Political Violence","CRM3380",27,"20",3.15,"3.3","-0.15",2020
+"38","Sociology of The Family","SOC3321",72,"27",3.26,"3.22","0.04",2020
+"39","Qualitative Mthds In Psych Act","PSY4404A",112,"31",3.6,"3.38","0.22",2020
+"40","Quantitative Mthds Soclgy Lab","SOC4100L",89,"39",3.58,"3.48","0.1",2020
+"41","Psychology of Women","PSY3322",92,"23",3.5,"3.67","-0.16",2020
+"42","Immigration and Migration","SOC3350",164,"74",3.92,"3.91","0.01",2020
+"43","Family Violence","SW3322",155,"44",3.56,"3.52","0.04",2020
+"44","Child Psych,  Early Childhood","PSY3310",235,"52",3.58,"3.59","-0.01",2020
+"45","Quantitative Mthds Sociology","SOC4100",89,"39",3.65,"3.53","0.12",2020
+"46","Survey Research Act","PSY4444A",84,"33",3.6,"3.47","0.13",2020
+"47","Gender and Sexuality","SOC3328",275,"81",3.67,"3.48","0.19",2020
+"48","Community Psychology","PSY4250",37,"11",3.03,"2.9","0.13",2020
+"49","Theories of Counseling","PSY4121",39,"N<10",3.18,"N<10","N/A",2020
+"50","Experimental Psychology","PSY4433",288,"97",3.2,"3.13","0.07",2020
+"51","Probation and Parole","CRM3320",102,"51",3.35,"2.94","0.41",2020
+"52","Juvenile Delinquency","CRM3360",71,"37",3.27,"3.01","0.26",2020
+"53","Human Sexuality,  Relationship","PSY4455",503,"194",3.38,"3.4","-0.02",2020
+"54","Rsrch Methods In Criminology","CRM2205",19,"23",3.04,"2.82","0.22",2020
+"55","Qualitative Methods In Psych","PSY4404",112,"31",3.38,"3.15","0.23",2020
+"56","Human Rights","SW4440",60,"22",3.1,"3.3","-0.2",2020
+"57","Program Evaluation","PSY4430",133,"49",3.68,"3.59","0.09",2020
+"58","Contemp Treat of Law Violators","CRM3318",62,"37",3.49,"3.27","0.22",2020
+"59","Crime Analysis Activity","CRM3306A",32,"16",3.47,"3.42","0.05",2020
+"60","Policing","CRM3319",91,"46",3.22,"3.15","0.08",2020
+"61","Crime Analysis","CRM3306",32,"16",3.69,"3.62","0.07",2020
+"62","Experimental Psychology Act","PSY4433A",288,"97",3.2,"3.13","0.07",2020
+"63","Black Sociology","SOC3314",71,"31",3.21,"3.25","-0.04",2020
+"64","Program Evaluation Lab","PSY4430A",133,"49",3.67,"3.59","0.09",2020
+"65","Adolescent Psychology","PSY3312",221,"57",3.68,"3.59","0.09",2020
+"66","Child Psychology For Educators","PSY2206",43,"N<10",3.63,"N<10","N/A",2020
+"67","Qualitative Methods For Soc","SOC4110",123,"26",3.73,"3.71","0.02",2020
+"68","Sociology of Education","SOC3360",35,"13",3.31,"3.47","-0.16",2020
+"69","Internship","SW4411",92,"13",3.94,"4","-0.06",2020
+"70","Introduction To Sociology","SOC2201",334,"155",3.57,"3.4","0.16",2020
+"71","Senior Symposium","CRM4611",23,"15",3.65,"3.53","0.13",2020
+"72","Health Psychology","PSY3326",326,"132",3.64,"3.59","0.05",2020
+"73","Qual Mthds For Soclgy Lab","SOC4110L",123,"26",3.74,"3.79","-0.06",2020
+"74","Race and Ethnic Relations","SOC3320",211,"64",3.18,"3.12","0.06",2020
+"75","Media and Crime","CRM3390",137,"96",3.34,"3.24","0.1",2020
+"76","Technology and Society","SOC4440",79,"30",3.81,"3.71","0.1",2020
+"77","Social Psychology","PSY4401",175,"54",3.69,"3.59","0.1",2020
+"78","Spec Study For Ud Students","PSY4000",38,"N<10",3.98,"N<10","N/A",2020
+"79","Medical Social Work","SW3320",39,"N<10",3.66,"N<10","N/A",2020
