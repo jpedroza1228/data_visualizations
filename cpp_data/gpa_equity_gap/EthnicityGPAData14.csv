@@ -1,0 +1,71 @@
+"Data Download for Which Courses Have the Largest GPA Equity Gaps?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/achievement-gaps-gpa
+"CSV created on:  ","Sun, Dec 12, 2021 5:32 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","Psychology and Sociology","2014 - Academic Year","Largest GPA Gap AND Highest Enrollment"
+
+"Average GPA by Ethnicity"
+Course,"Course Code",White,"African American",Latino/a,Asian
+"General Psychology",PSY201,2.95,2.11,2.53,2.92
+"Principles of Sociology",SOC201,2.83,2.18,2.55,2.82
+"Principles of Psychology I",PSY202,2.39,2.03,2.02,2.35
+"Juvenile Delinquency",SOC360,3.35,N<10,3.28,2.43
+"Socialization,  Self and Socie",SOC402,3.31,N<10,3.25,N<10
+"Abnormal Psychology",PSY415,3.07,1.97,2.66,2.65
+"Research Methods In Psychology",PSY204,2.77,N<10,2.84,2.87
+"Human Sexual Behav,  Relatnshi",PSY455,2.87,2.85,2.78,2.7
+"Family As A Social Institution",SOC321,N<10,N<10,2.7,N<10
+"Basic Developmental Psychology",PSY305,2.78,N<10,2.7,2.92
+"Mind, Brain, and Behavior",PSY210,2.59,2.52,2.21,2.18
+"Adolescent Psychology",PSY312,2.98,N<10,3.03,2.72
+"Senior Seminar",SOC498,3.59,N<10,3.23,3.21
+"Basic Counseling Skills",PSY417,3.33,N<10,3.23,3.09
+"Survey Research Activity",SOC444A,N<10,N<10,3.26,2.83
+Criminology,SOC302,2.72,N<10,2.65,2.33
+"Principles of Sociology",SOC202,2.57,N<10,2.48,2.03
+"Survey of Social Welfare",SW300,N<10,N<10,3.17,N<10
+"Exper Psy and Res Meth and Des",PSY433L,3.24,N<10,2.89,2.9
+"Classical Sociological Theory",SOC305,2.79,N<10,2.46,2.67
+"Social Stratificationand Inequ",SOC309,3.14,N<10,2.8,2.28
+"Psychology of Personality",PSY403,2.69,N<10,2.81,2.58
+"Exper Psy and Res Meth and Des",PSY433,3.24,N<10,2.89,2.88
+"Urban Sociology",SOC401,N<10,N<10,3.42,N<10
+"Child Psych,  Early Childhood",PSY310,3.7,N<10,2.93,3.02
+"Sociology of Minority Commun",SOC323,3.33,N<10,3.28,2.96
+"Treatment of Law Violators",SW318,N<10,N<10,3.23,N<10
+"Child Psych,  The Middle Years",PSY311,N<10,N<10,2.28,N<10
+"Survey Research",SOC444,N<10,N<10,3.03,2.73
+"Ethnic Relations In America",SOC320,3.08,N<10,2.76,3.06
+"Social Work Practice",SW301,N<10,N<10,3.37,N<10
+"Gender and Sexuality",SOC328,3.31,N<10,2.96,N<10
+"Politics As A Soc Institution",SOC322,N<10,N<10,2.52,N<10
+"Theories of Learning",PSY402,N<10,N<10,2.02,1.62
+"Statistics For The Social Sci",SOC307,3.76,N<10,3.62,3.46
+"Statistics For Social Sci Act",SOC307A,3.76,N<10,3.62,3.46
+"Death and Dying",SW470,N<10,N<10,3.43,N<10
+"Industrial and Organizatio Psy",PSY332,3.6,N<10,3.53,3.63
+"Rsrch Methods In Sociology II",SOC205,3.73,N<10,3.76,N<10
+"Research Methods In Sociolgy I",SOC204,N<10,N<10,2.92,N<10
+"Leadership and Teams",PSY490,N<10,N<10,3.24,N<10
+"Spec Topics Ud Students",SOC499,3.57,N<10,3.18,3.09
+"Organizational Change and Inte",PSY452,3.55,N<10,3.77,3.53
+"Senior Seminar",PSY498,3.71,N<10,3.48,3.49
+"Statistics For The Social Scie",PSY307,3.14,2.9,3,2.86
+"Statistics For Social Sci Act",PSY307A,3.14,2.9,3,2.86
+"Family Violence",SW322,3.47,N<10,3.47,3.26
+"Program Evaluation",PSY430,3.49,N<10,3.38,3.31
+"Theories of Counseling",PSY412,N<10,N<10,3.26,N<10
+"Child Psych For Educators",PSY206,2.57,N<10,2.35,N<10
+"The Psychology of Identity",PSY321,N<10,N<10,2.85,3.12
+"Community Psychology",PSY425,N<10,N<10,2.97,N<10
+"Human Relations",PSY314,N<10,N<10,3.8,N<10
+"Contemporary Social Problems",SOC301,3.16,N<10,3.01,3.11
+"Social Psychology",PSY401,3.03,N<10,2.96,2.77
+"Psychology of Women",PSY322,N<10,N<10,2.69,N<10
+"Contemporary Sociological Thry",SOC306,3.64,N<10,3.49,N<10
+"Probation and Parole",SW320,3.38,N<10,3.26,N<10
+"Soc Welfare Policies and Issue",SW431,N<10,N<10,3.65,N<10
+"Cognitive Processes",PSY334,2.79,N<10,2.55,2.86
+"Multicultural Psychology",PSY325,3.08,2.95,2.98,3.07
+"Health Psychology",PSY326,3.17,2.75,3.06,3.06
+"Field Work",SW402,N<10,N<10,4,N<10
+

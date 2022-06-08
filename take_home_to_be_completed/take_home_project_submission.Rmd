@@ -1,0 +1,168 @@
+---
+title: "Renal Disease Take Home Project Answers"
+author: "Jonathan Pedroza, JP"
+date: "10/20/2021"
+output: html_document
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+
+getwd()
+
+library(tidyverse)
+```
+
+## Mentor Milestone 1 (students usually cover this during week 1 + 2)
+
+Import the project data and recreate the ggplot below. Then, extend the milestone by creating another plot to demonstrate your understanding of ggplot.
+
+Step 1: Read in `baseline_data.xpt` (MDRD data) and recreate the plot below.
+
+```{r loading in baseline data}
+baseline <- haven::read_xpt(here::here("take_home_to_be_completed", "data/baseline_data.xpt"))
+
+# baseline <- haven::read_xpt("../data/baseline_data.xpt")
+```
+
+Recreate the plot in this chunk:
+
+```{r milestone-1-recreation}
+ggplot(data = baseline, aes(gfr)) + 
+  geom_histogram()
+```
+
+Step 2: Create a second plot below:
+
+```{r milestone-1-extension}
+
+baseline %>% 
+  pivot_longer(cols = c("gfr", "followup"), names_to = "before_after", values_to = "gfr_values") %>% 
+  mutate(before_after = factor(before_after),
+         dropout = factor(dropout),
+         before_after = relevel(before_after, ref = "gfr"),
+         dropout = recode(dropout,
+                          "0" = "Continued",
+                          "1" = "Dropped Out"),
+         before_after = recode(before_after,
+                               "gfr" = "Baseline GFR",
+                               "followup" = "Followup GFR")) %>% 
+  group_by(dropout, before_after) %>% 
+  mutate(avg_gfr = mean(gfr_values)) %>% 
+  ungroup() %>% 
+  ggplot(aes(before_after, avg_gfr, group = dropout)) + 
+  geom_line(aes(color = dropout), size = 1.25) + 
+    geom_point(aes(color = dropout), size = 1.25) +
+  labs(title = "Change in Average GFR At Baseline and Follow-up",
+       subtitle = "For Patients that Continued or Dropped Out",
+       x = "",
+       y = "GFR Value",
+       caption = "GFR = Glomerular Filtration Rate") + 
+  scale_color_manual(values = c("#387448", "#d74122")) + 
+  theme_minimal() +
+  theme(legend.title = element_blank())
+  
+```
+
+## Mentor Milestone 2
+
+Read in the data from data/baseline_data.xpt and data/data_supplemental.xlsx
+data_dictionary.md in the data folder explains the variables in both data sets (in case you’d like to learn more about the data)
+The formula for BMI is kilograms / meters^2
+Please do and save your work below:
+
+For your extension, please demonstrate your understanding of summarizing data sets.
+
+```{r milestone-2-recreation}
+supplemental <- readxl::read_xlsx(here::here("take_home_to_be_completed", "data/data_supplemental.xlsx"))
+
+data <- left_join(baseline, supplemental, by = "ptid")
+
+data <- data %>% 
+  mutate(bmi = weight/height^2)
+
+data %>% 
+  select(ptid, gfr, age, bmi) %>% 
+  print()
+```
+
+---------------------------------------------------
+
+```{r milestone-2-extension}
+data %>% 
+  summarize(avg_bmi = mean(bmi, na.rm = TRUE),
+            med_bmi = median(bmi),
+            variance = sd(bmi)^2,
+            sd_bmi = sd(bmi),
+            n = n())
+
+data %>% 
+  mutate(dietl_n = recode(dietl_n, "1" = "Yes",
+                          "0" = "No")) %>% 
+  group_by(sex, dietl_n) %>% 
+  summarize(avg_bmi = mean(bmi, na.rm = TRUE),
+            med_bmi = median(bmi),
+            variance = sd(bmi)^2,
+            sd_bmi = sd(bmi),
+            n = n())
+
+data %>% 
+  filter(dropout == 0) %>% 
+  summarize(avg_bmi = mean(bmi, na.rm = TRUE),
+            med_bmi = median(bmi),
+            variance = sd(bmi)^2,
+            sd_bmi = sd(bmi),
+            n = n())
+
+data %>% 
+  group_by(dietl_n, dietk_n) %>% 
+  filter(dietl_n == 1 |
+           dietk_n == 1) %>% 
+  summarize(avg_bmi = mean(bmi, na.rm = TRUE),
+            med_bmi = median(bmi),
+            variance = sd(bmi)^2,
+            sd_bmi = sd(bmi),
+            n = n())
+
+data %>% 
+  pivot_longer(cols = c("dietl_n", "dietl_l", "dietk_n", "dietk_l"), names_to = "diet_assignment", values_to = "diet_values") %>% 
+  filter(diet_assignment == "dietl_n") %>% 
+  summarize(avg_bmi = mean(bmi, na.rm = TRUE),
+            med_bmi = median(bmi),
+            variance = sd(bmi)^2,
+            sd_bmi = sd(bmi),
+            n = n())
+```
+
+## Mentor Milestone 3 (students usually cover this during week 9)
+
+This milestone is about iteration with `purrr`. Your objective is to use iteration to load in the 100 files found in the `/data/milestone-3` directory.
+
+Please do and save your work below:
+
+```{r milestone-3-recreation, warning = FALSE, message = FALSE}
+
+data_files <- fs::dir_ls(here::here("take_home_to_be_completed/data", "milestone-3"),
+                         glob = "*.csv")
+
+data_combined <-map_dfr(data_files, read_csv)
+
+```
+
+```{r}
+head(data_combined, 10)
+```
+
+
+For your milestone extension, please choose from the following 2 options:
+
+-  Explain the difference between `map()` and its variants, such as `map_chr()`.
+
+**Answer**: The difference between `map()` and its variants is that `map()` will always return a list, while the variants will return the appropriate vector depending on the variant function. For instance, `map_chr()` will return a character vector if working with strings.
+
+-  Share an example of how you've used `purrr` in the past.
+
+
+
+
+

@@ -1,0 +1,592 @@
+library(shiny)
+library(shinydashboard)
+library(tidyverse)
+library(tidymodels)
+library(prophet)
+library(lubridate)
+library(modeltime)
+library(timetk)
+library(patchwork)
+library(xgboost)
+library(plotly)
+
+theme_set(theme_light())
+
+googlesheets4::gs4_deauth()
+
+set.seed(05262022)
+
+jetblue <- googlesheets4::read_sheet('https://docs.google.com/spreadsheets/d/1SpRXsC3kXDaQLUfC6cPIOvsqxDF6updhgHRJeT8PTog/edit#gid=0') %>% 
+  janitor::clean_names() %>% 
+  mutate(ds = as_date(date)) %>% 
+  select(-date)
+
+# honest <- googlesheets4::read_sheet('https://docs.google.com/spreadsheets/d/1SBLfoU3AhAQF6IJTn4TNTXKmopVk44S0JeifK3-DMoU/edit#gid=0') %>% 
+#   janitor::clean_names() %>% 
+#   mutate(ds = as_date(date)) %>% 
+#   select(-date)
+
+# alibaba <- googlesheets4::read_sheet('https://docs.google.com/spreadsheets/d/1CHh6zEzdWST2U-AsjBBhFNaOyTKJceuFdwsiIV5YCFs/edit#gid=0') %>% 
+#   janitor::clean_names() %>% 
+#   mutate(ds = as_date(date)) %>% 
+#   select(-date)
+
+# us_holi <-
+#   generated_holidays %>% 
+#   filter(country == 'US') %>% 
+#   mutate(date = as_date(ds))
+
+# china_holi <-
+#   generated_holidays %>% 
+#   filter(country == 'CN') %>% 
+#   mutate(date = as_date(ds))
+
+# Define UI for application that draws a histogram
+ui <- 
+  navbarPage("Stock Forecasting",
+             tabPanel('Prophet Training',
+                      sidebarLayout(
+                        sidebarPanel(
+                          width = 2,
+                          
+                          selectInput(inputId = 'changepoint_prior_scale',
+                                      label = 'Changepoint value (default = .05)',
+                                      choices = c(seq(.001, .5, by = .01), .05),
+                                      selected = .05),
+                          
+                          selectInput(inputId = 'seasonality_prior_scale',
+                                      label = 'Seasonality value (default = 10)',
+                                      choices = c(seq(.01, 10, by = .1), 10),
+                                      selected = 10),
+                          
+                          selectInput(inputId = 'holidays_prior_scale',
+                                      label = 'Holiday value (default = 10)',
+                                      choices = c(seq(.01, 10, by = .1), 10),
+                                      selected = 10),
+                          
+                          selectInput(inputId = 'seasonality_mode',
+                                      label = 'Seasonality mode (default = additive)',
+                                      choices = c('additive', 'multiplicative'),
+                                      selected = 'additive'),
+                          
+                          actionButton('Update',
+                                       label = 'Update Training Model')
+                        ),
+                        mainPanel(
+                          fluidRow(box(plotOutput('jet_train_cast'),
+                                       title = 'JetBlue Model Training'),
+                                   box(dataTableOutput('train_rmse'),
+                                       title = 'JetBlue Train Model Accuracy')))
+                        )
+                      ),
+             tabPanel('Time Series Visualized',
+                      sidebarLayout(
+                        sidebarPanel(
+                          width = 2,
+                          
+                        selectInput(inputId = 'future_forecast',
+                                    label = 'Months to Forecast Ahead',
+                                    choices = seq(1, 60, by = 1)),
+                        
+                        actionButton('Forecast',
+                                     label = 'Update Forecast')
+                      ),
+                      mainPanel(
+                        tabsetPanel(
+                          type = 'tabs', #Make sure that the options locked in for the training data goes to the testing fit
+                          tabPanel(title = 'JetBlue Stock Across Time'),
+                          box(plotOutput('jetblue_forecast'),
+                              title = 'JetBlue Testing Model'),
+                          box(plotOutput('jet_future_forecast'),
+                              title = 'Forecasted JetBlue Stock'),
+                          box(dataTableOutput('jet_test_rmse'),
+                              title = 'Jetblue Model Accuracy')),
+                          )
+             )
+             )
+)
+
+server <- 
+  function(input, output){
+  
+    set.seed(05262022)
+    
+    # making training/testing datasets
+    jet_splits <- reactive({
+      initial_time_split(jetblue)
+    })
+    
+    # make choosing model parameters reactive
+    cp_select <- eventReactive(input$Update,
+                               input$changepoint_prior_scale)
+    season_select <- eventReactive(input$Update,
+                                   input$seasonality_prior_scale)
+    holi_select <- eventReactive(input$Update,
+                                 input$holidays_prior_scale)
+    sea_mode_select <- eventReactive(input$Update,
+                                     input$seasonality_mode)
+    
+    # model characteristics
+    jet_model_re <- reactive({
+      prophet_reg(
+        prior_scale_changepoints = as.numeric(cp_select()),
+        prior_scale_seasonality = as.numeric(season_select()),
+        prior_scale_holidays = as.numeric(holi_select()),
+        season = sea_mode_select()) %>% 
+        set_engine(engine = 'prophet',
+                   num.threads = parallel::detectCores(),
+                   verbose = TRUE)
+    })
+    
+    # fitting model to training data
+    jet_train_fit_re <- reactive({
+      jet_model_re() %>% 
+        fit(close ~ ds,
+           data = training(jet_splits()))
+    })
+    
+    # visuals of training model fit
+    output$jet_train_cast <- renderPlot({
+      jet_train_fit_re() %>% 
+        modeltime_calibrate(new_data = training(jet_splits())) %>% 
+        modeltime_forecast(new_data = training(jet_splits()),
+                           actual_data = jetblue) %>% 
+        plot_modeltime_forecast(.interactive = FALSE)
+      
+    })
+    
+    # RMSE of training model
+    output$train_rmse <- renderDataTable({
+      jet_train_rmse <-
+        jet_train_fit_re() %>% 
+        modeltime_calibrate(new_data = training(jet_splits())) %>% 
+        modeltime_accuracy() %>% 
+        pluck('rmse')
+      
+      data.frame(Stock = 'JetBlue',
+                 RMSE = jet_train_rmse)
+    })
+
+    # testing jet models
+    output$jetblue_forecast <- renderPlot({
+      jet_train_fit_re() %>% 
+        modeltime_calibrate(new_data = testing(jet_splits())) %>% 
+        modeltime_forecast(new_data = testing(jet_splits()),
+                           actual_data = jetblue) %>% 
+        plot_modeltime_forecast(.interactive = FALSE)
+      
+    })
+    
+    #RMSE of jetblue models (prophet)
+    output$jet_test_rmse <- renderDataTable({
+      jet_test_rmse <- jet_train_fit_re() %>% 
+        modeltime_calibrate(new_data = testing(jet_splits())) %>%
+        modeltime_accuracy() %>% 
+        pluck('rmse')
+      
+      data.frame(model = 'Prophet',
+                 RMSE = jet_test_rmse) 
+    })
+    
+    # future data
+    future_jetblue_re <- reactive({
+      jetblue %>% 
+        future_frame(.length_out = paste0(as.numeric(input$future_forecast), ' months'), #make sure names are coorect
+                     .bind_data = TRUE)
+    })
+    
+    # full data forecasts
+    
+    output$jet_future_forecast <- renderPlot({
+      jet_train_fit_re() %>% 
+        modeltime_calibrate(new_data = testing(jet_splits())) %>% 
+        modeltime_refit(data = jetblue) %>% 
+        modeltime_forecast(new_data = future_jetblue_re(),
+                           actual_data = jetblue) %>% 
+        plot_modeltime_forecast(.interactive = FALSE)
+    })
+    
+}
+
+shinyApp(ui, server)
+
+
+
+
+
+tabPanel(
+box(plotOutput('honest_train_cast'),
+                                       title = 'Honest Company Model Training'),
+                                   box(plotOutput('baba_train_cast'),
+                                       title = 'Alibaba Model Training'),
+                                   box(dataTableOutput('train_rmse')))
+
+               'XGBoost Training',
+               sidebarLayout(
+                 sidebarPanel(
+                   width = 2,
+                   
+                   selectInput(inputId = 'learning_rate',
+                               label = 'Learning rate (default = .03)',
+                               choices = c(seq(0, 1, by = .1), .03),
+                               selected = .03),
+                   
+                   selectInput(inputId = 'tree_depth',
+                               label = 'Depth of trees (default = 6)',
+                               choices = seq(0, 15, by = 1),
+                               selected = 6),
+                   
+                   selectInput(inputId = 'trees',
+                               label = 'Number of trees (default = 15)',
+                               choices = c(seq(15, 1000, by = 30), 1000),
+                               selected = 15),
+                   
+                   selectInput(inputId = 'min_n',
+                               label = 'Minimal node size (default = 1)',
+                               choices = seq(1, 15, by = 1),
+                               selected = 1),
+                   
+                   selectInput(inputId = 'loss_reduction',
+                               label = 'Minimum loss reduction (default = 0)',
+                               choices = seq(0, 10, by = .5),
+                               selected = 0),
+                   
+                   selectInput(inputId = 'sample_size',
+                               label = 'Proportion observations sampled (default = 1)',
+                               choices = seq(0, 1, by = .05),
+                               selected = 1),
+                   
+                   submitButton('Update Training Model')
+                 ),
+                 mainPanel(
+                   fluidRow(box(plotOutput('jet_train_boost'),
+                                title = 'Jetblue Model Training'),
+                            box(plotOutput('honest_train_boost'),
+                                title = 'Honest Company Model Training'),
+                            box(plotOutput('baba_train_boost'),
+                                title = 'Alibaba Model Training'),
+                            box(dataTableOutput('train_rmse_boost')))
+                 )
+               )
+             ),
+             
+             
+             tabPanel('Honest Company Stock',
+                                   fluidRow(box(plotOutput('time_series_2'),
+                                                title = 'Honest Company Stock Across Time'),
+                                            box(plotOutput('honest_forecast'),
+                                                title = 'Honest Company Testing Model'),
+                                            box(plotOutput('honest_future_forecast'),
+                                                title = 'Forecasted Honest Company Stock'),
+                          box(dataTableOutput('honest_test_rmse')))),
+                          tabPanel('Alibaba Stock',
+                          fluidRow(box(plotOutput('time_series_3'),
+                                       title = 'Alibaba Stock Across Time'),
+                                   box(plotOutput('jetblue_forecast'),
+                                       title = 'JetBlue Testing Model'),
+                          box(plotOutput('baba_future_forecast'),
+                              title = 'Forecasted Alibaba Stock'),
+                          box(dataTableOutput('baba_test_rmse'))))
+                          
+                          'JetBlue Stock',
+                                   fluidRow(box(plotOutput('time_series_1'),
+             
+             
+ server functions
+ 
+ honest_model_re <- reactive({
+      prophet_reg(prior_scale_changepoints = as.numeric(input$changepoint_prior_scale),
+                  prior_scale_seasonality = as.numeric(input$seasonality_prior_scale),
+                  prior_scale_holidays = as.numeric(input$holidays_prior_scale),
+                  season = input$seasonality_mode) %>% 
+        set_engine(engine = 'prophet',
+                   num.threads = parallel::detectCores(),
+                   verbose = TRUE)
+    })
+    
+    baba_model_re <- reactive({
+      prophet_reg(prior_scale_changepoints = as.numeric(input$changepoint_prior_scale),
+                  prior_scale_seasonality = as.numeric(input$seasonality_prior_scale),
+                  prior_scale_holidays = as.numeric(input$holidays_prior_scale),
+                  season = input$seasonality_mode) %>% 
+        set_engine(engine = 'prophet',
+                   num.threads = parallel::detectCores(),
+                   verbose = TRUE)
+    })
+    
+     honest_splits <- reactive({
+      initial_time_split(honest)
+    })
+    
+    baba_splits <- reactive({
+      initial_time_split(alibaba)
+    })
+    
+    honest_train_fit_re <- reactive({
+      honest_model_re() %>% 
+        fit(close ~ ds,
+            data = training(honest_splits()))
+    })
+    
+    baba_train_fit_re <- reactive({
+      baba_model_re() %>% 
+        fit(close ~ ds,
+            data = training(baba_splits()))
+    })
+    
+    output$honest_train_cast <- renderPlot({
+      honest_train_fit_re() %>% 
+        modeltime_calibrate(new_data = training(honest_splits())) %>% 
+        modeltime_forecast(new_data = training(honest_splits()),
+                           actual_data = honest) %>% 
+        plot_modeltime_forecast(.interactive = FALSE)
+      
+    })
+    
+    output$baba_train_cast <- renderPlot({
+      baba_train_fit_re() %>% 
+        modeltime_calibrate(new_data = training(baba_splits())) %>% 
+        modeltime_forecast(new_data = training(baba_splits()),
+                           actual_data = alibaba) %>% 
+        plot_modeltime_forecast(.interactive = FALSE)
+      
+    })
+    
+    honest_train_rmse <-
+        jet_train_fit_re() %>% 
+        modeltime_calibrate(new_data = training(honest_splits())) %>% 
+        modeltime_accuracy() %>% 
+        pluck('rmse')
+      
+      baba_train_rmse <-
+        jet_train_fit_re() %>% 
+        modeltime_calibrate(new_data = training(baba_splits())) %>% 
+        modeltime_accuracy() %>% 
+        pluck('rmse')
+
+      data.frame(Stock = c('JetBlue', 'Honest Company', 'Alibaba'),
+                 RMSE = c(jet_train_rmse, honest_train_rmse, baba_train_rmse))
+ 
+ # XGBoost models
+    jet_boost_mod_re <- reactive({
+      boost_tree() %>% 
+      set_engine('xgboost',
+                 num.threads = parallel::detectCores(),
+                 verbose = TRUE) %>% 
+      set_mode('regression') %>% 
+      set_args(learn_rate = as.numeric(input$learning_rate),
+               tree_depth = as.numeric(input$tree_depth),
+               trees = as.numeric(input$trees),
+               min_n = as.numeric(input$min_n),
+               loss_reduction = as.numeric(input$loss_reduction),
+               sample_size = as.numeric(input$sample_size))
+    })
+    
+    honest_boost_mod_re <- reactive({
+      boost_tree() %>% 
+        set_engine('xgboost',
+                   num.threads = parallel::detectCores(),
+                   verbose = TRUE) %>% 
+        set_mode('regression') %>% 
+        set_args(learn_rate = as.numeric(input$learning_rate),
+                 tree_depth = as.numeric(input$tree_depth),
+                 trees = as.numeric(input$trees),
+                 min_n = as.numeric(input$min_n),
+                 loss_reduction = as.numeric(input$loss_reduction),
+                 sample_size = as.numeric(input$sample_size))
+    })
+    
+    baba_boost_mod_re <- reactive({
+      boost_tree() %>% 
+        set_engine('xgboost',
+                   num.threads = parallel::detectCores(),
+                   verbose = TRUE) %>% 
+        set_mode('regression') %>% 
+        set_args(learn_rate = as.numeric(input$learning_rate),
+                 tree_depth = as.numeric(input$tree_depth),
+                 trees = as.numeric(input$trees),
+                 min_n = as.numeric(input$min_n),
+                 loss_reduction = as.numeric(input$loss_reduction),
+                 sample_size = as.numeric(input$sample_size))
+    })
+    
+    # boosted fit
+    jet_boost_fit_re <- reactive({
+      jet_boost_mod_re() %>% 
+        fit(close ~ ds, data = training(jet_splits()))
+    })
+    
+    honest_boost_fit_re <- reactive({
+      honest_boost_mod_re() %>% 
+        fit(close ~ ds, data = training(honest_splits()))
+    })
+    
+    baba_boost_fit_re <- reactive({
+      baba_boost_mod_re() %>% 
+        fit(close ~ ds, data = training(baba_splits()))
+    })
+    
+    # dataframe creation for plotting model learning
+    jet_df_re <- reactive({
+      data.frame(iteration = jet_boost_fit_re()$fit$evaluation_log$iter,
+                 rmse = jet_boost_fit_re()$fit$evaluation_log$training_rmse)
+    })
+    
+    honest_df_re <- reactive({
+      data.frame(iteration = honest_boost_fit_re()$fit$evaluation_log$iter,
+                 rmse = honest_boost_fit_re()$fit$evaluation_log$training_rmse)
+    })
+    
+    baba_df_re <- reactive({
+      data.frame(iteration = baba_boost_fit_re()$fit$evaluation_log$iter,
+                 rmse = baba_boost_fit_re()$fit$evaluation_log$training_rmse)
+    })
+    
+    # Training Visualization
+    output$jet_train_boost <- renderPlot({
+      ggplot(data = jet_df_re(),
+             aes(iteration,
+                 rmse)) + 
+        geom_point(alpha = .3) + 
+        geom_line(color = 'dodgerblue')
+    })
+    
+    output$honest_train_boost <- renderPlot({
+      ggplot(data = honest_df_re(),
+             aes(iteration,
+                 rmse)) + 
+        geom_point(alpha = .3) + 
+        geom_line(color = 'dodgerblue')
+    })
+    
+    output$baba_train_boost <- renderPlot({
+      ggplot(data = baba_df_re(),
+             aes(iteration,
+                 rmse)) + 
+        geom_point(alpha = .3) + 
+        geom_line(color = 'dodgerblue')
+    })
+    
+    # Training Boost RMSE
+    output$train_rmse_boost <- renderDataTable({
+      jet_avg_rmse <- mean(jet_df_re()$rmse)
+      honest_avg_rmse <- mean(honest_df_re()$rmse)
+      baba_avg_rmse <- mean(baba_df_re()$rmse)
+      
+      jet_min_rmse <- min(jet_df_re()$rmse)
+      honest_min_rmse <- min(honset_df_re()$rmse)
+      baba_min_rmse <- min(baba_df_re()$rmse)
+      
+      data.frame(Stock = c('JetBlue', 'Honest Company', 'Alibaba'),
+                 `Average RMSE` = c(jet_avg_rmse, honest_avg_rmse, baba_avg_rmse),
+                 `Lowest RMSE` = c(jet_min_rmse, honest_min_rmse, baba_min_rmse))
+    })
+    
+     output$time_series_2 <- renderPlot({
+      honest %>% 
+        plot_time_series(ds, close, .interactive = TRUE) +
+        labs(title = 'Honest Company Stock Over Time',
+             x = 'Date',
+             y = 'Stock Price')
+    })
+    
+    output$time_series_3 <- renderPlot({
+      alibaba %>% 
+        plot_time_series(ds, close, .interactive = TRUE) +
+        labs(title = 'Alibaba Stock Over Time',
+             x = 'Date',
+             y = 'Stock Price')
+    })
+    
+    honest_test_fit_re <- reactive({
+      honest_model_re() %>% 
+        fit(close ~ ds,
+            data = testing(honest_splits()))
+    })
+    
+    baba_test_fit_re <- reactive({
+      baba_model_re() %>% 
+        fit(close ~ ds,
+            data = testing(baba_splits()))
+    })
+    
+    # testing honest models
+    output$honest_forecast <- renderPlot({
+      honest_test_fit_re() %>% 
+        modeltime_calibrate(new_data = testing(honest_splits())) %>% 
+        modeltime_forecast(new_data = testing(honest_splits()),
+                           actual_data = honest) %>% 
+        plot_modeltime_forecast(.interactive = FALSE)
+      
+    })
+    
+    #RMSE of honest models (prophet & xgboost)
+    output$honest_test_rmse <- renderDataTable({
+      honest_test_rmse <- honest_test_fit_re() %>% 
+        modeltime_calibrate(new_data = testing(honest_splits())) %>% 
+        modeltime_accuracy() %>% 
+        pluck('rmse')
+      
+      data.frame(model = c('Prophet', 'XGBoost'),
+                 RMSE = c(honest_test_rmse, honest_test_rmse)) #change the second one for the xgboost model
+    })
+    
+    # testing alibaba models
+    output$baba_forecast <- renderPlot({
+      baba_test_fit_re() %>% 
+        modeltime_calibrate(new_data = testing(baba_splits())) %>% 
+        modeltime_forecast(new_data = testing(baba_splits()),
+                           actual_data = alibaba) %>% 
+        plot_modeltime_forecast(.interactive = FALSE)
+      
+    })
+    
+    #RMSE of alibaba models (prophet & xgboost)
+    output$baba_test_rmse <- renderDataTable({
+      baba_test_rmse <- baba_test_fit_re() %>% 
+        modeltime_calibrate(new_data = testing(baba_splits())) %>% 
+        modeltime_accuracy() %>% 
+        pluck('rmse')
+      
+      data.frame(model = c('Prophet', 'XGBoost'),
+                 RMSE = c(baba_test_rmse, baba_test_rmse)) #change the second one for the xgboost model
+    })
+    
+    future_honest_re <- reactive({
+      honest %>% 
+        future_frame(.length_out = paste0(as.numeric(input$future_forecast), ' months'),
+                     .bind_data = TRUE)
+    })
+    
+    future_alibaba_re <- reactive({
+      alibaba %>% 
+        future_frame(.length_out = paste0(as.numeric(input$future_forecast), ' months'),
+                     .bind_data = TRUE)
+    })
+    
+    output$honest_future_forecast <- renderPlot({
+      honest_test_fit_re() %>% 
+        modeltime_calibrate(new_data = honest) %>% 
+        modeltime_forecast(new_data = future_honest_re(),
+                           actual_data = honest) %>% 
+        plot_modeltime_forecast(.interactive = FALSE)
+    })
+    
+    output$baba_future_forecast <- renderPlot({
+      baba_test_fit_re() %>% 
+        modeltime_calibrate(new_data = alibaba) %>% 
+        modeltime_forecast(new_data = future_alibaba_re(),
+                           actual_data = alibaba) %>% 
+        plot_modeltime_forecast(.interactive = FALSE)
+    })
+    
+    # visualizations for the whole dataset without forecasts
+    output$time_series_1 <- renderPlot({
+      jetblue %>% 
+        plot_time_series(ds, close, .interactive = TRUE) + 
+        labs(title = 'Jetblue Stock Over Time',
+             x = 'Date',
+             y = 'Stock Price')
+    })
+    
+    

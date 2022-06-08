@@ -1,0 +1,73 @@
+"Data Download for Which Courses Have the Largest GPA Equity Gaps?"
+"CSV from: ",https://csusuccess.dashboards.calstate.edu/public/faculty-dashboard/achievement-gaps-gpa
+"CSV created on:  ","Sun, Dec 12, 2021 5:32 PM America/Los_Angeles"
+Pomona,"College of Letters, Arts, & Social Sciences","Psychology and Sociology","2016 - Academic Year","Largest GPA Gap AND Highest Enrollment"
+
+"Enrollment by Ethnicity"
+Course,"Course Code",White,"African American",Latino/a,Asian
+"General Psychology",PSY201,253,59,713,338
+"Human Sexual Behav,  Relatnshi",PSY455,132,24,402,139
+"Mind, Brain, and Behavior",PSY210,59,24,207,81
+"Principles of Sociology",SOC201,83,32,264,84
+"Multicultural Psychology",PSY325,54,14,186,62
+"Principles of Psychology I",PSY202,34,20,141,48
+"Research Methods In Sociolgy I",SOC204,16,N<10,97,12
+"Basic Developmental Psychology",PSY305,18,N<10,53,12
+"Statistics For The Social Scie",PSY307,20,N<10,88,12
+"Statistics For Social Sci Act",PSY307A,20,N<10,88,12
+"Child Psych,  Early Childhood",PSY310,15,N<10,46,N<10
+"Statistics For The Social Sci",SOC307,10,N<10,41,N<10
+"Cognitive Processes",PSY334,27,N<10,65,24
+"Juvenile Delinquency",SOC360,13,N<10,72,10
+"Exper Psy and Res Meth and Des",PSY433,21,N<10,94,21
+"Exper Psy and Res Meth and Des",PSY433L,21,N<10,94,21
+"Statistics For Social Sci Act",SOC307A,10,N<10,41,N<10
+"Contemporary Sociological Thry",SOC306,13,N<10,77,N<10
+"Senior Seminar",PSY498,25,N<10,70,14
+"Family Violence",SW322,N<10,N<10,63,N<10
+"Theories of Learning",PSY402,N<10,N<10,24,N<10
+"Treatment of Law Violators",SW318,11,N<10,60,N<10
+"Memory and Amnesia",PSY335,N<10,N<10,25,N<10
+"Religion In American Life",SOC324,N<10,N<10,24,N<10
+"Abnormal Psychology",PSY415,30,N<10,100,26
+"Classical Sociological Theory",SOC305,14,N<10,89,15
+"Senior Seminar",SOC498,12,N<10,79,N<10
+Criminology,SOC302,20,N<10,74,21
+"Psychology of Women",PSY322,14,N<10,56,12
+"Social Inequality and Sport",SOC451,N<10,N<10,15,11
+"Ethnic Relations In America",SOC320,10,N<10,27,N<10
+"Socialization,  Self and Socie",SOC402,13,N<10,74,14
+"Rsrch Methods In Sociology II",SOC205,18,N<10,88,N<10
+"Gender and Sexuality",SOC328,11,N<10,66,13
+"Child Psych,  The Middle Years",PSY311,N<10,N<10,30,N<10
+"Basic Counseling Skills",PSY417,13,N<10,54,12
+"Research Methods In Psychology",PSY204,20,N<10,48,21
+"Sensation and Perception",PSY460,N<10,N<10,19,N<10
+"Probation and Parole",SW320,N<10,N<10,66,N<10
+"Social Change",SOC340,N<10,N<10,18,N<10
+"Industrial and Organizatio Psy",PSY332,20,N<10,45,14
+"Adolescent Psychology",PSY312,18,N<10,48,16
+"Program Evaluation",PSY430,18,N<10,57,12
+"Survey of Social Welfare",SW300,N<10,N<10,17,N<10
+"Survey Research",SOC444,N<10,N<10,20,N<10
+"Health Psychology",PSY326,86,17,261,129
+"Survey Research Activity",SOC444A,N<10,N<10,20,N<10
+"Psychology of Personality",PSY403,22,N<10,68,22
+"Soc Welfare Policies and Issue",SW431,N<10,N<10,20,N<10
+"Organizational Change and Inte",PSY452,10,N<10,23,N<10
+"Theories of Counseling",PSY412,N<10,N<10,18,N<10
+"Principles of Sociology",SOC202,N<10,N<10,36,10
+"Social Stratificationand Inequ",SOC309,N<10,N<10,71,14
+"Physiological Psychology",PSY303,N<10,N<10,13,N<10
+"Politics As A Soc Institution",SOC322,N<10,N<10,31,N<10
+"Urban Sociology",SOC401,N<10,N<10,29,N<10
+"Qualitative Methds In Psychlgy",PSY404,N<10,N<10,12,N<10
+"Spec Study Ld Students",PSY200,N<10,N<10,15,N<10
+"Physiological Psychology Lab",PSY303L,N<10,N<10,13,N<10
+"Spec Study Ud Students",PSY400,N<10,N<10,28,10
+"Social Work Practice",SW301,N<10,N<10,41,N<10
+"Social Psychology",PSY401,13,N<10,55,12
+"Family As A Social Institution",SOC321,N<10,N<10,30,N<10
+"Contemporary Social Problems",SOC301,27,N<10,116,38
+"Field Work",SW402,N<10,N<10,62,N<10
+

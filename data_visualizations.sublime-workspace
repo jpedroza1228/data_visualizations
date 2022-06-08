@@ -1,0 +1,238 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "library(psych)\nlibrary(tidycensus)\nlibrary(spdep)\nlibrary(spatialreg)\nlibrary(rgdal)\nlibrary(rgeos)\nlibrary(tmap)\nlibrary(inspectdf)\n\noptions(scipen = 999)\n\nset.seed(12152020)\n\ncensus_key <- \"a0e25d904bd3c57cfc0eb784b66431a766719f40\"  \n\ncensus_api_key(census_key)\n\ncounty16 <- read_csv('https://raw.githubusercontent.com/jpedroza1228/dissertation/master/analytic_data/county_16.csv') %>% \n  dplyr::select(-X1)\ncounty18 <- read_csv('https://raw.githubusercontent.com/jpedroza1228/dissertation/master/analytic_data/county_18.csv') %>% \n  dplyr::select(-X1)\ncounty20 <- read_csv('https://raw.githubusercontent.com/jpedroza1228/dissertation/master/analytic_data/county_20.csv') %>% \n  dplyr::select(-X1)\n\ncrime16 <- read_csv('https://raw.githubusercontent.com/jpedroza1228/dissertation/master/analytic_data/crime16.csv') %>% \n  dplyr::select(-X1)\ncrime18 <- read_csv('https://raw.githubusercontent.com/jpedroza1228/dissertation/master/analytic_data/crime18.csv') %>% \n  dplyr::select(-X1)\n\nvariables_acs <- load_variables(2016, 'acs5')\n\nacs_var <- c('B02001_002', #estimate total, white alone\n             'B02001_003', #estimate total, black/african american alone\n             'B02001_005', #estimate total, asian alone\n             'B03003_003', #estimate total, hispanic or latino\n             'B19013_001', #median household income total\n             'B01003_001' #population count\n)\n\nacs_year <- get_acs(\n  geography = \"county\",\n  variables = acs_var,\n  year = 2016,\n  survey = \"acs5\",\n  geometry = TRUE,\n  shift_geo = TRUE,\n  output = 'wide'\n) %>% \n  janitor::clean_names()\n\nacs_year <- separate(acs_year, col = name, into = c('county_name', 'state_name'), sep = ', ') %>% \n  janitor::clean_names() %>% \n  rename(white_est = b02001_002e,\n         black_est = b02001_003e,\n         asian_est = b02001_005e,\n         latino_est = b03003_003e,\n         median_household_income = b19013_001e,\n         pop_count_2016 = b01003_001e,\n         acs_geometry = geometry) %>% \n  dplyr::select(1:4,\n                6, 8, 10, 12, 14, 16) \n\nacs_year$state_name <- str_to_lower(acs_year$state_name)\n\n\nacs_year <- acs_year %>% \n  mutate(state = recode(state_name, 'alabama' = 'AL','alaska' = 'AK','arizona' = 'AZ','arkansas' = 'AR',\n                        'california' = 'CA','colorado' = 'CO','connecticut' = 'CT',\n                        'delaware' = 'DE', 'district of columbia' = 'DC',\n                        'florida' = 'FL',\n                        'georgia' = 'GA',\n                        'hawaii' = 'HI',\n                        'idaho' = 'ID','illinois' = 'IL','indiana' = 'IN','iowa' = 'IA',\n                        'kansas' = 'KS','kentucky' = 'KY',\n                        'louisiana' = 'LA',\n                        'maine' = 'ME','maryland' = 'MD','massachusetts' = 'MA','michigan' = 'MI','minnesota' = 'MN','mississippi' = 'MS','missouri' = 'MO','montana' = 'MT',\n                        'nebraska' = 'NE','nevada' = 'NV','new hampshire' = 'NH','new jersey' = 'NJ','new mexico' = 'NM','new york' = 'NY','north carolina' = 'NC','north dakota' = 'ND',\n                        'ohio' = 'OH','oklahoma' = 'OK','oregon' = 'OR',\n                        'pennsylvania' = 'PA',\n                        'rhode island' = 'RI',\n                        'south carolina' = 'SC','south dakota' = 'SD',\n                        'tennessee' = 'TN','texas' = 'TX',\n                        'utah' = 'UT',\n                        'vermont' = 'VT','virginia' = 'VA',\n                        'washington' = 'WA','west virginia' = 'WV','wisconsin' = 'WI','wyoming' = 'WY'),\n         year = 2016)\n```\n\n```{r joining}\nneed_acs16 <- left_join(county16, crime16, c(\"year\", \"state\"))\nfinal16 <- left_join(need_acs16, acs_year, by = c('county",
+			"settings":
+			{
+				"buffer_size": 3719,
+				"line_ending": "Windows",
+				"name": "library(psych)"
+			},
+			"undo_stack":
+			[
+				[
+					5,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAAjA4AAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					8,
+					2,
+					"right_delete",
+					null,
+					"AgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAKHNmKQAAAAAAAAAAAAAAAAAAAAABAAAACg",
+					"AQAAAAAAAAABAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 130.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/cpppe/Desktop/keys.R",
+		"/C/Users/cpppe/Desktop/github_projects/dissertation/gce_key.json",
+		"/C/Users/cpppe/Desktop/gce_key.json",
+		"/C/Users/cpppe/Desktop/rhs data/scripts/modeling_special_edition.Rmd",
+		"/E/UO/R Projects/accult stress health behaviors/paper_analyses_all.Rmd",
+		"/C/Users/cpppe/AppData/Local/Temp/kite_tutorial.py",
+		"/C/Users/cpppe/Downloads/after_oakplots.R",
+		"/C/Users/cpppe/Downloads/GMT20201117-220328_Jonathan-P.transcript.vtt",
+		"/C/Users/cpppe/Desktop/python_stuff/practice_python/pandas_practice.ipynb",
+		"/C/Users/cpppe/Desktop/github_projects/Final_ML_Blog/_posts/2020-11-30-shoe-me-what-youre-working-with-data-desc/show-me-what-youre-working-with-data-desc.Rmd",
+		"/C/Users/cpppe/AppData/Local/Temp/Temp1_NPS_TrailStandard_20161021.zip/NPS_TrailStandard_20161021/NPS_TRAIL_20161021.xml",
+		"/C/Users/cpppe/Desktop/python_stuff/python_script.py"
+	],
+	"find":
+	{
+		"height": 0.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3719,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "library(psych)",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "data_visualizations.sublime-project",
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
