@@ -1,0 +1,31 @@
+---
+title: "Detecting Phone Numbers"
+author: JP
+format: html
+---
+
+## Loading 
+
+```{python}
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import phonenumbers as pn
+from phonenumbers import carrier
+from phonenumbers import geocoder
+```
+
+
+```{python}
+bread = pn.parse("+1 562 650 9230", "US")
+valid_bread = pn.is_valid_number(bread)
+location_bread = geocoder.description_for_number(bread, "US")
+carrier_bread = carrier.name_for_number(bread, "US")
+```
+
+
+```{python}
+print("The number is ", valid_bread, ".")
+print("The location for the number is in ", location_bread, ".")
+print("The carrier for this number is ", carrier_bread, ".")
+```
