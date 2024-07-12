@@ -1,15 +1,13 @@
 library(tidyverse)
 library(tidymodels)
 
-heart <- read_csv('kaggle/heart_disease/heart.csv') %>% 
+heart <- read_csv("C:/Users/cpppe/Downloads/Heart_Disease_Prediction.csv") |>
   janitor::clean_names()
 
 theme_set(theme_light())
 
-glimpse(heart)
 
-heart %>% 
-  count(thal)
+
 
 heart <- heart %>% 
   mutate(
@@ -63,7 +61,7 @@ heart_test <- testing(heart_split)
 
 heart_fold <- vfold_cv(heart_train, v = 10)
 
-library(xgboost)
+library(ranger)
 
 set.seed(12345)
 
