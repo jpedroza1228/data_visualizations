@@ -1,41 +1,9 @@
 library(tidyverse)
 library(reactable)
+library(brms)
+library(tidybayes)
 
-# data dictionary
-# https://www.cde.ca.gov/ds/ad/fssd.asp
- 
-# reading in data
-# sus_list <- map(
-#   c(
-#     "https://www3.cde.ca.gov/demo-downloads/discipline/suspension12.txt",
-#     "https://www3.cde.ca.gov/demo-downloads/discipline/suspension13.txt",
-#     "https://www3.cde.ca.gov/demo-downloads/discipline/suspension14.txt",
-#     "https://www3.cde.ca.gov/demo-downloads/discipline/suspension15.txt",
-#     "https://www3.cde.ca.gov/demo-downloads/discipline/suspension16.txt",
-#     "https://www3.cde.ca.gov/demo-downloads/discipline/suspension17.txt",
-#     "https://www3.cde.ca.gov/demo-downloads/discipline/suspension18.txt",
-#     "https://www3.cde.ca.gov/demo-downloads/discipline/suspension19.txt",
-#     "https://www3.cde.ca.gov/demo-downloads/discipline/suspension20.txt",
-#     "https://www3.cde.ca.gov/demo-downloads/discipline/suspension21.txt",
-#     "https://www3.cde.ca.gov/demo-downloads/discipline/suspension22-v2.txt",
-#     "https://www3.cde.ca.gov/demo-downloads/discipline/suspension23.txt"
-#   ),
-#   ~read_delim(.x)
-# ) 
-
-# map2(
-#   sus_list,
-#   12:23,
-#   ~write_csv(
-#     .x,
-#     glue::glue(
-#       "ca_stu_data/suspension_data_20{.y}.csv"
-#     )
-#     )
-# )
-
-# combo <- map_dfr(sus_list, ~.x)
-
+theme_set(theme_light())
 
 read_func <- function(year){
   readr::read_csv(
@@ -49,6 +17,7 @@ combo <- map_dfr(
   12:23,
   ~read_func(.x)
 )
+
 
 combo <- combo |>
   janitor::clean_names() |>
@@ -64,145 +33,104 @@ combo <- combo |>
     )
   )
 
+combo |> count(aggregate_level)
 
-combo |> glimpse()
-
-county <- combo |>
-  group_by(
-    academic_year,
-    county_name,
-    reporting_category
-    ) |>
-    reframe(
-      avg_suspend = mean(total_suspensions, na.rm = TRUE),
-      avg_enroll = mean(cumulative_enrollment, na.rm = TRUE),
-      suspend_per_total_enroll = total_suspensions/cumulative_enrollment
-    )
-
-county |>
+all <- combo |>
   filter(
-    reporting_category == "SD" &
-    county_name != "State"
-  ) |>
-  group_by(academic_year, county_name) |>
-  summarize(
-    avg_sus_prop = mean(suspend_per_total_enroll, na.rm = TRUE)
-  ) |>
-  ungroup() |>
-  drop_na() |>
-  ggplot(
-    aes(
-      academic_year,
-      avg_sus_prop,
-      group = county_name,
-      color = county_name
-    )
-  ) +
-  geom_line() +
-  theme_light() +
-  theme(legend.position = "none")
-
-
-county |>
-  filter(
-    reporting_category == "SD" &
-    county_name != "State"
-  ) |>
-  group_by(academic_year, county_name) |>
-  summarize(
-    avg_county_sus = mean(avg_suspend, na.rm = TRUE)
-  ) |>
-  ungroup() |>
-  drop_na() |>
-  ggplot(
-    aes(
-      academic_year,
-      avg_county_sus,
-      group = county_name,
-      color = county_name
-    )
-  ) +
-  geom_line() +
-  ggrepel::geom_text_repel(
-    data = county |>
-  filter(
-    reporting_category == "SD" &
-    county_name != "State"
-  ) |>
-  group_by(academic_year, county_name) |>
-  summarize(
-    avg_county_sus = mean(avg_suspend, na.rm = TRUE)
-  ) |>
-  ungroup() |>
-  drop_na() |>
-  filter(
-    academic_year == "2012-13"
-  ),
-  aes(
-    label = county_name
+    reporting_category %in% c(
+      "RB", "RI", "RA", "RF", "RH", "RD", "RP", "RT", "RW"
+    ) &
+    charter_yn == "No" &
+    county_name != "State" &
+    aggregate_level == "C"
   )
-  ) +
-  theme_light() +
-  theme(legend.position = "none")
 
 
-county |>
-  filter(
-    reporting_category == "SD" &
-    county_name != "State"
-  ) |>
-  pivot_longer(
-    c(
-      avg_suspend,
-      avg_enroll
-    )
-  ) |>
-  group_by(academic_year, county_name, name) |>
-  summarize(
-    county_avg = mean(value, na.rm = TRUE)
-  ) |>
-  ungroup() |>
-  drop_na() |>
-  ggplot(
-    aes(
-      academic_year,
-      county_avg,
-      group = county_name,
-      color = county_name
-    )
-  ) +
-  geom_line() +
-  ggrepel::geom_text_repel(
-    data = county |>
-  filter(
-    reporting_category == "SD" &
-    county_name != "State"
-  ) |>
-  pivot_longer(
-    c(
-      avg_suspend,
-      avg_enroll
-    )
-  ) |>
-  group_by(academic_year, county_name, name) |>
-  summarize(
-    county_avg = mean(value, na.rm = TRUE)
-  ) |>
-  ungroup() |>
-  drop_na() |>
-  filter(
-    academic_year == "2012-13"
-  ),
-  aes(
-    label = county_name
-  )
-  ) +
-  facet_wrap(
-    vars(
-      name
+all |> glimpse()
+
+all |> count(academic_year)
+all |> count(county_name)
+
+all <- all |>
+  mutate(
+    year = case_when(
+      academic_year == "2011-12" ~ 11,
+      academic_year == "2012-13" ~ 12,
+      academic_year == "2013-14" ~ 13,
+      academic_year == "2014-15" ~ 14,
+      academic_year == "2015-16" ~ 15,
+      academic_year == "2016-17" ~ 16,
+      academic_year == "2017-18" ~ 17,
+      academic_year == "2018-19" ~ 18,
+      academic_year == "2019-20" ~ 19,
+      academic_year == "2020-21" ~ 20,
+      academic_year == "2021-22" ~ 21,
+      academic_year == "2022-23" ~ 22
     ),
-    scales = "free",
-    ncol = 1
-  ) +
-  theme_light() +
-  theme(legend.position = "none")
+    county_name = as.factor(county_name),
+    county_name = relevel(county_name, ref = "Los Angeles")
+  )
+
+all |>
+  filter(
+    county_name == "Los Angeles" &
+    year == 11
+  ) |>
+  select(aggregate_level, county_name, year, suspension_count_defiance_only, reporting_category) |>
+  reactable::reactable(
+    filterable = TRUE,
+    sortable = TRUE,
+    searchable = TRUE
+  )
+
+# this is only for using aggregate_level == "S" for school or "D" for district
+# all <- all |>
+#   group_by(
+#     academic_year 
+#   ) |>
+#   mutate(
+#     school_num = row_number()
+#   ) |>
+#   ungroup()
+
+all <- all |> select(
+  county_name,
+  year,
+  suspension_count_defiance_only,
+  reporting_category
+)
+
+all_drop <- all |> drop_na()
+
+all_drop |> group_by(year) |> count() |> ungroup() |> mutate(p = n/sum(n)*100)
+
+all_train <- all_drop |> filter(year <= 19) 
+all_test <- all_drop |> filter(year > 19)
+
+summary(
+  lme4::lmer(
+  suspension_count_defiance_only ~ year*reporting_category + county_name + (1 | county_name),
+  data = all_train
+  )
+)
+
+library(cmdstanr)
+
+fit <- brm(
+  suspension_count_defiance_only ~ year*reporting_category + county_name + (1 | county_name),
+  data = all_train,
+  family = gaussian(),
+  chains = 4,
+  iter = 2000,
+  warmup = 2000,
+  cores = parallel::detectCores() - 1,
+  seed = 12345,
+  backend = "cmdstanr"
+)
+
+library(broom)
+library(broom.mixed)
+library(tidybayes)
+
+summary(fit)
+loo(fit)

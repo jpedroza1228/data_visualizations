@@ -1,0 +1,37 @@
+---
+title: "Untitled"
+format: html
+---
+
+```{r}
+library(reticulate)
+use_python("C:/Users/Jonathan/anaconda3/python.exe")
+```
+
+
+```{python}
+import os
+import numpy as np
+import pandas as pd
+import keras
+from keras import layers
+import matplotlib.pyplot as plt
+```
+
+```{python}
+image_size = (180, 180)
+batch_size = 128
+
+train_ds, val_ds = keras.utils.image_dataset_from_directory(
+  "c:/Users/cpppe/Desktop/GitHubRepos/data_visualizations/breat_cancer_images/Dataset_BUSI_with_GT/train",
+  validation_split = .2,
+  subset = "both",
+  seed = 12345,
+  image_size = image_size,
+  batch_size = batch_size
+)
+```
+
+```{python}
+
+```
