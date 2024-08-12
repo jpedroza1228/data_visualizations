@@ -9,14 +9,18 @@ theme_set(theme_light())
 
 read_func <- function(year){
   readr::read_csv(
-    glue::glue(
-      "ca_stu_data/suspension_data_20{year}.csv"
+    here::here(
+      glue::glue(
+        "ca_stu_data/suspension_data_20{year}.csv"
+      )
     )
   )
 }
 
+getwd()
+
 combo <- map_dfr(
-  12:23,
+  15:20,
   ~read_func(.x)
 )
 
@@ -35,8 +39,6 @@ combo <- combo |>
     )
   )
 
-combo |> count(aggregate_level)
-
 all <- combo |>
   filter(
     reporting_category %in% c(
@@ -44,15 +46,10 @@ all <- combo |>
       "SD"
     ) &
     charter_yn == "No" &
-    aggregate_level == "C"
+    aggregate_level == "S"
   )
 
 # s = School, D = District, C = County, T = state
-
-all |> glimpse()
-
-all |> count(academic_year)
-all |> count(county_name)
 
 all <- all |>
   mutate(
@@ -85,13 +82,11 @@ all <- all |>
 #   ) |>
 #   ungroup()
 
-all <- all |> 
-  select(
-  county_name,
-  year,
-  suspension_count_defiance_only,
-  reporting_category
-)
+glimpse(all)
+
+all <- all |>
+  drop_na(school_name, suspension_count_defiance_only) |>
+  select(county_name, district_name, school_name, year, reporting_category, unduplicated_count_of_students_suspended_defiance_only, cumulative_enrollment, suspension_count_defiance_only, total_suspensions)
 
 all_drop <- all |> 
   mutate(
@@ -136,8 +131,11 @@ all_drop <- all |>
       -reporting_category
     )
 
-all_drop <- all_drop |> filter(year >= 21)
-all_drop_race <- all_drop |> drop_na(asian, black, latino, american_indian, pacific_islander, two_or_more_races, white, not_reported)
+all_drop <- all_drop |>
+  mutate(
+    double_trouble = suspension_count_defiance_only - unduplicated_count_of_students_suspended_defiance_only #students that have been suspended for defiance for more than 1 time
+  )
+
 all_drop_sd <- all_drop |> drop_na(stu_w_dis)
 
 # fit weights for size of district
@@ -195,6 +193,9 @@ between_county |>
 
 library(cmdstanr)
 library(brms)
+library(broom)
+library(broom.mixed)
+library(tidybayes)
 
 fit <- brm(
   suspension_count_defiance_only ~ asian*year + black*year + latino*year + american_indian*year + pacific_islander*year + two_or_more_races*year + white*year  + (1 | county_name),
@@ -209,11 +210,6 @@ fit <- brm(
   seed = 12345,
   backend = "cmdstanr"
 )
-
-
-library(broom)
-library(broom.mixed)
-library(tidybayes)
 
 summary(fit, waic = TRUE)
 tidy(fit)
@@ -248,10 +244,30 @@ ranef(fit)$county_name |>
 
 
 # students with disabilities
-freq_fit_sd <- lme4::lmer(
-  suspension_count_defiance_only ~ stu_w_dis*year  + (1 | county_name),
+glimpse(all_drop_sd)
+
+all_drop_sd |>
+  group_by(year) |>
+  count(stu_w_dis)
+
+all15 <- all_drop_sd |>
+  filter(year == 15)
+
+freq_fit_sd <- lme4::glmer(
+  stu_w_dis ~
+  double_trouble +
+  (double_trouble | county_name/district_name),
+  data = all15,
+  family = binomial("logit")
+)
+
+
+freq_fit_sd <- lme4::glmer(
+  stu_w_dis ~
+  double_trouble*year +
+  (double_trouble | county_name/district_name/school_name),
   data = all_drop_sd,
-  REML = FALSE
+  family = binomial("logit")
 )
 
 summary(freq_fit_sd)
@@ -292,14 +308,12 @@ between_county_sd |>
   )
 
 
+cor.test(all_drop_sd$unduplicated_count_of_students_suspended_defiance_only, all_drop_sd$suspension_count_defiance_only)
+
 fit_sd <- brm(
-  suspension_count_defiance_only ~ stu_w_dis*year  + (1 | county_name),
-  data = all_drop_race,
-  family = gaussian(),
-  prior = c(
-    set_prior("normal(0, 10)", class = "b"),
-    set_prior("normal(0, 10)", class = "sd")
-  ),
+  stu_w_dis ~ suspension_count_defiance_only + year  +  cumulative_enrollment +  (1 | school_name/district_name/county_name),
+  data = all_drop_sd,
+  family = bernoulli(),
   cores = parallel::detectCores(),
   control = list(adapt_delta = .95),
   seed = 12345,
