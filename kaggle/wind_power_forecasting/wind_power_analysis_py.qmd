@@ -1,0 +1,832 @@
+---
+title: "Forecasting Turbine Data"
+format: html
+jupyter:
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+---
+
+https://www.kaggle.com/code/satishgunjal/tutorial-time-series-analysis-and-forecasting
+
+```{python}
+import pandas as pd
+import numpy as np
+import plotnine as pn
+import seaborn as sns
+from pyhere import here
+from janitor import clean_names
+```
+
+```{python}
+wind = pd.read_csv(here('kaggle/wind_power_forecasting/Turbine_Data.csv'))
+
+wind = wind.clean_names(case_type = 'snake')
+```
+
+```{python}
+wind = wind.rename(columns = {'unnamed_0': 'date_time'})
+
+wind_date_time = pd.to_datetime(wind['date_time'])
+
+wind['day'] = wind_date_time.dt.day
+wind['month'] = wind_date_time.dt.month
+wind['year'] = wind_date_time.dt.year
+wind['hour'] = wind_date_time.dt.hour
+
+wind['year'].value_counts()
+
+wind = wind.loc[wind['year'] != 2017]
+
+wind = wind.rename(columns = {'ambient_temperatue': 'ambient_temperature'})
+```
+
+```{python}
+wind.describe().transpose()
+
+wind.loc[:, 'active_power':'wind_speed']
+```
+
+
+```{python}
+wind_hourly = wind.groupby(['hour', 'day', 'month', 'year']).mean(['active_power', 'ambient_temperature', 'bearing_shaft_temperature', 'blade1_pitch_angle', 'blade2_pitch_angle', 'blade3_pitch_angle', 'control_box_temperature', 'gearbox_bearing_temperature', 'gearbox_oil_temperature', 'generator_rpm', 'generator_winding1_temperature', 'generator_winding2_temperature', 'hub_temperature', 'main_box_temperature', 'nacelle_position', 'reactive_power', 'rotor_rpm', 'turbine_status', 'wtg', 'wind_direction', 'wind_speed']).reset_index()
+```
+
+```{python}
+wind_dates = pd.to_datetime(wind_hourly[['year', 'month', 'day', 'hour']], yearfirst = True)
+
+wind_dates_df = pd.DataFrame({'date': wind_dates})
+
+wind_hourly = wind_hourly.join(wind_dates_df)
+
+wind_hourly.head()
+```
+
+```{python}
+for i in wind_hourly.columns:
+  na_counts = wind_hourly[i].isna().value_counts()
+  print(na_counts)
+```
+
+```{python}
+for i in wind_hourly.columns:
+  date_miss_plot = (
+    pn.ggplot(wind_hourly, pn.aes('date', i))
+    + pn.geom_line(group = 1, color = 'dodgerblue', alpha = .5)
+    + pn.theme_light()
+  )
+  print(date_miss_plot)
+```
+
+Variables to include:
+
+- wind_speed
+- wind_direction
+- reactive_power
+- nacelle_position
+- active_power
+- ambient_temperature
+
+If starting from 2018-12-01
+
+- bearing_shaft_temperature
+- gearbox_bearing_temperature
+- gearbox_oil_temperature
+- generator_rpm
+- generator_winding1_temperature
+- generator_winding2_temperature
+- rotor_rpm
+- main_box_temperature
+- hub_temperature
+
+```{python}
+#potential last resort; may want to impute
+wind_hourly.dropna()
+```
+
+```{python}
+wind_hourly.groupby('month').mean('bearing_shaft_temperature')
+```
+
+```{python}
+(
+  pn.ggplot(wind_hourly, pn.aes('date', 'bearing_shaft_temperature'))
+  + pn.geom_line(alpha = .5, group = 1)
+  + pn.theme_light()
+)
+```
+
+```{python}
+wind_hourly[['date', 'active_power']].isna()['active_power'].value_counts()
+
+daily_avg = wind_hourly.groupby(['month', 'day']).transform(lambda x: x.fillna(x.mean()))
+
+monthly_avg = wind_hourly.groupby(['month']).transform(lambda x: x.fillna(x.mean()))
+```
+
+```{python}
+print(wind_hourly.head())
+print(wind_hourly.columns)
+
+print(daily_avg.head())
+print(daily_avg.columns)
+```
+
+```{python}
+wind_hourly['year'] = pd.Categorical(wind_hourly['year'], categories = [2018, 2019, 2020], ordered = True)
+
+wind_hourly = wind_hourly.sort_values(['year', 'month', 'day', 'hour'], ascending = [True, True, True, True]).reset_index()
+```
+
+```{python}
+wind_join = wind_hourly.merge(daily_avg, how = 'left', on = ['date'])
+
+#.drop(['index_x', 'index_y'], axis = 1)
+
+# daily_active_power_avg = wind_hourly.groupby(['year', 'month', 'day']).agg({'active_power': lambda x: x.mean(skipna=True)}).reset_index().dropna()
+```
+
+```{python}
+wind_join['wind_speed'] = wind_join['wind_speed_x'].fillna(wind_join['wind_speed_y'])
+wind_join['wind_direction'] = wind_join['wind_direction_x'].fillna(wind_join['wind_direction_y'])
+wind_join['reactive_power'] = wind_join['reactive_power_x'].fillna(wind_join['reactive_power_y'])
+wind_join['nacelle_position'] = wind_join['nacelle_position_x'].fillna(wind_join['nacelle_position_y'])
+wind_join['active_power'] = wind_join['active_power_x'].fillna(wind_join['active_power_y'])
+wind_join['ambient_temperature'] = wind_join['ambient_temperature_x'].fillna(wind_join['ambient_temperature_y'])
+wind_join['bearing_shaft_temperature'] = wind_join['bearing_shaft_temperature_x'].fillna(wind_join['bearing_shaft_temperature_y'])
+wind_join['gearbox_bearing_temperature'] = wind_join['gearbox_bearing_temperature_x'].fillna(wind_join['gearbox_bearing_temperature_y'])
+wind_join['gearbox_oil_temperature'] = wind_join['gearbox_oil_temperature_x'].fillna(wind_join['gearbox_oil_temperature_y'])
+wind_join['generator_rpm'] = wind_join['generator_rpm_x'].fillna(wind_join['generator_rpm_y'])
+wind_join['generator_winding1_temperature'] = wind_join['generator_winding1_temperature_x'].fillna(wind_join['generator_winding1_temperature_y'])
+wind_join['generator_winding2_temperature'] = wind_join['generator_winding2_temperature_x'].fillna(wind_join['generator_winding2_temperature_y'])
+wind_join['rotor_rpm'] = wind_join['rotor_rpm_x'].fillna(wind_join['rotor_rpm_y'])
+wind_join['main_box_temperature'] = wind_join['main_box_temperature_x'].fillna(wind_join['main_box_temperature_y'])
+wind_join['hub_temperature'] = wind_join['hub_temperature_x'].fillna(wind_join['hub_temperature_y'])
+```
+
+```{python}
+wind_join = wind_join[['hour_x', 'day', 'month', 'year_x', 'date', 'wind_speed', 'wind_direction', 'reactive_power', 'nacelle_position', 'active_power', 'ambient_temperature', 'bearing_shaft_temperature', 'gearbox_bearing_temperature', 'gearbox_oil_temperature', 'generator_rpm', 'generator_winding1_temperature', 'generator_winding2_temperature', 'rotor_rpm', 'main_box_temperature', 'hub_temperature']].rename(columns = {'hour_x': 'hour', 'year_x': 'year'})
+
+# wind_join = wind_join.loc[:,~wind_join.columns.str.endswith('_x')]
+```
+
+```{python}
+for i in wind_join.columns:
+  date_miss_plot2 = (
+    pn.ggplot(wind_join, pn.aes('date', i))
+    + pn.geom_line(pn.aes(color = 'month'),  group = 1)
+  + pn.facet_wrap('year', scales = 'free_x', ncol = 1)
+  + pn.theme_light()
+  + pn.theme(axis_text_x = pn.element_blank())
+  )
+  print(date_miss_plot2)
+```
+
+```{python}
+#| eval: false
+#| echo: false
+
+from sklearn.impute import SimpleImputer
+
+mod_var = ['hub_temperature', 'main_box_temperature', 'rotor_rpm', 'generator_winding2_temperature', 'generator_winding1_temperature', 'generator_rpm', 'gearbox_oil_temperature', 'gearbox_bearing_temperature', 'bearing_shaft_temperature']
+
+wind_mean = SimpleImputer(missing_values = np.nan, strategy = 'mean').set_output(transform = 'pandas')
+wind_mean.fit(wind_join[mod_var])
+wind_imp = wind_mean.transform(wind_join[mod_var])
+
+wind_imp = wind_join[['date', 'hour', 'day', 'month', 'year', 'ambient_temperature', 'active_power', 'nacelle_position', 'reactive_power', 'wind_direction', 'wind_speed']].join(wind_imp)
+```
+
+```{python}
+for i in wind_imp.columns:
+  na_counts_w_imp = wind_imp[i].isna().value_counts()
+  print(na_counts_w_imp)
+```
+
+```{python}
+for i in wind_imp.columns:
+  date_plot = (
+    pn.ggplot(wind_imp, pn.aes('date', i))
+    + pn.geom_line(pn.aes(color = 'month'),  group = 1)
+  + pn.facet_wrap('year', scales = 'free_x', ncol = 1)
+  + pn.theme_light()
+  + pn.theme(axis_text_x = pn.element_blank())
+  )
+  print(date_plot)
+```
+
+```{python}
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+decomp_add = seasonal_decompose(wind_imp[['date', 'active_power']].set_index('date'), model = 'additive') 
+decomp_add_fig = decomp_add.plot()
+
+decomp_add_fig
+```
+
+```{python}
+def time_series_split(data, prop = .75, val = True):
+  if val == True:
+    train, test = np.split(data, [int(prop *len(data))])
+  
+    train, vali = np.split(train, [int(prop *len(train))])
+    
+    return train, vali, test
+  else: 
+    train, test = np.split(data, [int(prop *len(data))])
+
+    return train, test
+
+# wind_train, wind_vali, wind_test = time_series_split(wind_join, prop = .75, val = True)
+
+wind_train, wind_test = time_series_split(wind_imp, prop = .75, val = False)
+```
+
+```{python}
+wind_train.head()
+```
+
+```{python}
+wind_train_long = wind_train.reset_index(drop = True).melt(id_vars = ['date', 'hour', 'day', 'month', 'year'], value_vars = ['ambient_temperature', 'active_power', 'nacelle_position', 'reactive_power', 'wind_direction', 'wind_speed', 'hub_temperature', 'main_box_temperature', 'rotor_rpm', 'generator_winding2_temperature', 'generator_winding1_temperature', 'generator_rpm', 'gearbox_oil_temperature', 'gearbox_bearing_temperature', 'bearing_shaft_temperature'])
+```
+
+```{python}
+(
+  pn.ggplot(wind_train_long.reset_index().loc[wind_train_long['variable'].isin(['ambient_temperature', 'active_power', 'reactive_power', 'wind_direction', 'wind_speed'])], pn.aes('date', 'value'))
+  + pn.geom_line(pn.aes(color = 'factor(variable)'))
+  + pn.facet_wrap('variable',scales = 'free', ncol = 1)
+  + pn.theme_light()
+  + pn.theme(legend_position = 'none')
+)
+```
+
+```{python}
+(
+  pn.ggplot(wind_train_long.reset_index().loc[wind_train_long['variable'].isin(['nacelle_position', 'rotor_rpm', 'generator_rpm'])], pn.aes('date', 'value'))
+  + pn.geom_line(pn.aes(color = 'factor(variable)'))
+  + pn.facet_wrap('variable',scales = 'free', ncol = 1)
+  + pn.theme_light()
+  + pn.theme(legend_position = 'none')
+)
+```
+
+```{python}
+(
+  pn.ggplot(wind_train_long.reset_index().loc[wind_train_long['variable'].isin(['hub_temperature', 'main_box_temperature', 'generator_winding2_temperature', 'generator_winding1_temperature'])], pn.aes('date', 'value'))
+  + pn.geom_line(pn.aes(color = 'factor(variable)'))
+  + pn.facet_wrap('variable',scales = 'free', ncol = 1)
+  + pn.theme_light()
+  + pn.theme(legend_position = 'none')
+)
+```
+
+```{python}
+(
+  pn.ggplot(wind_train_long.reset_index().loc[wind_train_long['variable'].isin(['gearbox_oil_temperature', 'gearbox_bearing_temperature', 'bearing_shaft_temperature'])], pn.aes('date', 'value'))
+  + pn.geom_line(pn.aes(color = 'factor(variable)'))
+  + pn.facet_wrap('variable',scales = 'free', ncol = 1)
+  + pn.theme_light()
+  + pn.theme(legend_position = 'none')
+)
+```
+
+Include:
+- gearbox_oil_temperature, main_box_temperature, generator_winding1_temperature, generator_rpm, nacelle_position, ambient_temperature, reactive_power, wind_direction, wind_speed
+
+```{python}
+import statsmodels.tsa as tsa
+from statsmodels.tsa import stattools
+from statsmodels.tsa.arima.model import ARIMA
+```
+
+```{python}
+adf_test = stattools.adfuller(wind_train['active_power'], regression = 'ct', autolag = 'BIC')
+
+print("Test statistic for the Dickey Fuller Test:", adf_test[0])
+print("p-value for the Dickey Fuller Test:", adf_test[1])
+print("Lags used in the Dickey Fuller Test:", adf_test[2])
+print("Number of observations used:", adf_test[3])
+print("Critical values:", adf_test[4])
+
+print('The p-value indicates that the time series is stationary.')
+```
+
+```{python}
+autocor = stattools.acf(wind_train['active_power'])
+
+autocor = pd.Series(autocor)
+autocor_df = pd.DataFrame({'autocor': autocor})
+
+autocor.mean()
+```
+
+```{python}
+(
+  pn.ggplot(autocor_df, pn.aes('autocor'))
+  + pn.geom_histogram(color = 'black', fill = 'dodgerblue', bins = 30)
+  + pn.scale_x_continuous(limits = [0, 1])
+  + pn.theme_light()
+)
+```
+
+# ARIMA Model
+
+```{python}
+arima_bic = []
+
+for i in range(1, 25):
+  arima_model = ARIMA(wind_train['active_power'], dates = wind_train['date'], order = (i, 0, 0), freq = 'h', trend = 'c')
+  arima_fit = arima_model.fit()
+  arima_bic.append({'lags': i, 'bic': arima_fit.bic})
+
+arima_bic_df = pd.DataFrame(arima_bic)
+
+arima_bic_df.sort_values('bic', ascending = True)
+```
+
+```{python}
+arima_bic2 = []
+
+for i in range(1, 25):
+  arima_model2 = ARIMA(wind_train['active_power'], dates = wind_train['date'], order = (1, i, 0), freq = 'h', trend = None)
+  arima_fit2 = arima_model2.fit()
+  arima_bic2.append({'degree_diff': i, 'bic': arima_fit2.bic})
+
+arima_bic_df2 = pd.DataFrame(arima_bic2)
+
+arima_bic_df2.sort_values('bic', ascending = True)
+```
+
+```{python}
+arima_bic3 = []
+
+for i in range(1, 25):
+  arima_model3 = ARIMA(wind_train['active_power'], dates = wind_train['date'], order = (1, 1, i), freq = 'h', trend = None)
+  arima_fit3 = arima_model3.fit()
+  arima_bic3.append({'moving_avg_order': i, 'bic': arima_fit3.bic})
+
+arima_bic_df3 = pd.DataFrame(arima_bic3)
+
+arima_bic_df3.sort_values('bic', ascending = True)
+```
+
+```{python}
+# try out moving avg of 2, 5, & 6
+arima_model = ARIMA(wind_train['active_power'], dates = wind_train['date'], order = (1, 1, 5), freq = 'h', trend = None)
+
+arima_fit = arima_model.fit()
+```
+
+```{python}
+print(arima_fit.summary())
+# 2 = 202219
+# 5 = 202217
+# 6 = 202212
+
+# no order = 230858
+```
+
+# ARIMA Model w/ Regressors/Predictors
+
+```{python}
+regs = ['main_box_temperature', 'reactive_power', 'wind_direction']
+
+# arima_model_reg = ARIMA(wind_train['active_power'], wind_train[regs], dates = wind_train['date'], freq = 'h', trend = 'ct')
+arima_model_reg = ARIMA(wind_train['active_power'], wind_train[regs], dates = wind_train['date'], order = (1, 1, 5), freq = 'h', trend = None)
+
+arima_reg_fit = arima_model_reg.fit()
+```
+
+```{python}
+print(arima_reg_fit.summary())
+
+# no order = 219811
+# order (1, 1, 5): 188753
+```
+
+```{python}
+arima_pred = arima_fit.predict()
+
+reg_pred = arima_reg_fit.predict()
+
+reg_pred_df = pd.DataFrame({'date': wind_train['date'], 'active_power': wind_train['active_power'], 'no_regressors': arima_pred, 'w_regressors': reg_pred})
+
+reg_pred_df_long = reg_pred_df.melt(id_vars = 'date', value_vars = ['active_power', 'no_regressors', 'w_regressors'])
+```
+
+```{python}
+(
+  pn.ggplot(reg_pred_df_long, pn.aes('date', 'value'))
+  + pn.geom_line(pn.aes(color = 'factor(variable)'), alpha = .7)
+  + pn.facet_wrap('variable', scales = 'free', ncol = 1)
+  + pn.theme_light()
+)
+```
+
+```{python}
+(
+  pn.ggplot(reg_pred_df_long.loc[reg_pred_df_long['variable'] != 'no_regressors'], pn.aes('date', 'value'))
+  + pn.geom_line(pn.aes(color = 'factor(variable)'), alpha = .7)
+  + pn.facet_wrap('variable', scales = 'free', ncol = 1)
+  + pn.theme_light()
+)
+```
+
+```{python}
+arima_future_pred = arima_reg_fit.predict(start = wind_test.index[0], end = wind_test.index[-1], exog = wind_test[regs])
+
+print(arima_future_pred)
+```
+
+```{python}
+
+# arima_reg_fit.forecast(steps = 24*7, exog = wind_train[regs])
+
+# wind_arima_df = arima_reg_fit.get_forecast(steps = 24*14).summary_frame()
+```
+
+```{python}
+print(wind_test.head())
+
+print(wind_test.tail())
+```
+
+```{python}
+
+# wind_arima_df = wind_arima_df.reset_index()
+
+# wind_arima_long = wind_arima_df.melt(id_vars = 'date', value_vars = ['mean', 'mean_se', 'mean_ci_lower', 'mean_ci_upper'])
+
+# wind_arima_long_mean = wind_arima_long.loc[wind_arima_long['active_power'] == 'mean']
+# wind_arima_long_lower = wind_arima_long.loc[wind_arima_long['active_power'] == 'mean_ci_lower']
+# wind_arima_long_upper = wind_arima_long.loc[wind_arima_long['active_power'] == 'mean_ci_upper']
+```
+
+```{python}
+reg_pred_future = reg_pred_df.drop(columns = 'no_regressors')
+
+reg_pred_test = pd.DataFrame({'date': wind_test['date'], 'active_power': arima_future_pred})
+
+train_activepower_plot = wind_train[['date', 'active_power']]
+
+reg_pred_test_df = pd.concat([train_activepower_plot, reg_pred_test], axis = 0)
+
+reg_pred_test_df['train_test'] = np.select( \
+  [reg_pred_test_df['date'].between('2018-01-01 00:00:00', '2019-09-07 23:00:00', inclusive = 'both'), 
+   reg_pred_test_df['date'].between('2019-09-08 00:00:00', '2020-03-30 23:00:00', inclusive = 'both')],
+  ['train', 'test'] 
+)
+
+reg_pred_test_df = reg_pred_test_df.sort_values('date', ascending = True)
+```
+
+```{python}
+(
+  pn.ggplot(reg_pred_test_df, pn.aes('date', 'active_power'))
+  + pn.geom_line(pn.aes(color = 'train_test'))
+  + pn.theme_light()
+)
+
+```
+
+```{python}
+(
+  pn.ggplot(reg_pred_test_df, pn.aes('date', 'active_power'))
+  + pn.geom_line(pn.aes(color = 'train_test'))
+  + pn.scale_x_datetime(limits = ['2019-06-01', '2020-03-30'])
+  + pn.theme_light()
+)
+```
+
+# Auto-ARIMA Model
+
+```{python}
+import pmdarima as pm
+
+auto_model = pm.auto_arima(y = wind_train['active_power'], x = wind_train[regs], method = 'nm', random_state = 12345)
+```
+
+```{python}
+auto_model.summary()
+```
+
+# ARIMA w/ Auto-ARIMA Order
+
+```{python}
+arima_udpate = ARIMA(wind_train['active_power'], wind_train[regs], order = (1, 1, 2), dates = wind_train['date'], freq = 'h', trend = None)
+
+arima_fit_upd = arima_udpate.fit()
+```
+
+```{python}
+arima_fit_upd.summary()
+
+# order (1, 1, 2): 188778
+```
+
+```{python}
+arima_upd_pred = arima_fit_upd.predict()
+
+reg_upd_pred_df = pd.DataFrame({'date': wind_train['date'], 'active_power': wind_train['active_power'], 'w_upd_regress': arima_upd_pred})
+
+reg_upd_pred_df_long = reg_upd_pred_df.melt(id_vars = 'date', value_vars = ['active_power', 'w_upd_regress'])
+```
+
+```{python}
+(
+  pn.ggplot(reg_upd_pred_df_long, pn.aes('date', 'value'))
+  + pn.geom_line(pn.aes(color = 'factor(variable)'), alpha = .7)
+  + pn.facet_wrap('variable', scales = 'free', ncol = 1)
+  + pn.theme_light()
+  + pn.theme(legend_position = 'none')
+)
+```
+
+```{python}
+arima_future_upd_pred = arima_fit_upd.predict(start = wind_test.index[0], end = wind_test.index[-1], exog = wind_test[regs])
+
+print(arima_future_upd_pred)
+```
+
+```{python}
+reg_upd_pred_test = pd.DataFrame({'date': wind_test['date'], 'active_power': arima_future_upd_pred})
+
+reg_upd_pred_test_df = pd.concat([train_activepower_plot, reg_upd_pred_test], axis = 0)
+
+reg_upd_pred_test_df['train_test'] = np.select( \
+  [reg_upd_pred_test_df['date'].between('2018-01-01 00:00:00', '2019-09-07 23:00:00', inclusive = 'both'), 
+   reg_upd_pred_test_df['date'].between('2019-09-08 00:00:00', '2020-03-30 23:00:00', inclusive = 'both')],
+  ['train', 'test'] 
+)
+
+reg_upd_pred_test_df = reg_upd_pred_test_df.sort_values('date', ascending = True)
+```
+
+```{python}
+(
+  pn.ggplot(reg_upd_pred_test_df, pn.aes('date', 'active_power'))
+  + pn.geom_line(pn.aes(color = 'train_test'))
+  + pn.theme_light()
+)
+
+```
+
+```{python}
+(
+  pn.ggplot(reg_upd_pred_test_df, pn.aes('date', 'active_power'))
+  + pn.geom_line(pn.aes(color = 'train_test'))
+  + pn.scale_x_datetime(limits = ['2019-06-01', '2020-03-30'])
+  + pn.theme_light()
+)
+```
+
+# Comparisons
+
+```{python}
+print(arima_reg_fit.summary())
+
+print(arima_fit_upd.summary())
+```
+
+```{python}
+print('Mean value for the for loop model with regressors: ', arima_future_pred.mean().round(2))
+
+print('Mean value for the model with regressors with different order:', arima_future_upd_pred.mean().round(2))
+```
+
+```{python}
+arima_mse = np.mean((arima_future_pred - wind_test['active_power']) ** 2)
+
+print(f'For Loop Mean Squared Error: {arima_mse.round(2)}')
+
+arima_upd_mse = np.mean((arima_future_upd_pred - wind_test['active_power']) ** 2)
+
+print(f'Updated Mean Squared Error: {arima_upd_mse.round(2)}')
+```
+
+```{python}
+arima_mae = np.mean(np.abs(arima_future_pred - wind_test['active_power']))
+
+print(f'For Loop Mean Absolute Error: {arima_mae.round(2)}')
+
+arima_upd_mae = np.mean(np.abs(arima_future_upd_pred - wind_test['active_power']))
+
+print(f'Updated Mean Absolute Error: {arima_upd_mae.round(2)}')
+```
+
+```{python}
+arima_compare = reg_pred_test_df.merge(reg_upd_pred_test_df, how = 'inner', on = ['date', 'train_test'])
+
+arima_compare_long = arima_compare.melt(id_vars = ['date', 'train_test'], value_vars = ['active_power_x', 'active_power_y'])
+
+arima_compare_long['train_test'] = pd.Categorical(arima_compare_long['train_test'], categories = ['train', 'test'], ordered = True)
+```
+
+```{python}
+(
+  pn.ggplot(arima_compare_long.loc[arima_compare_long['train_test'] == 'test'], pn.aes('date', 'value'))
+  + pn.geom_line(pn.aes(color = 'factor(variable)'))
+  + pn.facet_wrap('variable', scales = 'free_x')
+  + pn.theme_light()
+  + pn.theme(legend_position = 'none')
+)
+```
+
+**FINDING: For Loop model with regressors and (1, 1, 5) order has lower MAE and MSE values.**
+
+**Now time to check the original model with no order to the for loop model**
+
+# Simple Expoenential Smoothing Model
+
+```{python}
+from statsmodels.tsa.holtwinters import ExponentialSmoothing as ets, SimpleExpSmoothing as sets, Holt
+```
+
+```{python}
+simple = sets(wind_train['active_power'])
+
+simple_fit = simple.fit(smoothing_level = .9)
+
+simple_fit2 = simple.fit()
+```
+
+```{python}
+smooth_levels = [.1, .2, .3, .4, .5, .6, .7, .8, .9, 1]
+
+for i in smooth_levels:
+  fits = simple.fit(smoothing_level = i)
+  print(fits.summary())
+```
+
+```{python}
+print(simple_fit.summary())
+
+print(simple_fit2.summary())
+```
+
+```{python}
+# wind_simple_df = simple_fit.forecast(steps = 24*14)
+
+wind_simple_pred = simple_fit.predict(start = wind_test.index[0], end = wind_test.index[-1])
+
+#print(wind_simple_df)
+
+print(wind_simple_pred)
+```
+
+```{python}
+simple_mse = np.mean((wind_simple_pred - wind_test['active_power']) ** 2)
+
+print(f'Simple ETS Mean Squared Error: {simple_mse.round(2)}')
+```
+
+```{python}
+simple_mae = np.mean(np.abs(wind_simple_pred - wind_test['active_power']))
+
+print(f'Simple ETS Mean Absolute Error: {simple_mae.round(2)}')
+```
+
+
+# Holt Winter’s Exponential Smoothing Model
+
+```{python}
+ets_add_model = ets(wind_train['active_power'], trend = 'additive', dates = wind_train['date'], freq = 'h')
+
+ets_add_fit = ets_add_model.fit()
+```
+
+```{python}
+print(ets_add_fit.summary())
+```
+
+```{python}
+ets_model = ets(wind_train['active_power'], trend = None, dates = wind_train['date'], freq = 'h')
+
+ets_fit = ets_model.fit()
+```
+
+```{python}
+print(ets_fit.summary())
+```
+
+```{python}
+# not working right now
+ets_add_pred = ets_add_fit.predict(start = wind_test.index[0], end = wind_test.index[-1])
+
+ets_pred = ets_fit.predict(start = wind_test.index[0], end = wind_test.index[-1])
+```
+
+```{python}
+ets_add_mse = np.mean((ets_add_pred - wind_test['active_power']) ** 2)
+
+print(f'ETS w/ Additive Trend Mean Squared Error: {ets_add_mse.round(2)}')
+
+ets_add_mae = np.mean(np.abs(ets_add_pred - wind_test['active_power']))
+
+print(f'ETS w/ Additive Trend Mean Absolute Error: {ets_add_mae.round(2)}')
+```
+
+```{python}
+ets_mse = np.mean((ets_pred - wind_test['active_power']) ** 2)
+
+print(f'ETS Mean Squared Error: {ets_mse.round(2)}')
+
+ets_mae = np.mean(np.abs(ets_pred - wind_test['active_power']))
+
+print(f'ETS Mean Absolute Error: {ets_mae.round(2)}')
+```
+
+# Holt Smoothing Model
+
+```{python}
+holt_mod = Holt(wind_train['active_power'], initialization_method = 'estimated')
+
+holt_fit = holt_mod.fit() #smoothing_level = .2, smoothing_trend = .2)
+```
+
+```{python}
+holt_fit.summary()
+```
+
+```{python}
+holt_df = holt_fit.forecast(steps = 24*14)
+
+holt_pred = holt_fit.predict(start = len(wind_train), end = len(wind_train) + (24*14))
+
+print(holt_df)
+
+print(holt_pred)
+```
+
+```{python}
+print(wind_train.tail())
+
+holt_df = holt_df.reset_index()
+
+holt_df['date'] = pd.date_range(start = '2019-04-07 06:0:00', end = '2019-04-21 05:00:00', freq = 'h')
+
+print(holt_df.head())
+```
+
+```{python}
+holt_df = holt_df.rename({0: 'active_power'}, axis = 1)
+```
+
+```{python}
+(
+  pn.ggplot(wind_train.reset_index(), pn.aes('date', 'active_power'))
+  + pn.geom_line(group = 1, alpha = .3, color = 'dodgerblue')
+  + pn.geom_line(holt_df, pn.aes('date', 'active_power'), group = 1, color = 'red')
+  + pn.scale_x_datetime(limits = ['2019-04-01', '2019-04-14'])
+  + pn.theme_light()
+)
+```
+
+# Auto Regression
+
+```{python}
+from statsmodels.tsa.ar_model import AutoReg
+
+ar_model = AutoReg(wind_train['active_power'], lags = 1, trend = 't', seasonal = False)
+
+ar_fit = ar_model.fit()
+```
+
+```{python}
+ar_fit.summary()
+```
+
+```{python}
+ar_df = ar_fit.forecast(steps = 24*14)
+
+ar_pred = ar_fit.predict(start = len(wind_train), end = len(wind_train) + (24*14))
+
+print(ar_df)
+
+print(ar_pred)
+```
+
+```{python}
+print(wind_train.tail())
+
+ar_df = ar_df.reset_index()
+
+ar_df['date'] = pd.date_range(start = '2019-04-07 06:0:00', end = '2019-04-21 05:00:00', freq = 'h')
+
+print(ar_df.head())
+```
+
+```{python}
+ar_df = ar_df.rename({0: 'active_power'}, axis = 1)
+```
+
+```{python}
+(
+  pn.ggplot(wind_train.reset_index(), pn.aes('date', 'active_power'))
+  + pn.geom_line(group = 1, alpha = .3, color = 'dodgerblue')
+  + pn.geom_line(ar_df, pn.aes('date', 'active_power'), group = 1, color = 'red')
+  + pn.scale_x_datetime(limits = ['2019-04-01', '2019-04-14'])
+  + pn.theme_light()
+)
+```

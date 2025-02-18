@@ -1,0 +1,2580 @@
+---
+title: "The Great American Taste Test"
+author: Jonathan A. Pedroza (JP)
+format: 
+  html:
+    code-fold: true
+---
+
+This post is from the Great American Coffee Taste Test, which unfortunately I was not able to take a part of. But it was interesting given that it was a fairly large sample that was not at all representative of "America" as a whole. I decided this would be a good time 
+
+```{r}
+library(tidyverse)
+library(inspectdf)
+library(bnlearn)
+library(Rgraphviz)
+library(reactable)
+library(cmdstanr)
+library(posterior)
+library(bayesplot)
+library(ggdag)
+library(dagitty)
+
+bn_score <- bnlearn::score
+rhat_posterior <- posterior::rhat
+
+theme_set(theme_light())
+
+coffee <- read_csv(here::here("random_data", "hoffmann_america_taste_data.csv")) |>
+  janitor::clean_names()
+```
+
+```{r}
+coffee |>
+  inspect_na() |>
+  show_plot()
+```
+
+```{r}
+coffee_drop <- coffee[, which(colMeans(!is.na(coffee)) > 0.5)]
+
+coffee_drop |>
+  inspect_na() |>
+  show_plot()
+```
+
+```{r}
+coffee_drop <- coffee_drop |>
+  select(
+    -c(
+      where_do_you_typically_drink_coffee,
+      # how_do_you_brew_coffee_at_home,
+      do_you_usually_add_anything_to_your_coffee,
+      why_do_you_drink_coffee
+    )
+  ) |>
+  rename(
+    age = what_is_your_age,
+    cup_per_day = how_many_cups_of_coffee_do_you_typically_drink_per_day,
+    drink_at_home = where_do_you_typically_drink_coffee_at_home,
+    drink_at_office = where_do_you_typically_drink_coffee_at_the_office,
+    drink_on_go = where_do_you_typically_drink_coffee_on_the_go,
+    drink_at_cafe = where_do_you_typically_drink_coffee_at_a_cafe,
+    drink_none_of_these = where_do_you_typically_drink_coffee_none_of_these,
+    home_brew_pour_over = how_do_you_brew_coffee_at_home_pour_over,
+    home_brew_french_press = how_do_you_brew_coffee_at_home_french_press,
+    home_brew_espresso = how_do_you_brew_coffee_at_home_espresso,
+    home_brew_mr_coffee = how_do_you_brew_coffee_at_home_coffee_brewing_machine_e_g_mr_coffee,
+    home_brew_pods = how_do_you_brew_coffee_at_home_pod_capsule_machine_e_g_keurig_nespresso,
+    home_brew_instant = how_do_you_brew_coffee_at_home_instant_coffee,
+    home_brew_bean2cup = how_do_you_brew_coffee_at_home_bean_to_cup_machine,
+    home_brew_cold_brew = how_do_you_brew_coffee_at_home_cold_brew,
+    home_brew_cometeer = how_do_you_brew_coffee_at_home_coffee_extract_e_g_cometeer,
+    home_brew_other = how_do_you_brew_coffee_at_home_other,
+    favorite_coffee_drink = what_is_your_favorite_coffee_drink,
+    coffee_black = do_you_usually_add_anything_to_your_coffee_no_just_black,
+    coffee_milk_alt_creamer = do_you_usually_add_anything_to_your_coffee_milk_dairy_alternative_or_coffee_creamer,
+    coffee_sugar = do_you_usually_add_anything_to_your_coffee_sugar_or_sweetener,
+    coffee_syrup = do_you_usually_add_anything_to_your_coffee_flavor_syrup,
+    coffee_other = do_you_usually_add_anything_to_your_coffee_other,
+    coffee_characteristic_preference = before_todays_tasting_which_of_the_following_best_described_what_kind_of_coffee_you_like,
+    coffee_strength = how_strong_do_you_like_your_coffee,
+    roast_preference = what_roast_level_of_coffee_do_you_prefer,
+    caffeine_preference = how_much_caffeine_do_you_like_in_your_coffee,
+    expertise = lastly_how_would_you_rate_your_own_coffee_expertise,
+    preference_a_to_b = between_coffee_a_coffee_b_and_coffee_c_which_did_you_prefer,
+    preference_a_to_d = between_coffee_a_and_coffee_d_which_did_you_prefer,
+    favorite_abcd = lastly_what_was_your_favorite_overall_coffee,
+    remote_work = do_you_work_from_home_or_in_person,
+    money_spend_a_month = in_total_much_money_do_you_typically_spend_on_coffee_in_a_month,
+    why_drink_taste_good = why_do_you_drink_coffee_it_tastes_good,
+    why_drink_caffeine = why_do_you_drink_coffee_i_need_the_caffeine,
+    why_drink_ritual = why_do_you_drink_coffee_i_need_the_ritual,
+    why_drink_makes_bathroom = why_do_you_drink_coffee_it_makes_me_go_to_the_bathroom,
+    why_drink_other = why_do_you_drink_coffee_other,
+    like_taste = do_you_like_the_taste_of_coffee,
+    know_where_coffee_comes_from = do_you_know_where_your_coffee_comes_from,
+    most_spent_on_cup_coffee = what_is_the_most_youve_ever_paid_for_a_cup_of_coffee,
+    willing_to_spend_cup_coffee = what_is_the_most_youd_ever_be_willing_to_pay_for_a_cup_of_coffee,
+    good_value_cafe = do_you_feel_like_you_re_getting_good_value_for_your_money_when_you_buy_coffee_at_a_cafe,
+    equipment_spent_5years = approximately_how_much_have_you_spent_on_coffee_equipment_in_the_past_5_years,
+    good_value_equipment = do_you_feel_like_you_re_getting_good_value_for_your_money_with_regards_to_your_coffee_equipment
+  )
+```
+
+```{r}
+coffee_logical <- coffee_drop |>
+  select_if(is.logical)
+
+coffee_drop <- coffee_drop |>
+  drop_na(
+    colnames(coffee_logical)
+  )
+
+coffee_drop <- coffee_drop |>
+  mutate(
+    across(
+      where(
+        is.logical
+      ),
+      ~case_when(
+        .x == TRUE ~ 1,
+        .x == FALSE ~ 0
+      )
+    ),
+    across(
+      where(
+        is.character
+      ),
+      ~as.factor(.x)
+    )
+  )
+
+coffee_drop <- coffee_drop |>
+  select(
+    -matches(
+      "_notes"
+    )
+  )
+
+coffee_drop |>
+  inspect_na() |>
+  show_plot()
+```
+
+```{r}
+coffee_drop |>
+  drop_na(favorite_abcd) |>
+  ggplot(
+    aes(
+      favorite_abcd
+    )
+  ) +
+  geom_bar(
+    aes(
+      fill = favorite_abcd
+    )
+  ) +
+  viridis::scale_fill_viridis(
+    discrete = TRUE
+  ) +
+  labs(
+    x = "Coffee Choices",
+    y = "Counts",
+    title = "Counts of Each Coffee"
+  ) +
+  theme(
+    legend.position = "none"
+  )
+```
+
+```{r}
+coffee_drop |>
+  select(
+    age,
+    matches(
+      "personal_pref"
+    )
+  ) |>
+  pivot_longer(
+    -age
+  ) |>
+  group_by(
+    age,
+    name
+  ) |>
+  count(
+    value
+    ) |>
+  mutate(
+    value = as.factor(value),
+    age = as.factor(age),
+    age = fct_relevel(
+      age,
+      "<18 years old",
+      "18-24 years old",
+      "25-34 years old",
+      "35-44 years old",
+      "45-54 years old",
+      "55-64 years old",
+      ">65 years old"
+    ),
+    name = case_when(
+      name == "coffee_a_personal_preference" ~ "Coffee A Preference",
+      name == "coffee_b_personal_preference" ~ "Coffee B Preference",
+      name == "coffee_c_personal_preference" ~ "Coffee C Preference",
+      name == "coffee_d_personal_preference" ~ "Coffee D Preference"
+    )
+  ) |> 
+  drop_na() |>
+  ggplot(
+    aes(
+      age,
+      n
+    )
+  ) +
+  geom_col(
+    position = position_dodge(),
+    aes(
+      fill = value
+    )
+  ) +
+  facet_wrap(
+    ~name
+  ) +
+  viridis::scale_fill_viridis(
+    discrete = TRUE
+    ) +
+  labs(
+    x = "",
+    y = "Counts",
+    fill = "Rating"
+  ) +
+  theme(
+    legend.position = "top",
+    strip.background = element_rect(
+      fill = "white"
+      ),
+    strip.text = element_text(
+      color = "black"
+    ),
+    axis.text.x = element_text(
+      angle = 45,
+      vjust = 0.5
+      )
+    ) +
+  NULL
+```
+
+```{r}
+coffee_drop |>
+  select(
+    gender,
+    matches(
+      "personal_pref"
+    )
+  ) |>
+  pivot_longer(
+    -gender
+  ) |>
+  group_by(
+    gender,
+    name
+  ) |>
+  count(
+    value
+    ) |>
+  mutate(
+    value = as.factor(value),
+    gender = as.factor(gender),
+    name = as.factor(name),
+    gender = fct_relevel(
+      gender,
+      "Male",
+      "Female",
+      "Non-binary",
+      "Other (please specify)",
+      "Prefer not to say"
+    ),
+    name = case_when(
+      name == "coffee_a_personal_preference" ~ "Coffee A Preference",
+      name == "coffee_b_personal_preference" ~ "Coffee B Preference",
+      name == "coffee_c_personal_preference" ~ "Coffee C Preference",
+      name == "coffee_d_personal_preference" ~ "Coffee D Preference"
+    )
+  ) |> 
+  drop_na() |>
+  ggplot(
+    aes(
+      gender,
+      n
+    )
+  ) +
+  geom_col(
+    position = position_dodge(),
+    aes(
+      fill = value
+    )
+  ) +
+  facet_wrap(
+    ~name
+  ) +
+  viridis::scale_fill_viridis(
+    discrete = TRUE
+    ) +
+  labs(
+    x = "",
+    y = "Counts",
+    fill = "Rating"
+  ) +
+  theme(
+    legend.position = "top",
+    strip.background = element_rect(
+      fill = "white"
+      ),
+    strip.text = element_text(
+      color = "black"
+    )
+    ) +
+  NULL
+```
+
+```{r}
+coffee_drop |>
+  select(
+    gender,
+    matches(
+      "personal_pref"
+    )
+  ) |>
+  pivot_longer(
+    -gender
+  ) |>
+  group_by(
+    gender,
+    name
+  ) |>
+  count(
+    value
+    ) |>
+  mutate(
+    value = as.factor(value),
+    gender = as.factor(gender),
+    name = as.factor(name),
+    gender = fct_relevel(
+      gender,
+      "Male",
+      "Female",
+      "Non-binary",
+      "Other (please specify)",
+      "Prefer not to say"
+    ),
+    name = case_when(
+      name == "coffee_a_personal_preference" ~ "Coffee A Preference",
+      name == "coffee_b_personal_preference" ~ "Coffee B Preference",
+      name == "coffee_c_personal_preference" ~ "Coffee C Preference",
+      name == "coffee_d_personal_preference" ~ "Coffee D Preference"
+    )
+  ) |> 
+  drop_na() |>
+  filter(
+    !gender %in% c("Male", "Female")
+  ) |>
+  ggplot(
+    aes(
+      gender,
+      n
+    )
+  ) +
+  geom_col(
+    position = position_dodge(),
+    aes(
+      fill = value
+    )
+  ) +
+  facet_wrap(
+    ~name
+  ) +
+  viridis::scale_fill_viridis(
+    discrete = TRUE
+    ) +
+  labs(
+    x = "",
+    y = "Counts",
+    fill = "Rating"
+  ) +
+  theme(
+    legend.position = "top",
+    strip.background = element_rect(
+      fill = "white"
+      ),
+    strip.text = element_text(
+      color = "black"
+    )
+    ) +
+  NULL
+```
+
+```{r}
+coffee_drop |>
+  group_by(
+    favorite_abcd,
+    expertise
+  ) |>
+  count() |> 
+  ungroup(
+    favorite_abcd
+    ) |>
+  mutate(
+    percent = n/sum(n),
+    percent = percent*100
+  ) |>
+  drop_na() |>
+  ggplot(
+    aes(
+      as.factor(expertise),
+      percent
+    )
+  ) +
+  geom_col(
+    aes(
+      fill = as.factor(favorite_abcd)
+    )
+  ) +
+  viridis::scale_fill_viridis(
+    discrete = TRUE
+  ) +
+  labs(
+    title = "Favorite Coffees By Self-Defined Expertise",
+    x = "Expertise",
+    y = "Percentage",
+    fill = ""
+  ) +
+  NULL
+```
+
+# Visualizing the Directed Acyclic Graph (DAG) 
+
+```{r}
+model_dag <- dagitty('
+dag {
+"Age Range" [pos="-0.853,-0.673"]
+"Coffee Roast Preference (Light, Med, Dark)" [pos="-0.807,-0.117"]
+"Cups of Coffee Per Day (1 or less, 2, 3 or more)" [pos="-0.610,-0.398"]
+"Expertise Level (1-10)" [pos="-1.132,-0.122"]
+"Favorite Coffee (A, B, C, D)" [outcome,pos="-0.952,0.060"]
+"Favorite Coffee Drink(Pourover, Espresso, etc.)" [pos="-0.990,-0.400"]
+"Type of Brewer at Home (Pourover, Espresso," [pos="-1.370,-0.401"]
+Gender [pos="-1.208,-0.672"]
+"Age Range" -> "Cups of Coffee Per Day (1 or less, 2, 3 or more)"
+"Age Range" -> "Favorite Coffee Drink(Pourover, Espresso, etc.)"
+"Age Range" -> "Type of Brewer at Home (Pourover, Espresso,"
+"Coffee Roast Preference (Light, Med, Dark)" -> "Expertise Level (1-10)"
+"Coffee Roast Preference (Light, Med, Dark)" -> "Favorite Coffee (A, B, C, D)"
+"Cups of Coffee Per Day (1 or less, 2, 3 or more)" -> "Coffee Roast Preference (Light, Med, Dark)"
+"Expertise Level (1-10)" -> "Favorite Coffee (A, B, C, D)"
+"Favorite Coffee Drink(Pourover, Espresso, etc.)" -> "Coffee Roast Preference (Light, Med, Dark)"
+"Favorite Coffee Drink(Pourover, Espresso, etc.)" -> "Cups of Coffee Per Day (1 or less, 2, 3 or more)"
+"Type of Brewer at Home (Pourover, Espresso," -> "Coffee Roast Preference (Light, Med, Dark)"
+"Type of Brewer at Home (Pourover, Espresso," -> "Favorite Coffee Drink(Pourover, Espresso, etc.)"
+Gender -> "Favorite Coffee Drink(Pourover, Espresso, etc.)"
+Gender -> "Type of Brewer at Home (Pourover, Espresso,"
+}
+
+')
+
+ggdag(model_dag) + 
+  geom_dag_point(
+    color = "gray70"
+    ) +
+  geom_dag_edges(
+    edge_color = "dodgerblue"
+    ) +
+  geom_dag_text(
+    color = "black",
+    nudge_y = -.02
+    ) +
+  theme_dag()
+```
+
+```{r}
+#| eval: false
+
+dummy_model_dag <- dagitty('
+dag {
+"2 cups" [selected,pos="-1.065,-0.194"]
+"25-34 years old" [selected,pos="-0.946,-0.719"]
+"35-44 years old" [pos="-0.872,-0.718"]
+"Dark Roast" [pos="-0.753,-0.120"]
+"Expert 1" [pos="-1.077,-0.011"]
+"Expert 10" [pos="-0.698,-0.027"]
+"Expert 2" [pos="-1.037,-0.018"]
+"Expert 3" [pos="-1.003,-0.019"]
+"Expert 4" [pos="-0.965,-0.018"]
+"Expert 5" [selected,pos="-0.926,-0.021"]
+"Expert 6" [pos="-0.881,-0.024"]
+"Expert 7" [pos="-0.837,-0.024"]
+"Expert 8" [pos="-0.787,-0.025"]
+"Expert 9" [pos="-0.740,-0.025"]
+"Favorite Coffee (A, B, C, D)" [outcome,pos="-0.869,0.078"]
+"Light Roast" [pos="-1.114,-0.107"]
+"Med Roast" [selected,pos="-0.908,-0.113"]
+"fav - americano" [pos="-0.834,-0.362"]
+"fav - cappuccino" [pos="-1.007,-0.364"]
+"fav - cortado" [pos="-1.182,-0.364"]
+"fav - drip" [pos="-1.133,-0.365"]
+"fav - espresso" [pos="-1.077,-0.365"]
+"fav - latte" [pos="-0.951,-0.365"]
+"fav - other" [pos="-0.774,-0.362"]
+"fav - pourover" [selected,pos="-0.899,-0.363"]
+"home brew - bean2cup" [pos="-0.824,-0.576"]
+"home brew - cold brew" [pos="-0.759,-0.553"]
+"home brew - cometeer" [pos="-0.698,-0.571"]
+"home brew - espresso" [pos="-1.134,-0.596"]
+"home brew - french press" [pos="-1.069,-0.576"]
+"home brew - instant" [pos="-0.883,-0.595"]
+"home brew - mr coffee" [pos="-0.939,-0.575"]
+"home brew - other" [pos="-0.646,-0.590"]
+"home brew - pods" [pos="-1.001,-0.555"]
+"home brew - pourover" [selected,pos="-1.197,-0.574"]
+"one or less cups" [pos="-1.190,-0.200"]
+"over 44 years old" [pos="-0.794,-0.718"]
+"three or more cups" [pos="-0.686,-0.188"]
+"under 24 years old" [pos="-0.701,-0.717"]
+Female [pos="-1.095,-0.718"]
+Male [selected,pos="-1.134,-0.718"]
+Other [pos="-1.057,-0.718"]
+"2 cups" -> "Dark Roast"
+"2 cups" -> "Light Roast"
+"2 cups" -> "Med Roast"
+"25-34 years old" -> "2 cups"
+"25-34 years old" -> "fav - americano"
+"25-34 years old" -> "fav - cappuccino"
+"25-34 years old" -> "fav - cortado"
+"25-34 years old" -> "fav - drip"
+"25-34 years old" -> "fav - espresso"
+"25-34 years old" -> "fav - latte"
+"25-34 years old" -> "fav - other"
+"25-34 years old" -> "fav - pourover"
+"25-34 years old" -> "home brew - bean2cup"
+"25-34 years old" -> "home brew - cold brew"
+"25-34 years old" -> "home brew - cometeer"
+"25-34 years old" -> "home brew - espresso"
+"25-34 years old" -> "home brew - french press"
+"25-34 years old" -> "home brew - instant"
+"25-34 years old" -> "home brew - mr coffee"
+"25-34 years old" -> "home brew - other"
+"25-34 years old" -> "home brew - pods"
+"25-34 years old" -> "home brew - pourover"
+"25-34 years old" -> "one or less cups"
+"25-34 years old" -> "three or more cups"
+"35-44 years old" -> "2 cups"
+"35-44 years old" -> "fav - americano"
+"35-44 years old" -> "fav - cappuccino"
+"35-44 years old" -> "fav - cortado"
+"35-44 years old" -> "fav - drip"
+"35-44 years old" -> "fav - espresso"
+"35-44 years old" -> "fav - latte"
+"35-44 years old" -> "fav - other"
+"35-44 years old" -> "fav - pourover"
+"35-44 years old" -> "home brew - bean2cup"
+"35-44 years old" -> "home brew - cold brew"
+"35-44 years old" -> "home brew - cometeer"
+"35-44 years old" -> "home brew - espresso"
+"35-44 years old" -> "home brew - french press"
+"35-44 years old" -> "home brew - instant"
+"35-44 years old" -> "home brew - mr coffee"
+"35-44 years old" -> "home brew - other"
+"35-44 years old" -> "home brew - pods"
+"35-44 years old" -> "home brew - pourover"
+"35-44 years old" -> "one or less cups"
+"35-44 years old" -> "three or more cups"
+"Dark Roast" -> "Expert 1"
+"Dark Roast" -> "Expert 10"
+"Dark Roast" -> "Expert 2"
+"Dark Roast" -> "Expert 3"
+"Dark Roast" -> "Expert 4"
+"Dark Roast" -> "Expert 5"
+"Dark Roast" -> "Expert 6"
+"Dark Roast" -> "Expert 7"
+"Dark Roast" -> "Expert 8"
+"Dark Roast" -> "Expert 9"
+"Dark Roast" -> "Favorite Coffee (A, B, C, D)"
+"Expert 1" -> "Favorite Coffee (A, B, C, D)"
+"Expert 10" -> "Favorite Coffee (A, B, C, D)"
+"Expert 2" -> "Favorite Coffee (A, B, C, D)"
+"Expert 3" -> "Favorite Coffee (A, B, C, D)"
+"Expert 4" -> "Favorite Coffee (A, B, C, D)"
+"Expert 5" -> "Favorite Coffee (A, B, C, D)"
+"Expert 6" -> "Favorite Coffee (A, B, C, D)"
+"Expert 7" -> "Favorite Coffee (A, B, C, D)"
+"Expert 8" -> "Favorite Coffee (A, B, C, D)"
+"Expert 9" -> "Favorite Coffee (A, B, C, D)"
+"Light Roast" -> "Expert 1"
+"Light Roast" -> "Expert 10"
+"Light Roast" -> "Expert 2"
+"Light Roast" -> "Expert 3"
+"Light Roast" -> "Expert 4"
+"Light Roast" -> "Expert 5"
+"Light Roast" -> "Expert 6"
+"Light Roast" -> "Expert 7"
+"Light Roast" -> "Expert 8"
+"Light Roast" -> "Expert 9"
+"Light Roast" -> "Favorite Coffee (A, B, C, D)"
+"Med Roast" -> "Expert 1"
+"Med Roast" -> "Expert 10"
+"Med Roast" -> "Expert 2"
+"Med Roast" -> "Expert 3"
+"Med Roast" -> "Expert 4"
+"Med Roast" -> "Expert 5"
+"Med Roast" -> "Expert 6"
+"Med Roast" -> "Expert 7"
+"Med Roast" -> "Expert 8"
+"Med Roast" -> "Expert 9"
+"Med Roast" -> "Favorite Coffee (A, B, C, D)"
+"fav - americano" -> "2 cups"
+"fav - americano" -> "Dark Roast"
+"fav - americano" -> "Light Roast"
+"fav - americano" -> "Med Roast"
+"fav - americano" -> "one or less cups"
+"fav - americano" -> "three or more cups"
+"fav - cappuccino" -> "2 cups"
+"fav - cappuccino" -> "Dark Roast"
+"fav - cappuccino" -> "Light Roast"
+"fav - cappuccino" -> "Med Roast"
+"fav - cappuccino" -> "one or less cups"
+"fav - cappuccino" -> "three or more cups"
+"fav - cortado" -> "2 cups"
+"fav - cortado" -> "Dark Roast"
+"fav - cortado" -> "Light Roast"
+"fav - cortado" -> "Med Roast"
+"fav - cortado" -> "one or less cups"
+"fav - cortado" -> "three or more cups"
+"fav - drip" -> "2 cups"
+"fav - drip" -> "Dark Roast"
+"fav - drip" -> "Light Roast"
+"fav - drip" -> "Med Roast"
+"fav - drip" -> "one or less cups"
+"fav - drip" -> "three or more cups"
+"fav - espresso" -> "2 cups"
+"fav - espresso" -> "Dark Roast"
+"fav - espresso" -> "Light Roast"
+"fav - espresso" -> "Med Roast"
+"fav - espresso" -> "one or less cups"
+"fav - espresso" -> "three or more cups"
+"fav - latte" -> "2 cups"
+"fav - latte" -> "Dark Roast"
+"fav - latte" -> "Light Roast"
+"fav - latte" -> "Med Roast"
+"fav - latte" -> "one or less cups"
+"fav - latte" -> "three or more cups"
+"fav - other" -> "2 cups"
+"fav - other" -> "Dark Roast"
+"fav - other" -> "Light Roast"
+"fav - other" -> "Med Roast"
+"fav - other" -> "one or less cups"
+"fav - other" -> "three or more cups"
+"fav - pourover" -> "2 cups"
+"fav - pourover" -> "Dark Roast"
+"fav - pourover" -> "Light Roast"
+"fav - pourover" -> "Med Roast"
+"fav - pourover" -> "one or less cups"
+"fav - pourover" -> "three or more cups"
+"home brew - bean2cup" -> "Dark Roast"
+"home brew - bean2cup" -> "Light Roast"
+"home brew - bean2cup" -> "Med Roast"
+"home brew - bean2cup" -> "fav - americano"
+"home brew - bean2cup" -> "fav - cappuccino"
+"home brew - bean2cup" -> "fav - cortado"
+"home brew - bean2cup" -> "fav - drip"
+"home brew - bean2cup" -> "fav - espresso"
+"home brew - bean2cup" -> "fav - latte"
+"home brew - bean2cup" -> "fav - other"
+"home brew - bean2cup" -> "fav - pourover"
+"home brew - cold brew" -> "Dark Roast"
+"home brew - cold brew" -> "Light Roast"
+"home brew - cold brew" -> "Med Roast"
+"home brew - cold brew" -> "fav - americano"
+"home brew - cold brew" -> "fav - cappuccino"
+"home brew - cold brew" -> "fav - cortado"
+"home brew - cold brew" -> "fav - drip"
+"home brew - cold brew" -> "fav - espresso"
+"home brew - cold brew" -> "fav - latte"
+"home brew - cold brew" -> "fav - other"
+"home brew - cold brew" -> "fav - pourover"
+"home brew - cometeer" -> "Dark Roast"
+"home brew - cometeer" -> "Light Roast"
+"home brew - cometeer" -> "Med Roast"
+"home brew - cometeer" -> "fav - americano"
+"home brew - cometeer" -> "fav - cappuccino"
+"home brew - cometeer" -> "fav - cortado"
+"home brew - cometeer" -> "fav - drip"
+"home brew - cometeer" -> "fav - espresso"
+"home brew - cometeer" -> "fav - latte"
+"home brew - cometeer" -> "fav - other"
+"home brew - cometeer" -> "fav - pourover"
+"home brew - espresso" -> "Dark Roast"
+"home brew - espresso" -> "Light Roast"
+"home brew - espresso" -> "Med Roast"
+"home brew - espresso" -> "fav - americano"
+"home brew - espresso" -> "fav - cappuccino"
+"home brew - espresso" -> "fav - cortado"
+"home brew - espresso" -> "fav - drip"
+"home brew - espresso" -> "fav - espresso"
+"home brew - espresso" -> "fav - latte"
+"home brew - espresso" -> "fav - other"
+"home brew - espresso" -> "fav - pourover"
+"home brew - french press" -> "Dark Roast"
+"home brew - french press" -> "Light Roast"
+"home brew - french press" -> "Med Roast"
+"home brew - french press" -> "fav - americano"
+"home brew - french press" -> "fav - cappuccino"
+"home brew - french press" -> "fav - cortado"
+"home brew - french press" -> "fav - drip"
+"home brew - french press" -> "fav - espresso"
+"home brew - french press" -> "fav - latte"
+"home brew - french press" -> "fav - other"
+"home brew - french press" -> "fav - pourover"
+"home brew - instant" -> "Dark Roast"
+"home brew - instant" -> "Light Roast"
+"home brew - instant" -> "Med Roast"
+"home brew - instant" -> "fav - americano"
+"home brew - instant" -> "fav - cappuccino"
+"home brew - instant" -> "fav - cortado"
+"home brew - instant" -> "fav - drip"
+"home brew - instant" -> "fav - espresso"
+"home brew - instant" -> "fav - latte"
+"home brew - instant" -> "fav - other"
+"home brew - instant" -> "fav - pourover"
+"home brew - mr coffee" -> "Dark Roast"
+"home brew - mr coffee" -> "Light Roast"
+"home brew - mr coffee" -> "Med Roast"
+"home brew - mr coffee" -> "fav - americano"
+"home brew - mr coffee" -> "fav - cappuccino"
+"home brew - mr coffee" -> "fav - cortado"
+"home brew - mr coffee" -> "fav - drip"
+"home brew - mr coffee" -> "fav - espresso"
+"home brew - mr coffee" -> "fav - latte"
+"home brew - mr coffee" -> "fav - other"
+"home brew - mr coffee" -> "fav - pourover"
+"home brew - other" -> "Dark Roast"
+"home brew - other" -> "Light Roast"
+"home brew - other" -> "Med Roast"
+"home brew - other" -> "fav - americano"
+"home brew - other" -> "fav - cappuccino"
+"home brew - other" -> "fav - cortado"
+"home brew - other" -> "fav - drip"
+"home brew - other" -> "fav - espresso"
+"home brew - other" -> "fav - latte"
+"home brew - other" -> "fav - other"
+"home brew - other" -> "fav - pourover"
+"home brew - pods" -> "Dark Roast"
+"home brew - pods" -> "Light Roast"
+"home brew - pods" -> "Med Roast"
+"home brew - pods" -> "fav - americano"
+"home brew - pods" -> "fav - cappuccino"
+"home brew - pods" -> "fav - cortado"
+"home brew - pods" -> "fav - drip"
+"home brew - pods" -> "fav - espresso"
+"home brew - pods" -> "fav - latte"
+"home brew - pods" -> "fav - other"
+"home brew - pods" -> "fav - pourover"
+"home brew - pourover" -> "Dark Roast"
+"home brew - pourover" -> "Light Roast"
+"home brew - pourover" -> "Med Roast"
+"home brew - pourover" -> "fav - americano"
+"home brew - pourover" -> "fav - cappuccino"
+"home brew - pourover" -> "fav - cortado"
+"home brew - pourover" -> "fav - drip"
+"home brew - pourover" -> "fav - espresso"
+"home brew - pourover" -> "fav - latte"
+"home brew - pourover" -> "fav - other"
+"home brew - pourover" -> "fav - pourover"
+"one or less cups" -> "Dark Roast"
+"one or less cups" -> "Light Roast"
+"one or less cups" -> "Med Roast"
+"over 44 years old" -> "2 cups"
+"over 44 years old" -> "fav - americano"
+"over 44 years old" -> "fav - cappuccino"
+"over 44 years old" -> "fav - cortado"
+"over 44 years old" -> "fav - drip"
+"over 44 years old" -> "fav - espresso"
+"over 44 years old" -> "fav - latte"
+"over 44 years old" -> "fav - other"
+"over 44 years old" -> "fav - pourover"
+"over 44 years old" -> "home brew - bean2cup"
+"over 44 years old" -> "home brew - cold brew"
+"over 44 years old" -> "home brew - cometeer"
+"over 44 years old" -> "home brew - espresso"
+"over 44 years old" -> "home brew - french press"
+"over 44 years old" -> "home brew - instant"
+"over 44 years old" -> "home brew - mr coffee"
+"over 44 years old" -> "home brew - other"
+"over 44 years old" -> "home brew - pods"
+"over 44 years old" -> "home brew - pourover"
+"over 44 years old" -> "one or less cups"
+"over 44 years old" -> "three or more cups"
+"three or more cups" -> "Dark Roast"
+"three or more cups" -> "Light Roast"
+"three or more cups" -> "Med Roast"
+"under 24 years old" -> "2 cups"
+"under 24 years old" -> "fav - americano"
+"under 24 years old" -> "fav - cappuccino"
+"under 24 years old" -> "fav - cortado"
+"under 24 years old" -> "fav - drip"
+"under 24 years old" -> "fav - espresso"
+"under 24 years old" -> "fav - latte"
+"under 24 years old" -> "fav - other"
+"under 24 years old" -> "fav - pourover"
+"under 24 years old" -> "home brew - bean2cup"
+"under 24 years old" -> "home brew - cold brew"
+"under 24 years old" -> "home brew - cometeer"
+"under 24 years old" -> "home brew - espresso"
+"under 24 years old" -> "home brew - french press"
+"under 24 years old" -> "home brew - instant"
+"under 24 years old" -> "home brew - mr coffee"
+"under 24 years old" -> "home brew - other"
+"under 24 years old" -> "home brew - pods"
+"under 24 years old" -> "home brew - pourover"
+"under 24 years old" -> "one or less cups"
+"under 24 years old" -> "three or more cups"
+Female -> "fav - americano"
+Female -> "fav - cappuccino"
+Female -> "fav - cortado"
+Female -> "fav - drip"
+Female -> "fav - espresso"
+Female -> "fav - latte"
+Female -> "fav - other"
+Female -> "fav - pourover"
+Male -> "fav - americano"
+Male -> "fav - cappuccino"
+Male -> "fav - cortado"
+Male -> "fav - drip"
+Male -> "fav - espresso"
+Male -> "fav - latte"
+Male -> "fav - other"
+Male -> "fav - pourover"
+Other -> "fav - americano"
+Other -> "fav - cappuccino"
+Other -> "fav - cortado"
+Other -> "fav - drip"
+Other -> "fav - espresso"
+Other -> "fav - latte"
+Other -> "fav - other"
+Other -> "fav - pourover"
+}
+')
+
+ggdag(dummy_model_dag) + 
+  geom_dag_point(
+    color = "gray70"
+    ) +
+  geom_dag_edges(
+    edge_color = "dodgerblue"
+    ) +
+  geom_dag_text(
+    color = "black",
+    nudge_y = -.02
+    ) +
+  theme_dag()
+```
+
+# Variables Chosen For Modeling & Dropping NAs
+
+```{r}
+purrr::map2(
+  coffee_drop |>
+  select(
+    gender,
+    age,
+    cup_per_day,
+    favorite_coffee_drink,
+    home_brew_pour_over,
+    home_brew_french_press,
+    home_brew_espresso,
+    home_brew_mr_coffee,
+    home_brew_pods,
+    home_brew_instant,
+    home_brew_bean2cup,
+    home_brew_cold_brew,
+    home_brew_cometeer,
+    home_brew_other,
+    roast_preference,
+    expertise,
+    favorite_abcd
+  ) |> 
+  drop_na(),
+  names(coffee_drop |>
+  select(
+    gender,
+    age,
+    cup_per_day,
+    favorite_coffee_drink,
+    home_brew_pour_over,
+    home_brew_french_press,
+    home_brew_espresso,
+    home_brew_mr_coffee,
+    home_brew_pods,
+    home_brew_instant,
+    home_brew_bean2cup,
+    home_brew_cold_brew,
+    home_brew_cometeer,
+    home_brew_other,
+    roast_preference,
+    expertise,
+    favorite_abcd
+  ) |> 
+  drop_na()
+  ),
+  ~ggplot(
+    coffee_drop |>
+  select(
+    gender,
+    age,
+    cup_per_day,
+    favorite_coffee_drink,
+    home_brew_pour_over,
+    home_brew_french_press,
+    home_brew_espresso,
+    home_brew_mr_coffee,
+    home_brew_pods,
+    home_brew_instant,
+    home_brew_bean2cup,
+    home_brew_cold_brew,
+    home_brew_cometeer,
+    home_brew_other,
+    roast_preference,
+    expertise,
+    favorite_abcd
+  ) |> 
+  drop_na(),
+  aes(.x)
+  ) + 
+  geom_bar(
+    fill = "dodgerblue"
+  ) +
+  coord_flip() +
+  labs(
+    title = glue::glue("{.y}")
+  )
+)
+```
+
+```{r}
+nona <- 
+  coffee_drop |>
+  select(
+    submission_id,
+    gender,
+    age,
+    cup_per_day,
+    home_brew_pour_over,
+    home_brew_french_press,
+    home_brew_espresso,
+    home_brew_mr_coffee,
+    home_brew_pods,
+    home_brew_instant,
+    home_brew_bean2cup,
+    home_brew_cold_brew,
+    home_brew_cometeer,
+    home_brew_other,
+    favorite_coffee_drink,
+    roast_preference,
+    expertise,
+    favorite_abcd
+  ) |>
+  drop_na() |>
+  mutate(
+    gender = case_when(
+      gender == "Female" ~ "Female",
+      gender == "Male" ~ "Male",
+      TRUE ~ "Other"
+    ),
+    age = case_when(
+      age == "<18 years old" ~ "under24",
+      age == "18-24 years old" ~ "under24",
+      age == "45-54 years old" ~ "over44",
+      age == "55-64 years old" ~ "over44",
+      age == ">65 years old" ~ "over44",
+      TRUE ~ age
+    ),
+    cup_per_day = case_when(
+      cup_per_day == "More than 4" ~ "three_or_more",
+      cup_per_day == "4" ~ "three_or_more",
+      cup_per_day == "3" ~ "three_or_more",
+      cup_per_day == "Less than 1" ~ "one_or_less",
+      cup_per_day == "1" ~ "one_or_less",
+      TRUE ~ cup_per_day
+    ),
+    favorite_coffee_drink = case_when(
+      favorite_coffee_drink == "Regular drip coffee" ~ "drip",
+      favorite_coffee_drink == "Pourover" ~ "pourover",
+      favorite_coffee_drink == "Other" ~ "other",
+      favorite_coffee_drink == "Mocha" ~ "other",
+      favorite_coffee_drink == "Latte" ~ "latte",
+      favorite_coffee_drink == "Iced coffee" ~ "other",
+      favorite_coffee_drink == "Espresso" ~ "espresso",
+      favorite_coffee_drink == "Cortado" ~ "cortado",
+      favorite_coffee_drink == "Cold brew" ~ "other",
+      favorite_coffee_drink == "Cappuccino" ~ "cappuccino",
+      favorite_coffee_drink == "Blended drink (e.g. Frappuccino)" ~ "other",
+      favorite_coffee_drink == "Americano" ~ "americano"
+    ),
+    roast_preference = case_when(
+      roast_preference == "Nordic" ~ "light",
+      roast_preference == "Medium" ~ "medium",
+      roast_preference == "Light" ~ "light",
+      roast_preference == "Italian" ~ "dark",
+      roast_preference == "French" ~ "dark",
+      roast_preference == "Dark" ~ "dark",
+      roast_preference == "Blonde" ~ "light",
+    )
+  )
+
+id <- nona$submission_id
+
+nona <- nona |>
+  select(
+    -submission_id
+  )
+
+nona_allcat <- nona  
+```
+
+# Changing to Factor Types for Bnlearn
+
+```{r}
+no_fact <- nona |>
+  mutate(
+    across(
+      everything(),
+      ~as.factor(.x)
+    )
+  )
+
+# glimpse(no_fact)
+# class(no_fact)
+
+no_fact <- as.data.frame(no_fact)
+```
+
+# Dummy-code Some Variables
+
+```{r}
+psych::dummy.code(nona$gender) |> head()
+
+nona$male <- psych::dummy.code(nona$gender)[, 1]
+nona$female <- psych::dummy.code(nona$gender)[, 2]
+nona$gen_other <- psych::dummy.code(nona$gender)[, 3]
+
+# age
+psych::dummy.code(nona$age) |> head()
+
+nona$twenty534 <- psych::dummy.code(nona$age)[, 1]
+nona$thirty544 <- psych::dummy.code(nona$age)[, 2]
+nona$over44 <- psych::dummy.code(nona$age)[, 3]
+nona$under24 <- psych::dummy.code(nona$age)[, 4]
+
+# cup_per_day
+psych::dummy.code(nona$cup_per_day) |> head()
+
+nona$cup_2 <- psych::dummy.code(nona$cup_per_day)[, 1]
+nona$cup_1orless <- psych::dummy.code(nona$cup_per_day)[, 2]
+nona$cup_3ormore <- psych::dummy.code(nona$cup_per_day)[, 3]
+
+# favorite_coffee_drink
+psych::dummy.code(nona$favorite_coffee_drink) |> head()
+
+nona$pourover <- psych::dummy.code(nona$favorite_coffee_drink)[, 1]
+nona$latte <- psych::dummy.code(nona$favorite_coffee_drink)[, 2]
+nona$other <- psych::dummy.code(nona$favorite_coffee_drink)[, 3]
+nona$drip <- psych::dummy.code(nona$favorite_coffee_drink)[, 4]
+nona$cappuccino <- psych::dummy.code(nona$favorite_coffee_drink)[, 5]
+nona$espresso <- psych::dummy.code(nona$favorite_coffee_drink)[, 6]
+nona$cortado <- psych::dummy.code(nona$favorite_coffee_drink)[, 7]
+nona$americano <- psych::dummy.code(nona$favorite_coffee_drink)[, 8]
+
+# roast_preference
+psych::dummy.code(nona$roast_preference) |> head()
+
+nona$roast_light <- psych::dummy.code(nona$roast_preference)[, 1]
+nona$roast_medium <- psych::dummy.code(nona$roast_preference)[, 2]
+nona$roast_dark <- psych::dummy.code(nona$roast_preference)[, 3]
+
+# expertise          
+psych::dummy.code(nona$expertise) |> head()
+
+nona$expert7 <- psych::dummy.code(nona$expertise)[, 1]
+nona$expert6 <- psych::dummy.code(nona$expertise)[, 2]
+nona$expert5 <- psych::dummy.code(nona$expertise)[, 3]
+nona$expert8 <- psych::dummy.code(nona$expertise)[, 4]
+nona$expert4 <- psych::dummy.code(nona$expertise)[, 5]
+nona$expert3 <- psych::dummy.code(nona$expertise)[, 6]
+nona$expert2 <- psych::dummy.code(nona$expertise)[, 7]
+nona$expert1 <- psych::dummy.code(nona$expertise)[, 8]
+nona$expert9 <- psych::dummy.code(nona$expertise)[, 9]
+nona$expert10 <- psych::dummy.code(nona$expertise)[, 10]
+```
+
+```{r}
+nona <- nona |>
+  select(
+    home_brew_pour_over:home_brew_other,
+    favorite_abcd:expert10
+  )
+
+# remove all the reference groups
+nona_noref <- nona |>
+  select(
+    -c(
+      male,
+      twenty534,
+      cup_2,
+      home_brew_pour_over,
+      pourover,
+      roast_medium,
+      expert5
+    )
+  )
+```
+
+# Bayesian Network
+
+## Using Bnlearn
+
+```{r}
+# Building Bayesian Network
+dag <- empty.graph(nodes = colnames(no_fact))
+
+arcs <- matrix(
+  c("gender", "cup_per_day",
+    "gender", "favorite_coffee_drink",
+    "gender", "home_brew_pour_over",
+    "gender", "home_brew_french_press",
+    "gender", "home_brew_espresso",
+    "gender", "home_brew_mr_coffee",
+    "gender", "home_brew_pods",
+    "gender", "home_brew_instant",
+    "gender", "home_brew_bean2cup",
+    "gender", "home_brew_cold_brew",
+    "gender", "home_brew_cometeer",
+    "gender", "home_brew_other",
+    "age", "cup_per_day",
+    "age", "favorite_coffee_drink",
+    "age", "home_brew_pour_over",
+    "age", "home_brew_french_press",
+    "age", "home_brew_espresso",
+    "age", "home_brew_mr_coffee",
+    "age", "home_brew_pods",
+    "age", "home_brew_instant",
+    "age", "home_brew_bean2cup",
+    "age", "home_brew_cold_brew",
+    "age", "home_brew_cometeer",
+    "age", "home_brew_other",
+
+    "cup_per_day", "roast_preference",
+    "favorite_coffee_drink", "roast_preference",
+    "home_brew_pour_over", "roast_preference",
+    "home_brew_french_press", "roast_preference",
+    "home_brew_espresso", "roast_preference",
+    "home_brew_mr_coffee", "roast_preference",
+    "home_brew_pods", "roast_preference",
+    "home_brew_instant", "roast_preference",
+    "home_brew_bean2cup", "roast_preference",
+    "home_brew_cold_brew", "roast_preference",
+    "home_brew_cometeer", "roast_preference",
+    "home_brew_other", "roast_preference",
+
+    "roast_preference", "expertise",
+    "roast_preference", "favorite_abcd",
+    "expertise", "favorite_abcd"),
+  byrow = TRUE,
+  ncol = 2,
+  dimnames = list(NULL, c("from", "to"))
+)
+
+arcs(dag) <- arcs
+
+graphviz.plot(dag)
+```
+
+```{r}
+set.seed(12345)
+dag_fit <- bn.fit(dag, data = no_fact, method = "bayes", iss = 5000)
+```
+
+### Gender - Conditional Probability Table (CPT)
+
+```{r}
+tibble(
+  Gender = attributes(dag_fit$gender$prob)$dimnames[[1]],
+  Probability = round(array(dag_fit$gender$prob), 2)
+) |>
+  reactable()
+```
+
+### Age - CPT
+
+```{r}
+tibble(
+  Age = attributes(dag_fit$age$prob)$dimnames[[1]],
+  Probability = round(array(dag_fit$age$prob), 2)
+) |>
+  reactable()
+```
+
+### Cups of Coffee Per Day - CPT
+
+```{r}
+#| eval: true
+#| echo: false
+
+gg_func <- function(
+  data,
+  x,
+  y = n,
+  fill,
+  facet
+  ){
+  ggplot(
+    data = {{data}},
+    aes(
+      as.factor({{x}}),
+      n
+    )
+  ) +
+  geom_col(
+    aes(
+      fill = as.factor({{fill}})
+    ),
+    position = position_dodge()
+  ) +
+  facet_wrap(
+    vars(
+      {{facet}}
+    )
+  ) +
+  viridis::scale_fill_viridis(
+    discrete = TRUE
+  )
+}
+```
+
+```{r}
+dag_fit$cup_per_day$prob |>
+  as_tibble() |>
+  mutate(
+    n = round(n, 2)
+  ) |>
+  gg_func(x = cup_per_day, y = n, fill = gender, facet = age) +
+  labs(
+    title = "Probability of Cups of Coffee Per Day From the Great American Tasting",
+    subtitle = "Based on Gender and Age Range",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+
+```
+
+### Home Brewing - Pourover
+
+```{r}
+dag_fit$home_brew_pour_over$prob |>
+  as_tibble() |>
+  mutate(
+    n = round(n, 2)
+  ) |>
+  gg_func(x = gender, y = n, fill = home_brew_pour_over, facet = age) +
+  labs(
+    title = "Probability of Making Pourover at Home From the Great American Tasting",
+    subtitle = "Based on Gender and Age Range",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+### Home Brewing - French Press
+
+```{r}
+dag_fit$home_brew_french_press$prob |>
+  as_tibble() |>
+  mutate(
+    n = round(n, 2)
+  ) |>
+  gg_func(x = gender, y = n, fill = home_brew_french_press, facet = age) +
+  labs(
+    title = "Probability of Making French Press at Home From the Great American Tasting",
+    subtitle = "Based on Gender and Age Range",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+### Home Brewing - Espresso
+
+```{r}
+dag_fit$home_brew_espresso$prob |>
+  as_tibble() |>
+  mutate(
+    n = round(n, 2)
+  ) |>
+  gg_func(x = gender, y = n, fill = home_brew_espresso, facet = age) +
+  labs(
+    title = "Probability of Making Espresso at Home From the Great American Tasting",
+    subtitle = "Based on Gender and Age Range",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+### Home Brewing - coffee Brewing Machine
+
+```{r}
+dag_fit$home_brew_mr_coffee$prob |>
+  as_tibble() |>
+  mutate(
+    n = round(n, 2)
+  ) |>
+  gg_func(x = gender, y = n, fill = home_brew_mr_coffee, facet = age) +
+  labs(
+    title = "Probability of Making Coffee Using a Coffee Brewing Machine at Home From the Great American Tasting",
+    subtitle = "Based on Gender and Age Range",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+### Home Brewing - Pods
+
+```{r}
+dag_fit$home_brew_pods$prob |>
+  as_tibble() |>
+  mutate(
+    n = round(n, 2)
+  ) |>
+  gg_func(x = gender, y = n, fill = home_brew_pods, facet = age) +
+  labs(
+    title = "Probability of Making Coffee Using Pods at Home From the Great American Tasting",
+    subtitle = "Based on Gender and Age Range",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+### Home Brewing - Instant Coffee
+
+```{r}
+dag_fit$home_brew_instant$prob |>
+  as_tibble() |>
+  mutate(
+    n = round(n, 2)
+  ) |>
+  gg_func(x = gender, y = n, fill = home_brew_instant, facet = age) +
+  labs(
+    title = "Probability of Making Instant Coffee at Home From the Great American Tasting",
+    subtitle = "Based on Gender and Age Range",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+### Home Brewing - Bean 2 Cup
+
+```{r}
+dag_fit$home_brew_bean2cup$prob |>
+  as_tibble() |>
+  mutate(
+    n = round(n, 2)
+  ) |>
+  gg_func(x = gender, y = n, fill = home_brew_bean2cup, facet = age) +
+  labs(
+    title = "Probability of Making Coffee Using a Bean 2 Cup Machine at Home From the Great American Tasting",
+    subtitle = "Based on Gender and Age Range",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+### Home Brewing - Cold Brew
+
+```{r}
+dag_fit$home_brew_cold_brew$prob |>
+  as_tibble() |>
+  mutate(
+    n = round(n, 2)
+  ) |>
+  gg_func(x = gender, y = n, fill = home_brew_cold_brew, facet = age) +
+  labs(
+    title = "Probability of Making Cold Brew at Home From the Great American Tasting",
+    subtitle = "Based on Gender and Age Range",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+### Home Brewing - Cometeer
+
+```{r}
+  as_tibble() |>
+  mutate(
+    n = round(n, 2)
+  ) |>
+  gg_func(x = gender, y = n, fill = home_brew_cometeer, facet = age) +
+  labs(
+    title = "Probability of Making Cometeer Coffees at Home From the Great American Tasting",
+    subtitle = "Based on Gender and Age Range",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+### Home Brewing - Other
+
+```{r}
+dag_fit$home_brew_other$prob |>
+  as_tibble() |>
+  mutate(
+    n = round(n, 2)
+  ) |>
+  gg_func(x = gender, y = n, fill = home_brew_other, facet = age) +
+  labs(
+    title = "Probability of Making Coffee From Other Methods at Home From the Great American Tasting",
+    subtitle = "Based on Gender and Age Range",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+### Favorite Coffee Drink - CPT
+
+```{r}
+dag_fit$favorite_coffee_drink$prob |>
+  as_tibble() |>
+  mutate(
+    n = round(n, 2)
+  ) |>
+  gg_func(
+    x = favorite_coffee_drink,
+    y = n,
+    fill = gender,
+    facet = age
+  ) +
+  labs(
+    title = "Probability of Favorite Coffee Drinks From the Great American Tasting",
+    subtitle = "Based on Gender and Age Range",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+### Roast Preference - CPT
+
+```{r}
+roast_pref_func <- function(
+  dag_table,
+  x,
+  y = n,
+  fill,
+  facet_x,
+  facet_y
+){
+  {{dag_table}} |>
+  as_tibble() |>
+  mutate(
+    fill = str_to_title({{fill}}),
+    n = round(n, 2),
+    across(
+      -n,
+      ~as.factor(.x)
+    ),
+    x = fct_relevel(
+      {{x}},
+      "three_or_more",
+      "2",
+      "one_or_less"
+    ),
+    fill = fct_relevel(
+      fill,
+      "Dark",
+      "Medium",
+      "Light"
+    )
+  ) |>
+  ggplot(
+    aes(
+      x,
+      {{y}}
+    )
+  ) +
+  geom_col(
+    aes(
+      fill = fill
+      )
+  ) +
+  coord_flip() +
+  facet_grid(
+    vars({{facet_x}}),
+    vars({{facet_y}})
+  ) +
+  viridis::scale_fill_viridis(
+    discrete = TRUE
+  ) +
+  guides(
+    fill = guide_legend(
+      reverse = TRUE
+      )
+    )
+}
+```
+
+The CPT here only include the probabilities for whether participants used one home brewer or not and considered all of the other home brewers as not using those at home.  
+
+```{r}
+roast_pref_func(
+  dag_table = dag_fit$roast_preference$prob[1:3, 1:3, 1:2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1:8],
+  x = cup_per_day,
+  y = n,
+  fill = roast_preference,
+  facet_x = favorite_coffee_drink,
+  facet_y = home_brew_pour_over
+) +
+  labs(
+    title = "Probability of Coffee Roast Preference From the Great American Tasting",
+    subtitle = "Based on Gender, Age, Cups Per Day, and Whether Participants Brew at Home Using a Pourover",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+```{r}
+roast_pref_func(
+  dag_table = dag_fit$roast_preference$prob[1:3, 1:3, 1, 1:2, 1, 1, 1, 1, 1, 1, 1, 1, 1:8],
+  x = cup_per_day,
+  y = n,
+  fill = roast_preference,
+  facet_x = favorite_coffee_drink,
+  facet_y = home_brew_french_press
+) +
+  labs(
+    title = "Probability of Coffee Roast Preference From the Great American Tasting",
+    subtitle = "Based on Gender, Age, Cups Per Day, and Whether Participants Brew at Home Using a French Press",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+```{r}
+roast_pref_func(
+  dag_table = dag_fit$roast_preference$prob[1:3, 1:3, 1, 1, 1:2, 1, 1, 1, 1, 1, 1, 1, 1:8],
+  x = cup_per_day,
+  y = n,
+  fill = roast_preference,
+  facet_x = favorite_coffee_drink,
+  facet_y = home_brew_espresso
+) +
+  labs(
+    title = "Probability of Coffee Roast Preference From the Great American Tasting",
+    subtitle = "Based on Gender, Age, Cups Per Day, and Whether Participants Brew Espresso at Home",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+```{r}
+roast_pref_func(
+  dag_table = dag_fit$roast_preference$prob[1:3, 1:3, 1, 1, 1, 1:2, 1, 1, 1, 1, 1, 1, 1:8],
+  x = cup_per_day,
+  y = n,
+  fill = roast_preference,
+  facet_x = favorite_coffee_drink,
+  facet_y = home_brew_mr_coffee
+) +
+  labs(
+    title = "Probability of Coffee Roast Preference From the Great American Tasting",
+    subtitle = "Based on Gender, Age, Cups Per Day, and Whether Participants Brew at Home Using a Coffee Machine",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+```{r}
+roast_pref_func(
+  dag_table = dag_fit$roast_preference$prob[1:3, 1:3, 1, 1, 1, 1, 1:2, 1, 1, 1, 1, 1, 1:8],
+  x = cup_per_day,
+  y = n,
+  fill = roast_preference,
+  facet_x = favorite_coffee_drink,
+  facet_y = home_brew_pods
+) +
+  labs(
+    title = "Probability of Coffee Roast Preference From the Great American Tasting",
+    subtitle = "Based on Gender, Age, Cups Per Day, and Whether Participants Brew at Home Using Pods",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+```{r}
+roast_pref_func(
+  dag_table = dag_fit$roast_preference$prob[1:3, 1:3, 1, 1, 1, 1, 1, 1:2, 1, 1, 1, 1, 1:8],
+  x = cup_per_day,
+  y = n,
+  fill = roast_preference,
+  facet_x = favorite_coffee_drink,
+  facet_y = home_brew_instant
+) +
+  labs(
+    title = "Probability of Coffee Roast Preference From the Great American Tasting",
+    subtitle = "Based on Gender, Age, Cups Per Day, and Whether Participants Brew at Home Using Instant Coffee",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+```{r}
+roast_pref_func(
+  dag_table = dag_fit$roast_preference$prob[1:3, 1:3, 1, 1, 1, 1, 1, 1, 1:2, 1, 1, 1, 1:8],
+  x = cup_per_day,
+  y = n,
+  fill = roast_preference,
+  facet_x = favorite_coffee_drink,
+  facet_y = home_brew_bean2cup
+) +
+  labs(
+    title = "Probability of Coffee Roast Preference From the Great American Tasting",
+    subtitle = "Based on Gender, Age, Cups Per Day, and Whether Participants Brew at Home Using a Bean 2 Cup Machine",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+```{r}
+roast_pref_func(
+  dag_table = dag_fit$roast_preference$prob[1:3, 1:3, 1, 1, 1, 1, 1, 1, 1, 1:2, 1, 1, 1:8],
+  x = cup_per_day,
+  y = n,
+  fill = roast_preference,
+  facet_x = favorite_coffee_drink,
+  facet_y = home_brew_cold_brew
+) +
+  labs(
+    title = "Probability of Coffee Roast Preference From the Great American Tasting",
+    subtitle = "Based on Gender, Age, Cups Per Day, and Whether Participants Brew Cold Brew at Home",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+```{r}
+roast_pref_func(
+  dag_table = dag_fit$roast_preference$prob[1:3, 1:3, 1, 1, 1, 1, 1, 1, 1, 1, 1:2, 1, 1:8],
+  x = cup_per_day,
+  y = n,
+  fill = roast_preference,
+  facet_x = favorite_coffee_drink,
+  facet_y = home_brew_cometeer
+) +
+  labs(
+    title = "Probability of Coffee Roast Preference From the Great American Tasting",
+    subtitle = "Based on Gender, Age, Cups Per Day, and Whether Participants Brew at Home Using Cometeer",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+```{r}
+roast_pref_func(
+  dag_table = dag_fit$roast_preference$prob[1:3, 1:3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1:2, 1:8],
+  x = cup_per_day,
+  y = n,
+  fill = roast_preference,
+  facet_x = favorite_coffee_drink,
+  facet_y = home_brew_other
+) +
+  labs(
+    title = "Probability of Coffee Roast Preference From the Great American Tasting",
+    subtitle = "Based on Gender, Age, Cups Per Day, and Whether Participants Brew at Home Using an Other Method",
+    x = "",
+    y = "Probability",
+    fill = ""
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+### Expertise Level - CPT
+
+```{r}
+expertise_tbl <- dag_fit$expertise$prob |> as_tibble() |>
+  mutate(
+    roast_preference = str_to_title(roast_preference),
+    across(
+      -n,
+      ~as.factor(.x)
+    ),
+    expertise = fct_relevel(
+      expertise,
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ),
+    roast_preference = fct_relevel(
+      roast_preference,
+      "Light",
+      "Medium",
+      "Dark"
+    )
+  ) 
+
+expertise_tbl |>
+  ggplot(
+    aes(
+      roast_preference,
+      n
+    )
+  ) +
+  geom_col(
+    aes(
+      fill = expertise
+    ),
+    position = position_dodge()
+  ) +
+  geom_text(
+    data = expertise_tbl |> filter(roast_preference == "Light"),
+    aes(
+      label = expertise,
+      group = expertise,
+      color = expertise
+    ),
+    position = position_dodge(width = .9),
+    vjust = -.5
+  ) +
+   labs(
+    title = "Probability of One's Roast Preference From The Great American Tasting",
+    subtitle = "Based on Self-Defined Expertise Level",
+    x = "",
+    y = "Probability",
+    caption = "Note: Probabilities range from 0 to 1. The scale is reduced to visually compare groups."
+  ) +
+  viridis::scale_color_viridis(
+    discrete = TRUE
+    ) +
+  viridis::scale_fill_viridis(
+    discrete = TRUE
+    ) +
+  scale_x_discrete(
+    expand = c(0, .5)
+  ) +
+  theme(
+    legend.position = "none",
+    axis.text = element_text(
+      color = "black"
+    ),
+    axis.title = element_text(
+      color = "black"
+    ),
+    plot.title = element_text(
+      color = "black"
+    ),
+    plot.subtitle = element_text(
+      color = "black"
+    ),
+    plot.caption = element_text(
+      color = "black"
+    )
+  )
+```
+
+### Favorite Coffee (A, B, C, D) - CPT
+
+```{r}
+favorite_abcd_prob <- dag_fit$favorite_abcd$prob |> as_tibble() |>
+  mutate(
+    across(
+      -n,
+      ~as.factor(.x)
+    ),
+    expertise = fct_relevel(
+      expertise,
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ),
+    roast_preference = fct_relevel(
+      roast_preference,
+      "light",
+      "medium",
+      "dark"
+    ),
+    favorite_abcd = fct_relevel(
+      favorite_abcd,
+      "Coffee A",
+      "Coffee B",
+      "Coffee C",
+      "Coffee D"
+    )
+  )
+
+# scales::show_col(viridis::viridis_pal(option = "E")(3))
+
+favorite_abcd_prob |>
+  ggplot(
+    aes(
+      favorite_abcd,
+      n
+    )
+  ) +
+  geom_col(
+    aes(
+      fill = roast_preference
+    ),
+    position = position_dodge()
+  ) +
+  geom_text(
+    data = favorite_abcd_prob |>
+    filter(
+        expertise == "4" &
+      favorite_abcd == "Coffee D" &
+      roast_preference == "light"
+    ),
+    label = "Light\nRoast",
+    nudge_y = .03,
+    color = "#00204DFF"
+  ) +
+  geom_text(
+    data = favorite_abcd_prob |>
+    filter(
+        expertise == "4" &
+      favorite_abcd == "Coffee C" &
+      roast_preference == "medium"
+    ),
+    label = "Medium\nRoast",
+    nudge_y = .03,
+    color = "#7C7B78FF"
+  ) +
+  geom_text(
+    data = favorite_abcd_prob |>
+    filter(
+        expertise == "4" &
+      favorite_abcd == "Coffee B" &
+      roast_preference == "dark"
+    ),
+    label = "Dark\nRoast",
+    nudge_y = .03,
+    color = "#FFEA46FF"
+  ) +
+  facet_wrap(
+    ~expertise,
+    ncol = 5
+  ) +
+  scale_y_continuous(
+    breaks = seq(.1, .6, .1)
+  ) +
+  viridis::scale_fill_viridis(
+    discrete = TRUE,
+    option = "cividis"
+  ) +
+  labs(
+    title = "Probability of One's Favorite Coffees From The Great American Tasting",
+    subtitle = "Based on Self-Defined Expertise Level & Roast Level Preference",
+    x = "",
+    y = "Probability"
+  ) +
+  theme(
+    legend.position = "none",
+    strip.background = element_rect(
+      fill = "#7C7B78FF"
+    ),
+    axis.text = element_text(
+      color = "#7C7B78FF"
+    ),
+    axis.title = element_text(
+      color = "#7C7B78FF"
+    ),
+    plot.title = element_text(
+      color = "#7C7B78FF"
+    ),
+    plot.subtitle = element_text(
+      color = "#7C7B78FF"
+    )
+  )
+```
+
+```{r}
+score(
+  dag,
+  data = no_fact, 
+  type = "bde",
+  iss = 5000
+)
+```
+
+```{r}
+cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A"),
+  evidence = (gender == "Male")
+)
+
+cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A"),
+  evidence = (gender == "Female")
+)
+
+cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee D"),
+  evidence = (gender == "Male")
+)
+
+cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee D"),
+  evidence = (gender == "Female")
+)
+
+cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A") |
+  (favorite_abcd == "Coffee D"),
+  evidence = (gender == "Male")
+)
+
+cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A") |
+  (favorite_abcd == "Coffee D"),
+  evidence = (gender == "Female")
+)
+```
+
+## Probabilities of Coffee A or Coffee D Based on Expertise Level
+
+```{r}
+expert1 <- cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A") |
+  (favorite_abcd == "Coffee D"),
+  evidence = (expertise == "1")
+)
+expert2 <- cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A") |
+  (favorite_abcd == "Coffee D"),
+  evidence = (expertise == "2")
+)
+expert3 <- cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A") |
+  (favorite_abcd == "Coffee D"),
+  evidence = (expertise == "3")
+)
+expert4 <- cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A") |
+  (favorite_abcd == "Coffee D"),
+  evidence = (expertise == "4")
+)
+expert5 <- cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A") |
+  (favorite_abcd == "Coffee D"),
+  evidence = (expertise == "5")
+)
+expert6 <- cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A") |
+  (favorite_abcd == "Coffee D"),
+  evidence = (expertise == "6")
+)
+expert7 <- cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A") |
+  (favorite_abcd == "Coffee D"),
+  evidence = (expertise == "7")
+)
+expert8 <- cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A") |
+  (favorite_abcd == "Coffee D"),
+  evidence = (expertise == "8")
+)
+expert9 <- cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A") |
+  (favorite_abcd == "Coffee D"),
+  evidence = (expertise == "9")
+)
+expert10 <- cpquery(
+  dag_fit,
+  event = (favorite_abcd == "Coffee A") |
+  (favorite_abcd == "Coffee D"),
+  evidence = (expertise == "10")
+)
+
+tibble(
+  expertise_level = seq(1, 10, 1),
+  probability_of_a_or_d = c(expert1, expert2, expert3, expert4, expert5, expert6, expert7, expert8, expert9, expert10)
+) |>
+  ggplot(
+    aes(
+      as.factor(expertise_level),
+      probability_of_a_or_d
+    )
+  ) +
+  geom_col(
+    aes(fill = as.factor(expertise_level)),
+    position = position_dodge()
+  ) +
+  geom_text(
+    aes(
+      label = round(probability_of_a_or_d, 2)
+    ),
+    color = "black",
+    vjust = -.3
+  ) +
+  scale_y_continuous(
+    limits = c(0, 1),
+    breaks = seq(0, 1, .1)
+  ) +
+  labs(
+    title = "Probability of Choosing Coffee A or D as Their Favorite Coffee",
+    subtitle = "By Level of Self-Defined Expertise",
+    x = "Expertise",
+    y = "Probability"
+  ) +
+  scale_fill_brewer(type = "qual", palette = "Set3") +
+  theme(
+    legend.position = "none"
+  )
+```
+
+## Using Stan
+
+```{r}
+# nona_allcat
+# nona_noref
+# nona
+
+colnames(nona_allcat)
+glimpse(nona_allcat)
+
+colnames(nona_noref)
+colnames(nona)
+
+nona_allcat <- nona_allcat |>
+  mutate(
+    gender = case_when(
+      gender == "Male" ~ 1,
+      gender == "Female" ~ 2,
+      gender == "Other" ~ 3
+    ),
+    age = case_when(
+      age == "under24" ~ 1,
+      age == "25-34 years old" ~ 2,
+      age == "35-44 years old" ~ 3,
+      age == "over44" ~ 4
+    ),
+    cup_per_day = case_when(
+      cup_per_day == "one_or_less" ~ 1,
+      cup_per_day == "2" ~ 2,
+      cup_per_day == "three_or_more" ~ 3
+    ),
+    favorite_coffee_drink = case_when(
+      favorite_coffee_drink == "pourover" ~ 1,
+      favorite_coffee_drink == "latte" ~ 2,
+      favorite_coffee_drink == "other" ~ 3,
+      favorite_coffee_drink == "drip" ~ 4,
+      favorite_coffee_drink == "cappuccino" ~ 5,
+      favorite_coffee_drink == "espresso" ~ 6,
+      favorite_coffee_drink == "cortado" ~ 7,
+      favorite_coffee_drink == "americano" ~ 8
+    ),
+    roast_preference = case_when(
+      roast_preference == "light" ~ 1,
+      roast_preference == "medium" ~ 2,
+      roast_preference == "dark" ~ 3
+    ),
+    expertise = case_when(
+      expertise == "1" ~ 1,
+      expertise == "2" ~ 2,
+      expertise == "3" ~ 3,
+      expertise == "4" ~ 4,
+      expertise == "5" ~ 5,
+      expertise == "6" ~ 6,
+      expertise == "7" ~ 7,
+      expertise == "8" ~ 8,
+      expertise == "9" ~ 9,
+      expertise == "10" ~ 10
+    ),
+    favorite_abcd = case_when(
+      favorite_abcd == "Coffee A" ~ 1,
+      favorite_abcd == "Coffee B" ~ 2,
+      favorite_abcd == "Coffee C" ~ 3,
+      favorite_abcd == "Coffee D" ~ 4
+    )
+  )
+
+
+nona_noref_recode <- nona_noref |>
+  mutate(
+    across(
+      -favorite_abcd,
+      ~case_when(
+        .x == 0 ~ -1,
+        TRUE ~ .x
+      )
+    )
+  )
+# 
+# nona_recode <- nona |>
+#   mutate(
+#     across(
+#       -favorite_abcd,
+#       ~case_when(
+#         .x == 0 ~ -1,
+#         TRUE ~ .x
+#       )
+#     )
+#   )
+```
+
+```{r}
+
+stan_allcat_list <- list(
+  J = nrow(nona_allcat[,-1]),
+  y_cat = count(nona_allcat, favorite_abcd) |> nrow(),
+  roast_preference_cat = count(nona_allcat, roast_preference) |> nrow(),
+  expert_cat = count(nona_allcat, expertise) |> nrow(),
+  cup_per_day_cat = count(nona_allcat, cup_per_day) |> nrow(),
+  favorite_coffee_drink_cat = count(nona_allcat, favorite_coffee_drink) |> nrow(),
+  gender_cat = count(nona_allcat, gender) |> nrow(),
+  age_cat = count(nona_allcat, age) |> nrow(),
+
+  Y = nona_allcat$favorite_abcd,
+  roast_preference = nona_allcat$roast_preference,
+  expert = nona_allcat$expertise,
+  favorite_coffee_drink = nona_allcat$favorite_coffee_drink,
+  cup_per_day = nona_allcat$cup_per_day,
+  home_brew_pourover = nona_allcat$home_brew_pour_over,
+  home_brew_french_press = nona_allcat$home_brew_french_press,
+  home_brew_espresso = nona_allcat$home_brew_espresso,
+  home_brew_mr_coffee = nona_allcat$home_brew_mr_coffee,
+  home_brew_pods = nona_allcat$home_brew_pods,
+  home_brew_instant = nona_allcat$home_brew_instant,
+  home_brew_bean2cup = nona_allcat$home_brew_bean2cup,
+  home_brew_cold_brew = nona_allcat$home_brew_cold_brew,
+  home_brew_cometeer = nona_allcat$home_brew_cometeer,
+  home_brew_other = nona_allcat$home_brew_other,
+  age = nona_allcat$age,
+  gender = nona_allcat$gender  
+)
+
+glimpse(stan_allcat_list)
+```
+
+```{r}
+#| eval: false
+
+stan_list <- list(
+  J = nrow(nona_noref_recode[,-1]),
+  I = ncol(nona_noref_recode[,-1]),
+  K = count(nona_noref_recode, favorite_abcd) |> nrow(),
+
+  female = nona_noref_recode$female,
+  gen_other = nona_noref_recode$gen_other,
+
+  thirty544 = nona_noref_recode$thirty544,
+  over44 = nona_noref_recode$over44,
+  under24 = nona_noref_recode$under24,
+
+
+  home_brew_french_press = nona_noref_recode$home_brew_french_press,
+  home_brew_espresso = nona_noref_recode$home_brew_espresso,
+  home_brew_mr_coffee = nona_noref_recode$home_brew_mr_coffee,
+  home_brew_pods = nona_noref_recode$home_brew_pods,
+  home_brew_instant = nona_noref_recode$home_brew_instant,
+  home_brew_bean2cup = nona_noref_recode$home_brew_bean2cup,
+  home_brew_cold_brew = nona_noref_recode$home_brew_cold_brew,
+  home_brew_cometeer = nona_noref_recode$home_brew_cometeer,
+  home_brew_other = nona_noref_recode$home_brew_other,
+  
+  latte = nona_noref_recode$latte,
+  otherdrink = nona_noref_recode$other,
+  drip = nona_noref_recode$drip,
+  cappuccino = nona_noref_recode$cappuccino,
+  espresso = nona_noref_recode$espresso,
+  cortado = nona_noref_recode$cortado,
+
+  cup_1orless = nona_noref_recode$cup_1orless,
+  cup_3ormore = nona_noref_recode$cup_3ormore,
+
+
+  americano = nona_noref_recode$americano,         
+  roast_light = nona_noref_recode$roast_light,
+  roast_dark = nona_noref_recode$roast_dark,
+
+  expert7 = nona_noref_recode$expert7,
+  expert6 = nona_noref_recode$expert6,
+  expert8 = nona_noref_recode$expert8,
+  expert4 = nona_noref_recode$expert4,
+  expert3 = nona_noref_recode$expert3,
+  expert2 = nona_noref_recode$expert2,
+  expert1 = nona_noref_recode$expert1,
+  expert9 = nona_noref_recode$expert9,
+  expert10 = nona_noref_recode$expert10,
+
+  Y = nona_noref_recode$favorite_abcd
+)
+
+# glimpse(stan_list)
+```
+
+```{r}
+#| eval: false
+#| echo: true
+
+set.seed(12345)
+mod <- cmdstan_model(here::here("random_scripts", "updated_stan_model.stan"))
+
+# mod$format(
+#   canonicalize = list("deprecations"),
+#   overwrite_file = TRUE,
+#   backup = FALSE
+# )
+```
+
+```{r}
+fit <- mod$sample(
+  data = stan_list,
+  seed = 12345,
+  iter_warmup = 2000,
+  iter_sampling = 2000,
+  # adapt_delta = .90,
+  chains = 4,
+  # step_size = .01,
+  parallel_chains = 8
+)
+
+saveRDS(fit, "coffee_tasting_bayes_net.RDS")
+
+# fit <- read_rds(here::here("random_data", "coffee_tasting_bayes_net.RDS"))
+```
+
+```{r}
+fit$output()[[1]]
+
+fit$diagnostic_summary()
+```
+
+```{r}
+bn_measure <- summarize_draws(fit$draws(), default_summary_measures())
+bn_converge <- summarize_draws(fit$draws(), default_convergence_measures())
+```
+
+```{r}
+bn_converge |>
+  arrange(rhat) |>
+  mutate(
+    across(
+      -variable,
+      ~round(.x, 2)
+    )
+  ) |>
+  reactable(
+    filterable = TRUE,
+    searchable = TRUE
+  )
+
+bn_measure |>
+  filter(
+    str_detect(
+      variable,
+      "theta"
+    )
+  ) |> 
+  mutate(
+    across(
+      -variable,
+      ~round(.x, 2)
+    )
+  ) |>
+  select(
+    variable,
+    mean,
+    sd
+  ) |>
+  reactable(
+    filterable = TRUE,
+    searchable = TRUE
+  )
+```
+
+```{r}
+bn_measure |>
+  filter(
+    str_detect(
+      variable,
+      "predictors"
+    )
+  )
+
+bn_measure |>
+  filter(
+    str_detect(
+      variable,
+      "^a_"
+    ) |
+    str_detect(
+      variable,
+      "^b_"
+    )
+  ) |> 
+  mutate(
+    across(
+      -variable,
+      ~exp(.x)
+    ),
+    across(
+      -variable,
+      ~round(.x, 2)
+    )
+  ) |>
+  select(
+    variable,
+    mean,
+    sd
+  ) |>
+  reactable(
+    filterable = TRUE,
+    searchable = TRUE
+  )
+```
+
+```{r}
+set.seed(12345)
+mod <- cmdstan_model(here::here("random_scripts", "all_category_model.stan"))
+
+fit <- mod$sample(
+  data = stan_allcat_list,
+  seed = 12345,
+  iter_warmup = 1000, #2000
+  iter_sampling = 1000, #2000
+  # adapt_delta = .90,
+  chains = 4,
+  # step_size = .01,
+  parallel_chains = 8
+)
+
+fit$diagnostic_summary()
+
+
+
+bn_converge <- summarize_draws(fit$draws(), default_convergence_measures())
+
+bn_converge |>
+  arrange(rhat) |>
+  mutate(
+    across(
+      -variable,
+      ~round(.x, 2)
+    )
+  ) |>
+  reactable(
+    filterable = TRUE,
+    searchable = TRUE
+  )
+
+bn_measure <- summarize_draws(fit$draws(), default_summary_measures())
+
+bn_measure |>
+  filter(
+    str_detect(
+      variable,
+      "^a_"
+    ) |
+    str_detect(
+      variable,
+      "^b_"
+    ) |
+    str_detect(
+      variable,
+      "log_lik"
+    )
+  ) |>
+  select(
+    variable,
+    log_odds = mean,
+    sd
+  ) |>
+  mutate(
+    prob_use = plogis(log_odds),
+    prob_notuse = 1 - prob_use,
+    #prob = exp(log_odds)/exp(1 + log_odds),
+    across(
+      -variable,
+      ~round(.x, 2)
+    )
+  )  |>
+  reactable(
+    filterable = TRUE,
+    searchable = TRUE
+  )
+```
+
+Interpretations for select parameters
+
+The alpha parameter for predicting participants' favorite coffee showed that participants who prefer medium roasted coffee and labeled themselves as a 5 on expertise had 1.14 times greater odds of enjoying coffee C than not enjoying it.
+
+alpha = compared to zero
+
+For example, b_roast_light_yb_roast_light_y is the change in log-odds for a given category when the roast level is light. Similarly, b_expert1_yb_expert1_y to b_expert10_yb_expert10_y represent the effects of being in each expert level on the log-odds of a particular category, again without any specific reference category. 
+
+```{r}
+alphas <- c(
+"a_latte",
+"a_otherdrink",
+"a_drip",
+"a_cappuccino",
+"a_espresso",
+"a_cortado",
+"a_americano",
+"a_home_frenchpress",
+"a_home_espresso",
+"a_home_mrcoffee",
+"a_home_pods",
+"a_home_instant",
+"a_home_bean2cup",
+"a_home_coldbrew",
+"a_home_cometeer",
+"a_home_other",
+"a_cup_1orless",
+"a_cup_3ormore",
+"a_roast_light",
+"a_roast_dark",
+"a_expert1",
+"a_expert2",
+"a_expert3",
+"a_expert4",
+"a_expert6",
+"a_expert7",
+"a_expert8",
+"a_expert9",
+"a_expert10",
+"a_y[1]",
+"a_y[2]", 
+"a_y[3]",
+"a_y[4]"
+)
+
+b_latte <- c(
+  "b_female_latte",
+  "b_gen_other_latte",
+  "b_thirty544_latte",
+  "b_over44_latte",
+  "b_under24_latte",
+  "b_home_frenchpress_latte",
+  "b_home_espresso_latte",
+  "b_home_mrcoffee_latte",
+  "b_home_pods_latte",
+  "b_home_instant_latte",
+  "b_home_bean2cup_latte",
+  "b_home_coldbrew_latte",
+  "b_home_cometeer_latte",
+  "b_home_other_latte"
+)
+
+alphas <- fit$draws(alphas) |> as_draws_matrix()
+beta_var_latte <- fit$draws(b_latte) |> as_draws_matrix()
+```
+
+```{r}
+mcmc_trace(alphas)
+mcmc_trace(beta_var_latte)
+```
+
+
+```{r}
+mcmc_areas(alphas)
+mcmc_areas(beta_var_latte)
+```

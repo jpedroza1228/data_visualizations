@@ -1,3 +1,5 @@
+# install.packages(c("shiny", "shinydashboard", "tidyverse", "tidymodels", "prophet", "lubridate", "modeltime", "timetk", "patchwork", "xgboost", "plotly"))
+
 library(shiny)
 library(shinydashboard)
 library(tidyverse)
@@ -20,26 +22,6 @@ jetblue <- googlesheets4::read_sheet('https://docs.google.com/spreadsheets/d/1Sp
   janitor::clean_names() %>% 
   mutate(ds = as_date(date)) %>% 
   select(-date)
-
-# honest <- googlesheets4::read_sheet('https://docs.google.com/spreadsheets/d/1SBLfoU3AhAQF6IJTn4TNTXKmopVk44S0JeifK3-DMoU/edit#gid=0') %>% 
-#   janitor::clean_names() %>% 
-#   mutate(ds = as_date(date)) %>% 
-#   select(-date)
-
-# alibaba <- googlesheets4::read_sheet('https://docs.google.com/spreadsheets/d/1CHh6zEzdWST2U-AsjBBhFNaOyTKJceuFdwsiIV5YCFs/edit#gid=0') %>% 
-#   janitor::clean_names() %>% 
-#   mutate(ds = as_date(date)) %>% 
-#   select(-date)
-
-# us_holi <-
-#   generated_holidays %>% 
-#   filter(country == 'US') %>% 
-#   mutate(date = as_date(ds))
-
-# china_holi <-
-#   generated_holidays %>% 
-#   filter(country == 'CN') %>% 
-#   mutate(date = as_date(ds))
 
 # Define UI for application that draws a histogram
 ui <- 
