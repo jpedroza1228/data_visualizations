@@ -1,9 +1,8 @@
 ---
-title: "Week 2 Recap"
-author: JP
+title: "COVID Data - Week 2"
 format: 
-    html:
-        toc: true
+  html:
+    toc: true
 ---
 
 Below is some of the code from my recreation and my milestone extension. I hope this helps with understanding the plotnine ecosystem as well as the usefulness of the `.loc` function.
@@ -24,7 +23,8 @@ rcParams.update({'savefig.bbox': 'tight'}) # Keeps plotnine legend from being cu
 ```
 
 ```{python}
-#| label: 'data loading'
+#| eval: false
+#| echo: true
 
 covid = pd.read_csv('data/covid.csv')
 
@@ -50,7 +50,50 @@ def glimpse(df):
 glimpse(covid)
 
 # this won't work because every filter needs its own set of parentheses
-covid.loc[covid['state'] == 'CA' & covid['cases'] > 0]
+# covid.loc[covid['state'] == 'CA' & covid['cases'] > 0]
+
+# like this
+covid.loc[(covid['state'] == 'CA') & (covid['cases'] > 0)]
+
+
+covid.loc[covid['state'].isin(['CA', 'WA', 'OR'])].value_counts('state')
+west_covid = covid.loc[covid['state'].isin(['CA', 'WA', 'OR'])]
+
+# numpy is already within your academy so this should work
+import numpy as np
+
+np.unique(west_covid['state'])
+```
+
+```{python}
+#| echo: false
+#| eval: true
+
+covid = pd.read_csv('/home/jon/Documents/github_repos/data_visualizations/posit_python_cheatsheet/covid.csv')
+
+covid.head()
+covid.info()
+covid.columns
+covid.columns.tolist()
+covid.shape[0]
+covid.shape[1]
+covid.index
+
+def glimpse(df):
+
+    print(f"Rows: {df.shape[0]}")
+
+    print(f"Columns: {df.shape[1]}")
+
+    for col in df.columns:
+
+        print(f"$ {col} <{df[col].dtype}> {df[col].head().values}")
+
+
+glimpse(covid)
+
+# this won't work because every filter needs its own set of parentheses
+# covid.loc[covid['state'] == 'CA' & covid['cases'] > 0]
 
 # like this
 covid.loc[(covid['state'] == 'CA') & (covid['cases'] > 0)]
@@ -69,7 +112,7 @@ np.unique(west_covid['state'])
 
 ```{python}
 #| label: 'recreation-subset'
-covid
+
 covid.head()
 
 covid_sub = covid.loc[covid['state'] == 'NY']
@@ -110,14 +153,29 @@ pn.ggplot.show(
 
 ```
 
-We will be talking about this later, but this would be the better method for showing two states with the same information. There is an even better way using `facet_wrap()` but we'll keep it here for now. 
+Here, it is also useful to add a color to both lines. They will not have a legend by default because the values are not within the aesthetics function.
 
 ```{python}
-ny_long = covid_sub.melt(id_vars = ['date', 'state'], value_vars = ['cases', 'deaths'], var_name = 'cases_or_deaths', value_name = 'values')
+pn.ggplot.show(
+  pn.ggplot(data = covid_sub)
+  + pn.geom_line(mapping = pn.aes(x = 'date', y = 'cases', group = 1),
+  color = 'dodgerblue')
+  + pn.geom_line(mapping = pn.aes(x = 'date', y = 'deaths', group = 1),
+  color = 'darkgreen')
+)
+
+```
+
+We will be talking about this later, but this would be the better method for showing two different variables with the same information. 
+
+```{python}
+ny_long = covid_sub.melt(id_vars = ['date', 'state'], \
+value_vars = ['cases', 'deaths'], \
+var_name = 'cases_or_deaths', value_name = 'values')
 
 pn.ggplot.show(
   pn.ggplot(ny_long, pn.aes('date', 'values'))
-  + pn.geom_line(pn.aes(color = 'state', group = 'cases_or_deaths'))
+  + pn.geom_line(pn.aes(color = 'cases_or_deaths', group = 'cases_or_deaths'))
   + pn.theme_light()
 )
 ```
@@ -129,17 +187,20 @@ During the milestone session, there was an instance of creating two different da
 ```{python}
 pn.ggplot.show(
   pn.ggplot()
-  + pn.geom_line(covid.loc[covid['state'] == 'CA'], pn.aes('date', 'cases', group = 1, color = 'state'))
-  + pn.geom_line(covid.loc[covid['state'] == 'NY'], pn.aes('date', 'cases', group = 1, color = 'state'))
+  + pn.geom_line(covid.loc[covid['state'] == 'CA'],
+  pn.aes('date', 'cases', group = 1, color = 'state'))
+  + pn.geom_line(covid.loc[covid['state'] == 'NY'],
+  pn.aes('date', 'cases', group = 1, color = 'state'))
   + pn.theme_light()
 )
 ```
 
-So, we can filter our data to include both CA and NY and then have plotnine automatically create a legend and some colors. When you have multiple values for the color argument, you don't need the `group = 'state'` argument but it may be helpful as you are starting out. Here is where having global rules, such as the color argument, can be changed depending on what you want to draw attention to.
+So, we can filter our data to include both CA and NY and then have plotnine automatically create a legend and some colors. Here we have global rules so every layer below will follow the same color values.
 
 ```{python}
 pn.ggplot.show(
-  pn.ggplot(covid.loc[covid['state'].isin(['CA', 'NY'])], pn.aes('date', 'cases', color = 'state', group = 'state'))
+  pn.ggplot(covid.loc[covid['state'].isin(['CA', 'NY'])],
+  pn.aes('date', 'cases', color = 'state', group = 'state'))
   + pn.geom_line() 
   + pn.theme_light()
 )
@@ -150,7 +211,8 @@ For instance, if you want to have points *over* your `geom_line()` function then
 
 ```{python}
 pn.ggplot.show(
-  pn.ggplot(covid.loc[covid['state'].isin(['CA', 'NY'])], pn.aes('date', 'cases', color = 'state', group = 'state'))
+  pn.ggplot(covid.loc[covid['state'].isin(['CA', 'NY'])],
+  pn.aes('date', 'cases', color = 'state', group = 'state'))
   + pn.geom_line() 
   + pn.geom_point(alpha = .5)
   + pn.theme_light()
@@ -162,8 +224,9 @@ But maybe you want to have points that are gray and just have the lines that are
 
 ```{python}
 pn.ggplot.show(
-  pn.ggplot(covid.loc[covid['state'].isin(['CA', 'NY'])], pn.aes('date', 'cases'))
-  + pn.geom_line(pn.aes(color = 'state')) 
+  pn.ggplot(covid.loc[covid['state'].isin(['CA', 'NY'])],
+  pn.aes('date', 'cases'))
+  + pn.geom_line(pn.aes(color = 'state', group = 'state')) 
   + pn.geom_point(alpha = .3, color = 'gray')
   + pn.theme_light()
 )
@@ -172,16 +235,6 @@ pn.ggplot.show(
 Below is the extension I showed during the milestone session. 
 
 ```{python}
-#| label: 'JP\'s extension'
-
-# showing similar findings
-covid[covid['state'] == 'CA'] == covid.loc[covid['state'] == 'CA']
-
-
-# covid.columns
-
-# all_cols = ['date', 'state', 'tests', 'cases', 'hospitalizations', 'deaths']
-
 #easiest option
 #no_missing = covid.dropna()
 
@@ -195,14 +248,18 @@ pn.ggplot.show(
   + pn.geom_smooth(method = 'lm', se = False)
   + pn.theme_light()
 )
+```
 
+```{python}
 pn.ggplot.show(
   pn.ggplot(data = no_missing, mapping = pn.aes(x = 'cases', y = 'deaths'))
   + pn.geom_point(alpha = .2, color = 'gray')
   + pn.geom_point(data = covid_sub, color = 'red', alpha = .8)
   + pn.theme_light()
 )
+```
 
+```{python}
 pn.ggplot.show(
   pn.ggplot(data = no_missing, mapping = pn.aes(x = 'cases', y = 'deaths'))
   + pn.geom_point(alpha = .2, color = 'gray')
@@ -214,6 +271,75 @@ pn.ggplot.show(
 
 # Using .loc
 
+Below is the link that shows why to use `.loc[]` function from the pandas website. If you are simply choosing columns, such as something like `covid[['state', 'date', 'cases']]` then that is fine, but once you include rows it is best to use `.loc[]/.iloc[]`.
+
+[Link for using .loc](https://pandas.pydata.org/pandas-docs/version/1.0.2/getting_started/intro_tutorials/03_subset_data.html#how-do-i-filter-specific-rows-from-a-dataframe)
+
+[Here is some more information for indexing based on `iloc/loc`.](https://pandas.pydata.org/pandas-docs/version/1.0.2/user_guide/indexing.html#different-choices-for-indexing)
+
 ```{python}
+# showing similar findings
+(covid[covid['state'] == 'CA'] == covid.loc[covid['state'] == 'CA']).head()
+```
+
+```{python}
+# we'll talk dates at a later time
+covid['date'] = pd.to_datetime(covid['date'])
+covid['day'] = covid['date'].dt.day
+covid['month'] = covid['date'].dt.month
+covid['year'] = covid['date'].dt.year
+
+covid.head()
+
+covid_cases = covid[['state', 'month', 'year', 'cases']]\
+  .groupby(['state', 'month', 'year']).max('cases')
+
+# indices include state, month, year
+covid_cases.head()
+
+# can reset indices to then have state, month, and year as columns
+covid_cases.reset_index().head()
+
+covid_cases2 = covid_cases.reset_index()
+
+covid_cases2.loc[covid_cases2['cases'] > 50000, 'state']
+
+covid_cases2[covid_cases2['cases'] > 50000]
+
+# returns error because you cannot select a different 
+# covid_cases2[covid_cases2['cases'] > 50000, 'state']
+```
+
+```{python}
+extra_covid = covid_cases2
+
+# does not work because it cannot infex the specific row and column of interest (state)
+# extra_covid[(extra_covid['cases'] > 900) & (extra_covid['state'] == 'AK'), \
+# 'state'] = 'Most Alaska'
+
+extra_covid.loc[(extra_covid['cases'] > 900) & (extra_covid['state'] == 'AK'), \
+  'state'] = 'Most Alaska'
+# better option would be to use something like this
+# max_ak = extra_covid.loc[extra_covid['state'] == 'AK', 'cases'].max()
+# extra_covid.loc[(extra_covid['state'] == 'AK') & \
+# (extra_covid['cases'] == max_ak), 'cases'] = 'Most Alaska'
+
+extra_covid.loc[(extra_covid['state'].str.startswith('AK')) | \
+  (extra_covid['state'].str.startswith('Most'))]
+```
+
+Reasons for using the `.loc[]/iloc[]` function:
+
+1. You can use it to filter rows based on boolean filter and then choose a specific column or list of columns.
+
+2. You can assign values when using these functions.
+
+3. It is slightly faster, but this is not really a big selling point.
+
+4. It allows you to explicitly index rows based on the filter. While most of the time without .loc, you'll be fine, there is a chance you can introduce unwanted behaviors. 
+
+
+```{python}
+
 
 ```
