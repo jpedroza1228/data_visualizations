@@ -1,0 +1,219 @@
+---
+title: "Week 2 Recap"
+author: JP
+format: 
+    html:
+        toc: true
+---
+
+Below is some of the code from my recreation and my milestone extension. I hope this helps with understanding the plotnine ecosystem as well as the usefulness of the `.loc` function.
+
+# Setup & Loading Data/Packages
+
+```{python}
+#| label: 'setup'
+
+# Import your packages here
+import pandas as pd
+from matplotlib import rcParams
+
+# Set some pandas options
+pd.set_option('display.max_columns', None)
+pd.set_option('mode.copy_on_write', True)
+rcParams.update({'savefig.bbox': 'tight'}) # Keeps plotnine legend from being cut off
+```
+
+```{python}
+#| label: 'data loading'
+
+covid = pd.read_csv('data/covid.csv')
+
+covid.head()
+covid.info()
+covid.columns
+covid.columns.tolist()
+covid.shape[0]
+covid.shape[1]
+covid.index
+
+def glimpse(df):
+
+    print(f"Rows: {df.shape[0]}")
+
+    print(f"Columns: {df.shape[1]}")
+
+    for col in df.columns:
+
+        print(f"$ {col} <{df[col].dtype}> {df[col].head().values}")
+
+
+glimpse(covid)
+
+# this won't work because every filter needs its own set of parentheses
+covid.loc[covid['state'] == 'CA' & covid['cases'] > 0]
+
+# like this
+covid.loc[(covid['state'] == 'CA') & (covid['cases'] > 0)]
+
+
+covid.loc[covid['state'].isin(['CA', 'WA', 'OR'])].value_counts('state')
+west_covid = covid.loc[covid['state'].isin(['CA', 'WA', 'OR'])]
+
+# numpy is already within your academy so this should work
+import numpy as np
+
+np.unique(west_covid['state'])
+```
+
+## Subsetting Data
+
+```{python}
+#| label: 'recreation-subset'
+covid
+covid.head()
+
+covid_sub = covid.loc[covid['state'] == 'NY']
+covid_sub.head()
+```
+
+# Visualizations
+
+So I'm going to write out what is actually happening in plotnine during each step. This next part will have several code chunks but I am organizing it that way so I can have notes between each step. I included a step that should fold the code on the rendered document by clicking on the right side to *hide* the code. I'll also use terminology that you could see when working with others that use `plotnine`/`ggplot`.
+
+I'll be creating the base layer for the plot. You'll notice that I don't have any points, lines, boxplots, etc. (Those are what we refer to as *geoms*) like *geom_point*, *geom_line*, and *geom_boxplot*. This is using my NY only dataframe.
+
+```{python}
+import plotnine as pn
+
+pn.ggplot.show(
+  pn.ggplot(covid_sub, pn.aes('date', 'cases'))
+)
+```
+
+You should only be seeing an x- and y-axis. Now we'll add a line. As mentioned during our milestone session, the `group = 1` is necessary for forcing every row in the NY dataframe to be in 1 group. You can do some weird things by forcing a value to 1. Like an x-axis to 1. It's unlikely that you'll ever do it, but its possible. 
+
+```{python}
+pn.ggplot.show(
+  pn.ggplot(covid_sub, pn.aes('date', 'cases'))
+  + pn.geom_line(group = 1)
+)
+```
+
+Now the issue with the recreation is that it asks for a practice that is not a *best practice*. For the recreation the base layer will only utilize the dataframe. Then you'll add additional layers to the base layer for the two line graphs. There is no rationale for creating this visual other than showing what plotnine can do and because it showcases the skills we've learned. I will show the code below that will show the best practice for conducting this visual. I mentioned that most if not all of you will forget the `group = 1` argument at some point plotting with plotnine and the reason why is because it is only really used when using `geom_line()`. So if you are not showing some form of forecasting or date variable, then you might forget to include it. 
+
+```{python}
+pn.ggplot.show(
+  pn.ggplot(data = covid_sub)
+  + pn.geom_line(mapping = pn.aes(x = 'date', y = 'cases', group = 1))
+  + pn.geom_line(mapping = pn.aes(x = 'date', y = 'deaths', group = 1))
+)
+
+```
+
+We will be talking about this later, but this would be the better method for showing two states with the same information. There is an even better way using `facet_wrap()` but we'll keep it here for now. 
+
+```{python}
+ny_long = covid_sub.melt(id_vars = ['date', 'state'], value_vars = ['cases', 'deaths'], var_name = 'cases_or_deaths', value_name = 'values')
+
+pn.ggplot.show(
+  pn.ggplot(ny_long, pn.aes('date', 'values'))
+  + pn.geom_line(pn.aes(color = 'state', group = 'cases_or_deaths'))
+  + pn.theme_light()
+)
+```
+
+# Visual From Milestone Session
+
+During the milestone session, there was an instance of creating two different dataframes for two individual states, which you can see below. This led to some good talking points so I want to make sure this was in writing. Since the values for the x and y axises are the same, there is no need to create two different dataframes. Instead, we can put everything on the base layer.  
+
+```{python}
+pn.ggplot.show(
+  pn.ggplot()
+  + pn.geom_line(covid.loc[covid['state'] == 'CA'], pn.aes('date', 'cases', group = 1, color = 'state'))
+  + pn.geom_line(covid.loc[covid['state'] == 'NY'], pn.aes('date', 'cases', group = 1, color = 'state'))
+  + pn.theme_light()
+)
+```
+
+So, we can filter our data to include both CA and NY and then have plotnine automatically create a legend and some colors. When you have multiple values for the color argument, you don't need the `group = 'state'` argument but it may be helpful as you are starting out. Here is where having global rules, such as the color argument, can be changed depending on what you want to draw attention to.
+
+```{python}
+pn.ggplot.show(
+  pn.ggplot(covid.loc[covid['state'].isin(['CA', 'NY'])], pn.aes('date', 'cases', color = 'state', group = 'state'))
+  + pn.geom_line() 
+  + pn.theme_light()
+)
+
+```
+
+For instance, if you want to have points *over* your `geom_line()` function then you would put the points on the layer after the `geom_line()` as shown below. If you want them under your line then put the `geom_point()` before the `geom_line()` function. Since the `color = 'state'` argument is still on the base layer, the line and the points will be matching colors based on the state. 
+
+```{python}
+pn.ggplot.show(
+  pn.ggplot(covid.loc[covid['state'].isin(['CA', 'NY'])], pn.aes('date', 'cases', color = 'state', group = 'state'))
+  + pn.geom_line() 
+  + pn.geom_point(alpha = .5)
+  + pn.theme_light()
+)
+
+```
+
+But maybe you want to have points that are gray and just have the lines that are different colors. Then you would put the `color = 'state'` argument only for the `geom_line()` function. This also shows the number one rule for plotnine and that is when to put values in the `pn.aes()` function. If you are using a column from your dataframe it goes in your aesthetics function. If you want a single value then it can go outside the aesthetics. Below for our line, we will have color based on the column `state`; however, all of our points will be gray no matter the state.  
+
+```{python}
+pn.ggplot.show(
+  pn.ggplot(covid.loc[covid['state'].isin(['CA', 'NY'])], pn.aes('date', 'cases'))
+  + pn.geom_line(pn.aes(color = 'state')) 
+  + pn.geom_point(alpha = .3, color = 'gray')
+  + pn.theme_light()
+)
+```
+
+Below is the extension I showed during the milestone session. 
+
+```{python}
+#| label: 'JP\'s extension'
+
+# showing similar findings
+covid[covid['state'] == 'CA'] == covid.loc[covid['state'] == 'CA']
+
+
+# covid.columns
+
+# all_cols = ['date', 'state', 'tests', 'cases', 'hospitalizations', 'deaths']
+
+#easiest option
+#no_missing = covid.dropna()
+
+# covid_sub = covid.loc[covid['state'] == 'NY']
+no_missing = covid.loc[covid['state'] != 'NY']
+
+
+pn.ggplot.show(
+  pn.ggplot(data = no_missing, mapping = pn.aes(x = 'cases', y = 'deaths')) 
+  + pn.geom_point(mapping = pn.aes(color = 'state'), alpha = .3)
+  + pn.geom_smooth(method = 'lm', se = False)
+  + pn.theme_light()
+)
+
+pn.ggplot.show(
+  pn.ggplot(data = no_missing, mapping = pn.aes(x = 'cases', y = 'deaths'))
+  + pn.geom_point(alpha = .2, color = 'gray')
+  + pn.geom_point(data = covid_sub, color = 'red', alpha = .8)
+  + pn.theme_light()
+)
+
+pn.ggplot.show(
+  pn.ggplot(data = no_missing, mapping = pn.aes(x = 'cases', y = 'deaths'))
+  + pn.geom_point(alpha = .2, color = 'gray')
+  + pn.geom_point(data = covid_sub, color = 'red', alpha = .8)
+  + pn.geom_smooth(data = covid_sub, method = 'lm', se = False, color = 'red')
+  + pn.theme_light()
+)
+```
+
+# Using .loc
+
+```{python}
+
+```
